@@ -2,13 +2,32 @@
 :root {
   --bg-light: #f9f9f9;
   --text-light: #1a1a1a;
-  --bg-dark: #000000;
-  --text-dark: #39ff14;
-  --neon-glow: 0 0 6px #39ff14;
   --input-border: #ccc;
-  --input-dark-border: #0ff;
-  --primary-color: #2563eb;
-  --primary-hover: #1e40af;
+  --primary-color: #2563eb;   
+  --primary-hover: #1e40af;   
+  --bg-dark: #121212;         
+  --text-dark: #e0e0e0;       
+  --panel-bg-dark: #1f1f1f;   
+  --panel-shadow-dark: 0 0 15px rgba(0, 0, 0, 0.3); 
+  --input-border-dark: #3a3a3a; 
+  --input-bg-dark: #2a2a2a;    
+  --input-text-dark: #e0e0e0; 
+  --neon-glow: none;          
+  --panel-bg-light: #ffffff; 
+  --panel-shadow-light: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.app.dark .panel {
+  background: var(--panel-bg-dark);    
+  box-shadow: var(--panel-shadow-dark); 
+}
+
+.app.dark .inputs input,
+.app.dark .inputs select {
+  background: var(--input-bg-dark);    
+  color: var(--input-text-dark);     
+  border: 1px solid var(--input-border-dark); 
+  box-shadow: none;                      
 }
 
 
@@ -31,11 +50,10 @@ body, html, .app {
 
 
 .container {
-  max-width: 1100px;
-  margin: auto;
+  max-width: 1200px; 
+  margin: 0 auto;   
   padding: 2rem;
-  margin-left: 0;
-  margin-right: auto;
+  box-sizing: border-box; 
 }
 
 
@@ -43,7 +61,7 @@ body, html, .app {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2rem; 
 }
 
 .header h1 {
@@ -65,21 +83,31 @@ body, html, .app {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+.app.dark .theme-toggle {
+  color: var(--text-dark);
+  border: 1px solid var(--input-border-dark); 
+}
+
+.app.dark .theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.08); 
+}
+
 
 .panel {
-  width: 120%;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 2rem;
-  background: white;
+  gap: 6rem;
+  background: var(--panel-bg-light);    
   border-radius: 16px;
   padding: 2rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--panel-shadow-light);
+  box-sizing: border-box;
 }
 
 .app.dark .panel {
-  background: #111;
-  box-shadow: 0 0 15px #0ff3;
+  background: var(--panel-bg-dark);     
+  box-shadow: var(--panel-shadow-dark); 
 }
 
 
@@ -103,10 +131,10 @@ body, html, .app {
 
 .app.dark .inputs input,
 .app.dark .inputs select {
-  background: #000;
-  color: #0ff;
-  border: 1px solid var(--input-dark-border);
-  box-shadow: var(--neon-glow);
+  background: var(--input-bg-dark);    
+  color: var(--input-text-dark);     
+  border: 1px solid var(--input-border-dark); 
+  box-shadow: none;                      
 }
 
 
@@ -130,11 +158,13 @@ body, html, .app {
 
 
 .plot {
-  height: 700px;
-  width: 900px;
+  height: 100%; 
+  width: 100%; 
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden; 
+  box-sizing: border-box; 
 }
 
 .placeholder {
@@ -145,6 +175,19 @@ body, html, .app {
 
 @media (max-width: 768px) {
   .panel {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; 
+    gap: 1.5rem; 
+    padding: 1rem; 
+  }
+
+  .container {
+    padding: 1rem; 
+  }
+
+  .header {
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 1rem; 
+    margin-bottom: 1.5rem; 
   }
 }

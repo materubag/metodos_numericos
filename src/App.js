@@ -116,26 +116,84 @@ export default function App() {
                     y: plotData.y,
                     type: 'scatter',
                     mode: 'lines',
-                    line: { width: 2 },
-                    marker: { color: isDark ? '#0ff' : '#1d4ed8' },
+                    line: {
+                      width: 2,
+                      // --- CAMBIO AQUÍ: Color de la línea de la gráfica ---
+                      color: isDark ? '#4285F4' : '#1d4ed8' // Azul de Google para oscuro, azul más oscuro para claro
+                    },
+                    marker: {
+                      // --- CAMBIO AQUÍ: Color de los marcadores (si los hay) ---
+                      color: isDark ? '#4285F4' : '#1d4ed8' // Mismo color que la línea
+                    },
                     name: method.toUpperCase(),
                     fill: method === 'simpson' ? 'tozeroy' : undefined,
-                    fillcolor: method === 'simpson' ? (isDark ? 'rgba(0,255,255,0.2)' : 'rgba(29,78,216,0.2)') : undefined
+                    fillcolor: method === 'simpson' ? (isDark ? 'rgba(66,133,244,0.2)' : 'rgba(29,78,216,0.2)') : undefined // Relleno con transparencia del color de la línea
                   }]}
                   layout={{
                     autosize: true,
-                    title: 'Resultado',
-                    paper_bgcolor: isDark ? '#000' : '#fff',
-                    plot_bgcolor: isDark ? '#000' : '#fff',
-                    font: { color: isDark ? '#0ff' : '#111' },
+                    title: {
+                      text: 'Resultado',
+                      // --- CAMBIO AQUÍ: Color del título de la gráfica ---
+                      font: {
+                        color: isDark ? '#e0e0e0' : '#111' // Gris claro para oscuro, negro para claro
+                      }
+                    },
+                    // --- CAMBIO AQUÍ: Colores de fondo del plot y papel ---
+                    paper_bgcolor: isDark ? '#1f1f1f' : '#fff', // Fondo del "papel" de la gráfica (panel-bg-dark)
+                    plot_bgcolor: isDark ? '#1f1f1f' : '#fff', // Fondo del área del plot
+
+                    // --- CAMBIO AQUÍ: Color de la fuente general (ejes, ticks) ---
+                    font: {
+                      color: isDark ? '#e0e0e0' : '#111' // Gris claro para oscuro, negro para claro
+                    },
                     margin: { t: 40, l: 50, r: 30, b: 40 },
-                    responsive: true
+                    responsive: true,
+                    // --- CAMBIOS AQUÍ: Ejes X e Y ---
+                    xaxis: {
+                      tickfont: {
+                        color: isDark ? '#b0b0b0' : '#555' // Gris suave para los números de los ejes
+                      },
+                      gridcolor: isDark ? '#3a3a3a' : '#eee', // Cuadrícula más sutil
+                      linecolor: isDark ? '#5a5a5a' : '#ccc', // Línea del eje
+                      zerolinecolor: isDark ? '#5a5a5a' : '#ccc', // Línea cero
+                      title: { // Si quieres títulos en los ejes
+                        font: {
+                          color: isDark ? '#e0e0e0' : '#111'
+                        }
+                      }
+                    },
+                    yaxis: {
+                      tickfont: {
+                        color: isDark ? '#b0b0b0' : '#555' // Gris suave para los números de los ejes
+                      },
+                      gridcolor: isDark ? '#3a3a3a' : '#eee', // Cuadrícula más sutil
+                      linecolor: isDark ? '#5a5a5a' : '#ccc', // Línea del eje
+                      zerolinecolor: isDark ? '#5a5a5a' : '#ccc', // Línea cero
+                      title: { // Si quieres títulos en los ejes
+                        font: {
+                          color: isDark ? '#e0e0e0' : '#111'
+                        }
+                      }
+                    },
+                    // --- CAMBIOS AQUÍ: Leyenda (si usas showlegend: true) ---
+                    showlegend: true, // Asegúrate de que esto esté aquí si quieres que la leyenda se muestre
+                    legend: {
+                      font: {
+                        color: isDark ? '#e0e0e0' : '#111' // Color de la fuente de la leyenda
+                      },
+                      bgcolor: isDark ? '#2a2a2a' : 'rgba(255,255,255,0.8)', // Fondo de la leyenda
+                      bordercolor: isDark ? '#4a4a4a' : '#ccc', // Borde de la leyenda
+                      borderwidth: 1
+                    }
                   }}
                   useResizeHandler
                   style={{ width: '100%', height: '100%' }}
                 />
                 {method === 'simpson' && area !== null && (
-                  <div className="area">Área ≈ {area.toFixed(6)}</div>
+                  // --- CAMBIO AQUÍ: Color del texto del área ---
+                  <div className="area" style={{ color: isDark ? '#e0e0e0' : '#1a1a1a' }}>
+                    Área ≈ {area.toFixed(6)}
+                  </div>
                 )}
               </>
             ) : <p className="placeholder">Selecciona método e ingresa parámetros.</p>}
