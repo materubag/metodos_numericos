@@ -3,9 +3,8 @@ import Plot from 'react-plotly.js';
 import { parse } from 'mathjs';
 import './App.css';
 
-
 export default function App() {
-  // Inicializar los estados vacíos
+  // Estados
   const [expr, setExpr] = useState('');
   const [a, setA] = useState('');
   const [b, setB] = useState('');
@@ -20,8 +19,8 @@ export default function App() {
 
   const isDark = theme === 'dark';
 
+  // Método Simpson 1/3
   const simpson = (f, a, b, n) => {
-    // Simpson 1/3 clásico para integración definida
     if (n % 2 !== 0) n++;
     const h = (b - a) / n;
     let sum = f(a) + f(b);
@@ -32,272 +31,498 @@ export default function App() {
     return (h / 3) * sum;
   };
 
+  // Función principal
   const handleRun = () => {
-    // Normalizar posibles signos menos Unicode a ASCII
     const exprNormalized = expr.replace(/[−–—]/g, '-');
-    // Convertir todos los valores a número antes de usarlos
     const aNum = parseFloat(a);
     const bNum = parseFloat(b);
     const hNum = parseFloat(h);
     const deltaNum = parseFloat(delta);
     const y0Num = parseFloat(y0);
     let f;
+    
     try {
       f = parse(exprNormalized).compile();
     } catch (e) {
-      setProcedure(`<span style='color:#e53935;font-weight:bold;'>Error de sintaxis en la expresión: ${e.message}</span>`);
+      setProcedure(`<span style='color:#e53935;font-weight:bold;'>Error de sintaxis: ${e.message}</span>`);
       setPlotData(null);
       setArea(null);
       return;
-    }
-    let proc = "";
-    if (method === 'simpson') {
-      // Simpson solo depende de x
-      let exprFixed = exprNormalized.replace(/\by\b/g, '0');
-      if (/\by\b/.test(exprNormalized)) {
-        setProcedure('<span style="color:#e53935;font-weight:bold;">Advertencia: La expresión para Simpson solo debe depender de x. Se ignoró la variable y.</span><br>');
-      } else {
-        setProcedure("");
+    }    if (method === 'simpson') {
+      if (isNaN(aNum) || isNaN(bNum) || isNaN(deltaNum)) {
+        setProcedure("<span style='color:#e53935;font-weight:bold;'>Error: Faltan valores para Simpson 1/3</span>");
+        return;
       }
-      const fSimpson = parse(exprFixed).compile();
-      // Calcular n como número de subintervalos (par)
-      let n = Math.round((bNum - aNum) / deltaNum);
-      if (n % 2 !== 0) n++;
-      const hSimpson = (bNum - aNum) / n;
-      let xs = [], ys = [];
-      let table = `<b>Tabla de nodos usados:</b><br><table class='procedure-table'><tr><th>i</th><th>x_i</th><th>f(x_i)</th></tr>`;
+      
+      let n = Math.ceil((bNum - aNum) / deltaNum);
+      if (n % 2 !== 0) n++; // Simpson requiere número par de subintervalos
+      
+      const h = (bNum - aNum) / n;
+      const x = [];
+      const y = [];
+      
       for (let i = 0; i <= n; i++) {
-        let xi = aNum + i * hSimpson;
-        let yi = fSimpson.evaluate({ x: xi });
-        xs.push(xi);
-        ys.push(yi);
-        table += `<tr><td>${i}</td><td>${Number(xi).toFixed(6)}</td><td>${Number(yi).toFixed(6)}</td></tr>`;
+        const xi = aNum + i * h;
+        const yi = f.evaluate({ x: xi });
+        x.push(xi);
+        y.push(yi);
       }
-      table += '</table>';
-      // Simpson 1/3
-      let sum = ys[0] + ys[n];
+      
+      // Calcular área usando Simpson 1/3
+      let sum = y[0] + y[n];
       for (let i = 1; i < n; i++) {
-        sum += (i % 2 === 0 ? 2 : 4) * ys[i];
+        sum += (i % 2 === 0 ? 2 : 4) * y[i];
       }
-      const areaVal = (hSimpson / 3) * sum;
-      proc = `<b>Procedimiento Simpson 1/3:</b><br>n = ${n} (subintervalos, debe ser par)<br>h = (b-a)/n = (${bNum}-${aNum})/${n} = ${hSimpson.toFixed(6)}<br>` +
-        `S = f(x_0) + f(x_n) + 4 * sum(f(x_impares)) + 2 * sum(f(x_pares))<br>` +
-        `Área ≈ (h/3) * S = (${hSimpson.toFixed(6)}/3) * ${sum.toFixed(6)} = <b>${areaVal.toFixed(6)}</b><br>` + table;
-      setPlotData({ x: xs, y: ys });
-      setArea(areaVal);
-      setProcedure(proc);
-    } else if (method === 'euler') {
-      if (!/\by\b/.test(expr)) {
-        alert('La expresión para Euler debe depender de x y de y.');
+      const calculatedArea = (h / 3) * sum;
+      
+      setPlotData({ x, y });
+      setArea(calculatedArea);
+        let procHtml = `<div style='background: ${isDark ? 'linear-gradient(135deg, #2d3748, #1a202c)' : 'linear-gradient(135deg, #f8f9fa, #e9ecef)'}; padding: 20px; border-radius: 12px; border-left: 4px solid ${isDark ? '#00dfd8' : '#007bff'}; color: ${isDark ? '#e2e8f0' : '#2d3748'};'>`;
+      procHtml += `<h4 style='color: ${isDark ? '#00dfd8' : '#007bff'}; margin-bottom: 15px;'><i class="bi bi-calculator"></i> Método Simpson 1/3</h4>`;
+      procHtml += `<p><strong>Función:</strong> f(x) = ${expr}</p>`;
+      procHtml += `<p><strong>Intervalo:</strong> [${aNum}, ${bNum}]</p>`;
+      procHtml += `<p><strong>Número de subintervalos:</strong> ${n} (ajustado para ser par)</p>`;
+      procHtml += `<p><strong>Paso h:</strong> ${h.toFixed(6)}</p>`;
+      procHtml += `<p><strong>Fórmula:</strong> ∫f(x)dx ≈ (h/3)[f(x₀) + 4∑f(xᵢ) + 2∑f(xⱼ) + f(xₙ)]</p>`;
+      procHtml += `<p><strong>Área calculada:</strong> ${calculatedArea.toFixed(6)} unidades²</p>`;
+      
+      // Tabla de valores
+      procHtml += `<div style='margin-top: 20px;'>`;
+      procHtml += `<h5 style='color: ${isDark ? '#00dfd8' : '#007bff'}; margin-bottom: 10px;'>Tabla de Puntos:</h5>`;
+      procHtml += `<div style='overflow-x: auto; border-radius: 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(0, 123, 255, 0.3)'};'>`;
+      procHtml += `<table style='width: 100%; border-collapse: collapse; font-size: 0.9em; background: ${isDark ? '#1a202c' : '#fff'};'>`;
+      procHtml += `<thead><tr style='background: ${isDark ? '#00dfd8' : '#007bff'}; color: white;'>`;
+      procHtml += `<th style='padding: 12px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(0, 123, 255, 0.3)'};'>i</th>`;
+      procHtml += `<th style='padding: 12px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(0, 123, 255, 0.3)'};'>xᵢ</th>`;
+      procHtml += `<th style='padding: 12px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(0, 123, 255, 0.3)'};'>f(xᵢ)</th>`;
+      procHtml += `<th style='padding: 12px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(0, 123, 255, 0.3)'};'>Coeficiente</th>`;
+      procHtml += `</tr></thead><tbody>`;
+      
+      for (let i = 0; i <= n; i++) {
+        let coef = i === 0 || i === n ? 1 : (i % 2 === 0 ? 2 : 4);
+        procHtml += `<tr style='${i % 2 === 0 ? (isDark ? "background: rgba(0, 223, 216, 0.05);" : "background: #f8f9fa;") : (isDark ? "background: rgba(26, 32, 44, 0.8);" : "background: #fff;")} color: ${isDark ? '#e2e8f0' : '#2d3748'};'>`;
+        procHtml += `<td style='padding: 10px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center;'>${i}</td>`;
+        procHtml += `<td style='padding: 10px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center;'>${x[i].toFixed(4)}</td>`;
+        procHtml += `<td style='padding: 10px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center;'>${y[i].toFixed(6)}</td>`;
+        procHtml += `<td style='padding: 10px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; font-weight: bold; color: ${isDark ? '#00dfd8' : '#007bff'};'>${coef}</td>`;
+        procHtml += `</tr>`;
+      }
+      
+      procHtml += `</tbody></table></div></div>`;
+      procHtml += `</div>`;
+      
+      setProcedure(procHtml);
+        } else if (method === 'euler') {
+      if (isNaN(aNum) || isNaN(bNum) || isNaN(hNum) || isNaN(y0Num)) {
+        setProcedure("<span style='color:#e53935;font-weight:bold;'>Error: Faltan valores para Euler</span>");
         return;
       }
-      let xs = [aNum], ys = [y0Num];
-      let x = aNum, y = y0Num;
-      let steps = `<b>Tabla de iteraciones:</b><br><table class='procedure-table'><tr><th>i</th><th>x</th><th>y</th><th>f(x,y)</th></tr>`;
-      let i = 0;
-      while (x < bNum) {
-        let k1 = f.evaluate({ x, y });
-        steps += `<tr><td>${i}</td><td>${x.toFixed(4)}</td><td>${y.toFixed(6)}</td><td>${k1.toFixed(6)}</td></tr>`;
-        y = y + hNum * k1;
-        x = x + hNum;
-        xs.push(x);
-        ys.push(y);
-        i++;
+      
+      const x = [aNum];
+      const y = [y0Num];
+      const slopes = [];
+      let xi = aNum, yi = y0Num;
+      
+      // Calcular primer slope
+      slopes.push(f.evaluate({ x: xi, y: yi }));
+      
+      while (xi < bNum) {
+        const slope = f.evaluate({ x: xi, y: yi });
+        yi = yi + hNum * slope;
+        xi = xi + hNum;
+        x.push(xi);
+        y.push(yi);
+        if (xi < bNum) slopes.push(f.evaluate({ x: xi, y: yi }));
       }
-      steps += '</table>';
-      proc = `<b>Procedimiento Euler:</b><br>y_{i+1} = y_i + h * f(x_i, y_i)<br>h = ${hNum}<br>` + steps + `<br>Respuesta final: <b>y(${bNum}) ≈ ${ys[ys.length-1].toFixed(6)}</b>`;
-      setPlotData({ x: xs, y: ys });
+      
+      setPlotData({ x, y });
       setArea(null);
-      setProcedure(proc);
-    } else if (method === 'rk2') {
-      if (!/\by\b/.test(expr)) {
-        alert('La expresión para Runge-Kutta 2 debe depender de x y de y.');
+        let procHtml = `<div style='background: ${isDark ? 'linear-gradient(135deg, #2d3748, #1a202c)' : 'linear-gradient(135deg, #f8f9fa, #e9ecef)'}; padding: 20px; border-radius: 12px; border-left: 4px solid ${isDark ? '#00dfd8' : '#28a745'}; color: ${isDark ? '#e2e8f0' : '#2d3748'};'>`;
+      procHtml += `<h4 style='color: ${isDark ? '#00dfd8' : '#28a745'}; margin-bottom: 15px;'><i class="bi bi-arrow-right"></i> Método de Euler</h4>`;
+      procHtml += `<p><strong>Ecuación diferencial:</strong> dy/dx = ${expr}</p>`;
+      procHtml += `<p><strong>Condición inicial:</strong> y(${aNum}) = ${y0Num}</p>`;
+      procHtml += `<p><strong>Paso h:</strong> ${hNum}</p>`;
+      procHtml += `<p><strong>Fórmula:</strong> yᵢ₊₁ = yᵢ + h × f(xᵢ, yᵢ)</p>`;
+      procHtml += `<p><strong>Valor final:</strong> y(${bNum}) ≈ ${y[y.length-1].toFixed(6)}</p>`;
+      
+      // Tabla de iteraciones
+      procHtml += `<div style='margin-top: 20px;'>`;
+      procHtml += `<h5 style='color: ${isDark ? '#00dfd8' : '#28a745'}; margin-bottom: 10px;'>Tabla de Iteraciones:</h5>`;
+      procHtml += `<div style='overflow-x: auto; border-radius: 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(40, 167, 69, 0.3)'};'>`;
+      procHtml += `<table style='width: 100%; border-collapse: collapse; font-size: 0.9em; background: ${isDark ? '#1a202c' : '#fff'};'>`;
+      procHtml += `<thead><tr style='background: ${isDark ? '#00dfd8' : '#28a745'}; color: white;'>`;
+      procHtml += `<th style='padding: 12px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(40, 167, 69, 0.3)'};'>i</th>`;
+      procHtml += `<th style='padding: 12px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(40, 167, 69, 0.3)'};'>xᵢ</th>`;
+      procHtml += `<th style='padding: 12px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(40, 167, 69, 0.3)'};'>yᵢ</th>`;
+      procHtml += `<th style='padding: 12px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(40, 167, 69, 0.3)'};'>f(xᵢ,yᵢ)</th>`;
+      procHtml += `<th style='padding: 12px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(40, 167, 69, 0.3)'};'>yᵢ₊₁</th>`;
+      procHtml += `</tr></thead><tbody>`;
+      
+      for (let i = 0; i < x.length - 1; i++) {
+        procHtml += `<tr style='${i % 2 === 0 ? (isDark ? "background: rgba(0, 223, 216, 0.05);" : "background: #f8f9fa;") : (isDark ? "background: rgba(26, 32, 44, 0.8);" : "background: #fff;")} color: ${isDark ? '#e2e8f0' : '#2d3748'};'>`;
+        procHtml += `<td style='padding: 10px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center;'>${i}</td>`;
+        procHtml += `<td style='padding: 10px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center;'>${x[i].toFixed(4)}</td>`;
+        procHtml += `<td style='padding: 10px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center;'>${y[i].toFixed(6)}</td>`;
+        procHtml += `<td style='padding: 10px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; color: ${isDark ? '#00dfd8' : '#28a745'};'>${slopes[i].toFixed(6)}</td>`;
+        procHtml += `<td style='padding: 10px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; font-weight: bold; color: ${isDark ? '#00dfd8' : '#28a745'};'>${y[i+1].toFixed(6)}</td>`;
+        procHtml += `</tr>`;
+      }
+      
+      procHtml += `</tbody></table></div></div>`;
+      procHtml += `</div>`;
+      
+      setProcedure(procHtml);
+        } else if (method === 'rk2') {
+      if (isNaN(aNum) || isNaN(bNum) || isNaN(hNum) || isNaN(y0Num)) {
+        setProcedure("<span style='color:#e53935;font-weight:bold;'>Error: Faltan valores para RK2</span>");
         return;
       }
-      let xs = [aNum], ys = [y0Num];
-      let x = aNum, y = y0Num;
-      let steps = `<b>Tabla de iteraciones:</b><br><table class='procedure-table'><tr><th>i</th><th>x</th><th>y</th><th>k1</th><th>k2</th></tr>`;
-      let i = 0;
-      while (x < bNum) {
-        let k1 = f.evaluate({ x, y });
-        let k2 = f.evaluate({ x: x + hNum, y: y + hNum * k1 });
-        steps += `<tr><td>${i}</td><td>${x.toFixed(4)}</td><td>${y.toFixed(6)}</td><td>${k1.toFixed(6)}</td><td>${k2.toFixed(6)}</td></tr>`;
-        y = y + (hNum / 2) * (k1 + k2);
-        x = x + hNum;
-        xs.push(x);
-        ys.push(y);
-        i++;
+      
+      const x = [aNum];
+      const y = [y0Num];
+      const k1Values = [];
+      const k2Values = [];
+      let xi = aNum, yi = y0Num;
+      
+      while (xi < bNum) {
+        const k1 = f.evaluate({ x: xi, y: yi });
+        const k2 = f.evaluate({ x: xi + hNum, y: yi + hNum * k1 });
+        
+        k1Values.push(k1);
+        k2Values.push(k2);
+        
+        yi = yi + (hNum / 2) * (k1 + k2);
+        xi = xi + hNum;
+        x.push(xi);
+        y.push(yi);
       }
-      steps += '</table>';
-      proc = `<b>Procedimiento Runge-Kutta 2° Orden:</b><br>k1 = f(x_i, y_i)<br>k2 = f(x_i + h, y_i + h * k1)<br>y_{i+1} = y_i + (h/2)*(k1 + k2)<br>h = ${hNum}<br>` + steps + `<br>Respuesta final: <b>y(${bNum}) ≈ ${ys[ys.length-1].toFixed(6)}</b>`;
-      setPlotData({ x: xs, y: ys });
+      
+      setPlotData({ x, y });
       setArea(null);
-      setProcedure(proc);
+        let procHtml = `<div style='background: ${isDark ? 'linear-gradient(135deg, #2d3748, #1a202c)' : 'linear-gradient(135deg, #f8f9fa, #e9ecef)'}; padding: 20px; border-radius: 12px; border-left: 4px solid ${isDark ? '#00dfd8' : '#dc3545'}; color: ${isDark ? '#e2e8f0' : '#2d3748'};'>`;
+      procHtml += `<h4 style='color: ${isDark ? '#00dfd8' : '#dc3545'}; margin-bottom: 15px;'><i class="bi bi-arrow-up-right"></i> Runge-Kutta 2° Orden</h4>`;
+      procHtml += `<p><strong>Ecuación diferencial:</strong> dy/dx = ${expr}</p>`;
+      procHtml += `<p><strong>Condición inicial:</strong> y(${aNum}) = ${y0Num}</p>`;
+      procHtml += `<p><strong>Paso h:</strong> ${hNum}</p>`;
+      procHtml += `<p><strong>Fórmulas:</strong></p>`;
+      procHtml += `<ul style='margin-left: 20px;'>`;
+      procHtml += `<li>k₁ = f(xᵢ, yᵢ)</li>`;
+      procHtml += `<li>k₂ = f(xᵢ + h, yᵢ + h×k₁)</li>`;
+      procHtml += `<li>yᵢ₊₁ = yᵢ + (h/2)×(k₁ + k₂)</li>`;
+      procHtml += `</ul>`;
+      procHtml += `<p><strong>Valor final:</strong> y(${bNum}) ≈ ${y[y.length-1].toFixed(6)}</p>`;
+      
+      // Tabla de iteraciones
+      procHtml += `<div style='margin-top: 20px;'>`;
+      procHtml += `<h5 style='color: ${isDark ? '#00dfd8' : '#dc3545'}; margin-bottom: 10px;'>Tabla de Iteraciones:</h5>`;
+      procHtml += `<div style='overflow-x: auto; border-radius: 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(220, 53, 69, 0.3)'};'>`;
+      procHtml += `<table style='width: 100%; border-collapse: collapse; font-size: 0.9em; background: ${isDark ? '#1a202c' : '#fff'};'>`;
+      procHtml += `<thead><tr style='background: ${isDark ? '#00dfd8' : '#dc3545'}; color: white;'>`;
+      procHtml += `<th style='padding: 12px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(220, 53, 69, 0.3)'};'>i</th>`;
+      procHtml += `<th style='padding: 12px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(220, 53, 69, 0.3)'};'>xᵢ</th>`;
+      procHtml += `<th style='padding: 12px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(220, 53, 69, 0.3)'};'>yᵢ</th>`;
+      procHtml += `<th style='padding: 12px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(220, 53, 69, 0.3)'};'>k₁</th>`;
+      procHtml += `<th style='padding: 12px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(220, 53, 69, 0.3)'};'>k₂</th>`;
+      procHtml += `<th style='padding: 12px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(220, 53, 69, 0.3)'};'>yᵢ₊₁</th>`;
+      procHtml += `</tr></thead><tbody>`;
+      
+      for (let i = 0; i < x.length - 1; i++) {
+        procHtml += `<tr style='${i % 2 === 0 ? (isDark ? "background: rgba(0, 223, 216, 0.05);" : "background: #f8f9fa;") : (isDark ? "background: rgba(26, 32, 44, 0.8);" : "background: #fff;")} color: ${isDark ? '#e2e8f0' : '#2d3748'};'>`;
+        procHtml += `<td style='padding: 10px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center;'>${i}</td>`;
+        procHtml += `<td style='padding: 10px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center;'>${x[i].toFixed(4)}</td>`;
+        procHtml += `<td style='padding: 10px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center;'>${y[i].toFixed(6)}</td>`;
+        procHtml += `<td style='padding: 10px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; color: ${isDark ? '#00dfd8' : '#dc3545'};'>${k1Values[i].toFixed(6)}</td>`;
+        procHtml += `<td style='padding: 10px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; color: ${isDark ? '#00dfd8' : '#dc3545'};'>${k2Values[i].toFixed(6)}</td>`;
+        procHtml += `<td style='padding: 10px 8px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; font-weight: bold; color: ${isDark ? '#00dfd8' : '#dc3545'};'>${y[i+1].toFixed(6)}</td>`;
+        procHtml += `</tr>`;
+      }
+      
+      procHtml += `</tbody></table></div></div>`;
+      procHtml += `</div>`;
+      
+      setProcedure(procHtml);
     }
   };
-
-  // Al cambiar de método, limpiar todo
-  const handleMethodChange = e => {
-    setMethod(e.target.value);
-    setExpr('');
-    setA('');
-    setB('');
-    setH('');
-    setDelta('');
-    setY0('');
-    setPlotData(null);
-    setArea(null);
-    setProcedure('');
-  };
-
   return (
-    <div className={`app ${theme} animate__animated animate__fadeIn`} style={{ minHeight: '100vh', background: isDark ? '#181c2b' : '#f8fafc', transition: 'background 0.5s' }}>
-      <div className="container py-4 animate__animated animate__fadeInUp animate__faster">
-        <header className="d-flex justify-content-between align-items-center mb-4 animate__animated animate__fadeInDown animate__faster">
+    <div className={`app ${theme} app-container`} style={{ background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)' }}>
+      <div className="container-fluid app-main">
+        <header className="header-modern app-header d-flex justify-content-between align-items-center" style={{ background: 'linear-gradient(135deg, #b71c1c 0%, #ffd600 100%)', color: '#fff', borderRadius: '15px', padding: '15px 25px' }}>
           <div className="d-flex align-items-center gap-3">
-            <img src="/logo192.png" alt="Logo" style={{ width: 48, height: 48, borderRadius: 12, boxShadow: isDark ? '0 2px 8px #00dfd8aa' : '0 2px 8px #007cf088' }} />
-            <h1 className="display-5 fw-bold mb-0" style={{ color: isDark ? '#fff' : '#232526', letterSpacing: 1 }}>Métodos Numéricos</h1>
+            <img src="/logo192.png" alt="Logo UTA" className="logo-modern" style={{ width: 45, height: 45, borderRadius: '50%', border: '2px solid #ffd600' }} />
+            <div>
+              <h1 className="fw-bold mb-0" style={{ fontSize: '1.8rem' }}>Métodos Numéricos</h1>
+              <small className="text-warning">Universidad Técnica de Ambato</small>
+            </div>
           </div>
-          <button className={`btn ${isDark ? 'btn-outline-info' : 'btn-outline-dark'} d-flex align-items-center animate__animated animate__fadeInRight animate__faster shadow-sm`} style={{ borderRadius: 30, background: isDark ? '#181c2b' : '#fff', color: isDark ? '#00dfd8' : '#007cf0', borderColor: isDark ? '#00dfd8' : '#007cf0', transition: 'all 0.3s' }} onClick={() => setTheme(t => t === 'light' ? 'dark' : 'light')}>
-            <i className={`bi bi-${theme === 'light' ? 'moon-stars' : 'sun'} me-2`}></i>
+          <button className="btn btn-outline-light" onClick={() => setTheme(t => t === 'light' ? 'dark' : 'light')}>
+            <i className={`bi bi-${theme === 'light' ? 'moon-stars-fill' : 'sun-fill'} me-2`}></i>
             {theme === 'light' ? 'Oscuro' : 'Claro'}
           </button>
         </header>
 
-        <div className="row g-4">
-          <div className="col-md-4 animate__animated animate__fadeInLeft animate__faster">
-            <div className="card p-4 shadow-sm border-0 animate__animated animate__zoomIn animate__faster" style={{ borderRadius: 16, background: isDark ? '#232526' : '#fff', boxShadow: isDark ? '0 2px 16px #00dfd855' : '0 2px 16px #007cf055', transition: 'background 0.5s' }}>
-              <div className="mb-4">
-                <label className="form-label fw-semibold text-secondary" style={{ fontSize: 18 }}>Método</label>
-                <select className="form-select shadow-sm" style={{ borderRadius: 10, borderColor: isDark ? '#00dfd8' : '#007cf0', color: isDark ? '#00dfd8' : '#007cf0', background: isDark ? '#232526' : '#fff', transition: 'all 0.3s' }} value={method} onChange={handleMethodChange}>
-                  <option value="">-- Seleccionar --</option>
-                  <option value="euler">Euler</option>
-                  <option value="rk2">Runge-Kutta 2</option>
-                  <option value="simpson">Simpson 1/3</option>
+        <div className="app-content">
+          <div className="row g-4 h-100">
+            <div className="col-lg-4 col-md-5">
+              <div className="card card-scrollable p-4" style={{ background: isDark ? 'rgba(45, 55, 72, 0.95)' : 'rgba(255, 255, 255, 0.95)', borderRadius: '20px', border: 'none', height: 'fit-content', minHeight: '500px' }}>
+                <h5 className="card-title fw-bold mb-4" style={{ color: isDark ? '#00dfd8' : '#b71c1c' }}>
+                  <i className="bi bi-gear-fill me-2"></i>
+                  Configuración
+                </h5>
+              
+              <div className="mb-3">
+                <label className="form-label fw-semibold">Método Numérico</label>
+                <select 
+                  className="form-select" 
+                  value={method} 
+                  onChange={(e) => setMethod(e.target.value)}
+                  style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
+                >
+                  <option value="">Seleccionar método</option>
+                  <option value="simpson">Simpson 1/3 (Integración)</option>
+                  <option value="euler">Euler (EDO)</option>
+                  <option value="rk2">Runge-Kutta 2° Orden (EDO)</option>
                 </select>
               </div>
 
-              {method && (
-                <div className="mb-4 animate__animated animate__fadeIn animate__faster">
-                  <label className="form-label fw-semibold text-secondary">f(x{method !== 'simpson' ? ', y' : ''})</label>
-                  <input className="form-control shadow-sm" style={{ borderRadius: 10, borderColor: isDark ? '#00dfd8' : '#007cf0', color: isDark ? '#00dfd8' : '#007cf0', background: isDark ? '#232526' : '#fff', transition: 'all 0.3s' }} value={expr} onChange={e => setExpr(e.target.value)} />
+              <div className="mb-3">
+                <label className="form-label fw-semibold">Función f(x) o f(x,y)</label>
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  value={expr} 
+                  onChange={(e) => setExpr(e.target.value)}
+                  placeholder="Ej: x^2, sin(x), x+y"
+                  style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
+                />
+              </div>
+
+              <div className="row">
+                <div className="col-6 mb-3">
+                  <label className="form-label fw-semibold">Límite inferior (a)</label>
+                  <input 
+                    type="number" 
+                    className="form-control" 
+                    value={a} 
+                    onChange={(e) => setA(e.target.value)}
+                    style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
+                  />
+                </div>
+                <div className="col-6 mb-3">
+                  <label className="form-label fw-semibold">Límite superior (b)</label>
+                  <input 
+                    type="number" 
+                    className="form-control" 
+                    value={b} 
+                    onChange={(e) => setB(e.target.value)}
+                    style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
+                  />
+                </div>
+              </div>
+
+              {method === 'simpson' && (
+                <div className="mb-3">
+                  <label className="form-label fw-semibold">Δx (paso)</label>
+                  <input 
+                    type="number" 
+                    className="form-control" 
+                    value={delta} 
+                    onChange={(e) => setDelta(e.target.value)}
+                    step="0.01"
+                    style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
+                  />
                 </div>
               )}
 
               {(method === 'euler' || method === 'rk2') && (
                 <>
-                  <div className="mb-3 animate__animated animate__fadeIn animate__faster">
-                    <label className="form-label text-secondary">y₀</label>
-                    <input className="form-control shadow-sm" style={{ borderRadius: 10, borderColor: isDark ? '#00dfd8' : '#007cf0', color: isDark ? '#00dfd8' : '#007cf0', background: isDark ? '#232526' : '#fff', transition: 'all 0.3s' }} type="number" step="any" value={y0} onChange={e => setY0(e.target.value)} />
+                  <div className="mb-3">
+                    <label className="form-label fw-semibold">Paso h</label>
+                    <input 
+                      type="number" 
+                      className="form-control" 
+                      value={h} 
+                      onChange={(e) => setH(e.target.value)}
+                      step="0.01"
+                      style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
+                    />
                   </div>
-                  <div className="mb-3 animate__animated animate__fadeIn animate__faster">
-                    <label className="form-label text-secondary">h (paso)</label>
-                    <input className="form-control shadow-sm" style={{ borderRadius: 10, borderColor: isDark ? '#00dfd8' : '#007cf0', color: isDark ? '#00dfd8' : '#007cf0', background: isDark ? '#232526' : '#fff', transition: 'all 0.3s' }} type="number" step="any" value={h} onChange={e => setH(e.target.value)} />
+                  <div className="mb-3">
+                    <label className="form-label fw-semibold">Valor inicial y₀</label>
+                    <input 
+                      type="number" 
+                      className="form-control" 
+                      value={y0} 
+                      onChange={(e) => setY0(e.target.value)}
+                      style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
+                    />
                   </div>
                 </>
               )}
 
-              {method === 'simpson' && (
-                <div className="mb-3 animate__animated animate__fadeIn animate__faster">
-                  <label className="form-label text-secondary">Δx (tamaño de subintervalo)</label>
-                  <input className="form-control shadow-sm" style={{ borderRadius: 10, borderColor: isDark ? '#00dfd8' : '#007cf0', color: isDark ? '#00dfd8' : '#007cf0', background: isDark ? '#232526' : '#fff', transition: 'all 0.3s' }} type="number" step="any" value={delta} onChange={e => setDelta(e.target.value)} />
-                </div>
-              )}
-
-              {method && (
-                <>
-                  <div className="mb-3 animate__animated animate__fadeIn animate__faster">
-                    <label className="form-label text-secondary">a (inicio)</label>
-                    <input className="form-control shadow-sm" style={{ borderRadius: 10, borderColor: isDark ? '#00dfd8' : '#007cf0', color: isDark ? '#00dfd8' : '#007cf0', background: isDark ? '#232526' : '#fff', transition: 'all 0.3s' }} type="number" step="any" value={a} onChange={e => setA(e.target.value)} />
-                  </div>
-                  <div className="mb-4 animate__animated animate__fadeIn animate__faster">
-                    <label className="form-label text-secondary">b (fin)</label>
-                    <input className="form-control shadow-sm" style={{ borderRadius: 10, borderColor: isDark ? '#00dfd8' : '#007cf0', color: isDark ? '#00dfd8' : '#007cf0', background: isDark ? '#232526' : '#fff', transition: 'all 0.3s' }} type="number" step="any" value={b} onChange={e => setB(e.target.value)} />
-                  </div>
-                  <button className="btn btn-primary w-100 py-2 fs-5 animate__animated animate__pulse animate__infinite shadow-sm" style={{ borderRadius: 12, background: isDark ? '#00dfd8' : '#007cf0', color: '#fff', border: 0, transition: 'background 0.3s' }} onClick={handleRun}>
-                    <i className="bi bi-graph-up-arrow me-2"></i>Visualizar
-                  </button>
-                </>
-              )}
+              <button 
+                className="btn btn-primary w-100 mt-3" 
+                onClick={handleRun}
+                style={{ background: isDark ? 'linear-gradient(135deg, #00dfd8, #667eea)' : 'linear-gradient(135deg, #b71c1c, #667eea)', border: 'none', padding: '12px' }}
+              >
+                <i className="bi bi-play-fill me-2"></i>
+                Visualizar
+              </button>
             </div>
-          </div>
-
-          <div className="col-md-8 animate__animated animate__fadeInRight animate__faster">
-            <div className="card p-4 shadow-sm h-100 border-0 animate__animated animate__zoomIn animate__faster" style={{ borderRadius: 16, background: isDark ? '#232526' : '#fff', boxShadow: isDark ? '0 2px 16px #00dfd855' : '0 2px 16px #007cf055', transition: 'background 0.5s' }}>
-              {plotData ? (
-                <>
-                  <Plot
-                    data={[{
-                      x: plotData.x,
-                      y: plotData.y,
-                      type: 'scatter',
-                      mode: 'lines',
-                      line: {
-                        width: 4,
-                        color: isDark ? '#00dfd8' : '#007cf0',
-                        dash: method === 'rk2' ? 'dashdot' : (method === 'euler' ? 'dot' : 'solid')
-                      },
-                      marker: {
-                        color: isDark ? '#00dfd8' : '#007cf0',
-                        size: 8,
-                        symbol: method === 'simpson' ? 'circle' : 'diamond'
-                      },
-                      name: method.toUpperCase(),
-                      fill: method === 'simpson' ? 'tozeroy' : undefined,
-                      fillcolor: method === 'simpson' ? (isDark ? 'rgba(0,223,216,0.2)' : 'rgba(0,124,240,0.2)') : undefined
-                    }]}
-                    layout={{
-                      autosize: true,
-                      title: {
-                        text: 'Resultado',
-                        font: { color: isDark ? '#00dfd8' : '#007cf0', size: 24 }
-                      },
-                      paper_bgcolor: isDark ? '#232526' : '#fff',
-                      plot_bgcolor: isDark ? '#232526' : '#fff',
-                      font: { color: isDark ? '#fff' : '#232526', size: 15 },
-                      margin: { t: 40, l: 50, r: 30, b: 40 },
-                      responsive: true,
-                      xaxis: {
-                        tickfont: { color: isDark ? '#00dfd8' : '#007cf0', size: 13 },
-                        gridcolor: isDark ? '#232526' : '#eee',
-                        linecolor: isDark ? '#00dfd8' : '#007cf0',
-                        zerolinecolor: isDark ? '#00dfd8' : '#007cf0',
-                        title: { font: { color: isDark ? '#00dfd8' : '#007cf0', size: 16 } }
-                      },
-                      yaxis: {
-                        tickfont: { color: isDark ? '#00dfd8' : '#007cf0', size: 13 },
-                        gridcolor: isDark ? '#232526' : '#eee',
-                        linecolor: isDark ? '#00dfd8' : '#007cf0',
-                        zerolinecolor: isDark ? '#00dfd8' : '#007cf0',
-                        title: { font: { color: isDark ? '#00dfd8' : '#007cf0', size: 16 } }
-                      },
-                      showlegend: true,
-                      legend: {
-                        font: { color: isDark ? '#fff' : '#232526', size: 14 },
-                        bgcolor: isDark ? '#232526' : 'rgba(255,255,255,0.8)',
-                        bordercolor: isDark ? '#00dfd8' : '#007cf0',
-                        borderwidth: 1
-                      }
-                    }}
-                    useResizeHandler
-                    style={{ width: '100%', height: '420px', borderRadius: 12, boxShadow: isDark ? '0 2px 16px #00dfd855' : '0 2px 16px #007cf055', transition: 'box-shadow 0.5s' }}
-                    className="animate__animated animate__fadeIn animate__faster"
-                  />
-                  {method === 'simpson' && area !== null && (
-                    <div className="alert mt-4 animate__animated animate__fadeInUp animate__faster d-flex align-items-center fs-5 shadow-sm" style={{ borderRadius: 10, background: isDark ? '#00dfd8' : '#007cf0', color: '#fff', border: 0, transition: 'background 0.3s' }}>
-                      <i className="bi bi-calculator me-2"></i>Área ≈ {area.toFixed(6)}
+          </div>          <div className="col-lg-8 col-md-7">
+            <div className="card card-scrollable p-4 d-flex flex-column" style={{ background: isDark ? 'rgba(45, 55, 72, 0.95)' : 'rgba(255, 255, 255, 0.95)', borderRadius: '20px', border: 'none', minHeight: '500px' }}>
+              <h5 className="card-title fw-bold mb-3" style={{ color: isDark ? '#00dfd8' : '#b71c1c' }}>
+                <i className="bi bi-graph-up-arrow me-2"></i>
+                Visualización
+              </h5>
+              
+              <div className="flex-fill d-flex flex-column" style={{ minHeight: 0 }}>
+                {plotData ? (
+                  <>                    <div className="flex-fill" style={{ minHeight: '350px', height: '400px' }}>
+                      <Plot 
+                        data={[{
+                          x: plotData.x,
+                          y: plotData.y,
+                          type: 'scatter',
+                          mode: 'lines+markers',
+                          line: { 
+                            color: isDark ? '#00dfd8' : '#b71c1c', 
+                            width: 3,
+                            shape: 'spline'
+                          },
+                          marker: { 
+                            color: isDark ? '#00dfd8' : '#b71c1c', 
+                            size: 6,
+                            line: { width: 1, color: isDark ? '#fff' : '#000' }
+                          },
+                          name: method === 'simpson' ? 'f(x) - Función a Integrar' : method === 'euler' ? 'y(x) - Solución por Euler' : 'y(x) - Solución por RK2',
+                          fill: method === 'simpson' ? 'tozeroy' : undefined,
+                          fillcolor: method === 'simpson' ? (isDark ? 'rgba(0,223,216,0.15)' : 'rgba(183,28,28,0.15)') : undefined
+                        }]}
+                        layout={{
+                          autosize: true,
+                          title: { 
+                            text: `<b>${method === 'simpson' ? 'Simpson 1/3 - Integración Numérica' : method === 'euler' ? 'Euler - Solución EDO' : 'Runge-Kutta 2° - Solución EDO'}</b>`, 
+                            font: { 
+                              color: isDark ? '#00dfd8' : '#b71c1c', 
+                              size: 16,
+                              family: 'Inter, sans-serif'
+                            },
+                            x: 0.5,
+                            y: 0.95
+                          },
+                          paper_bgcolor: 'rgba(0,0,0,0)',
+                          plot_bgcolor: isDark ? 'rgba(26, 32, 44, 0.3)' : 'rgba(248, 250, 252, 0.8)',
+                          font: { 
+                            color: isDark ? '#e2e8f0' : '#2d3748',
+                            family: 'Inter, sans-serif',
+                            size: 12
+                          },
+                          margin: { t: 60, l: 60, r: 40, b: 50 },
+                          xaxis: { 
+                            title: {
+                              text: '<b>x</b>',
+                              font: { color: isDark ? '#00dfd8' : '#b71c1c', size: 14 }
+                            },
+                            gridcolor: isDark ? 'rgba(0, 223, 216, 0.2)' : 'rgba(183, 28, 28, 0.2)',
+                            linecolor: isDark ? '#00dfd8' : '#b71c1c',
+                            tickcolor: isDark ? '#00dfd8' : '#b71c1c',
+                            tickfont: { color: isDark ? '#a0aec0' : '#4a5568' },
+                            zerolinecolor: isDark ? 'rgba(0, 223, 216, 0.5)' : 'rgba(183, 28, 28, 0.5)'
+                          },
+                          yaxis: { 
+                            title: {
+                              text: method === 'simpson' ? '<b>f(x)</b>' : '<b>y</b>',
+                              font: { color: isDark ? '#00dfd8' : '#b71c1c', size: 14 }
+                            },
+                            gridcolor: isDark ? 'rgba(0, 223, 216, 0.2)' : 'rgba(183, 28, 28, 0.2)',
+                            linecolor: isDark ? '#00dfd8' : '#b71c1c',
+                            tickcolor: isDark ? '#00dfd8' : '#b71c1c',
+                            tickfont: { color: isDark ? '#a0aec0' : '#4a5568' },
+                            zerolinecolor: isDark ? 'rgba(0, 223, 216, 0.5)' : 'rgba(183, 28, 28, 0.5)'
+                          },
+                          showlegend: true,
+                          legend: {
+                            x: 0.02,
+                            y: 0.98,
+                            bgcolor: isDark ? 'rgba(45, 55, 72, 0.8)' : 'rgba(255, 255, 255, 0.9)',
+                            bordercolor: isDark ? '#00dfd8' : '#b71c1c',
+                            borderwidth: 1,
+                            font: { 
+                              color: isDark ? '#e2e8f0' : '#2d3748',
+                              size: 11
+                            }
+                          }
+                        }}
+                        config={{ 
+                          responsive: true, 
+                          displayModeBar: false,
+                          staticPlot: false
+                        }}
+                        style={{ 
+                          width: '100%', 
+                          height: '100%',
+                          border: `1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : 'rgba(183, 28, 28, 0.2)'}`,
+                          borderRadius: '10px',
+                          overflow: 'hidden'
+                        }}
+                        useResizeHandler={true}
+                      />
                     </div>
-                  )}
-                  <div className="mt-4 animate__animated animate__fadeIn animate__faster" style={{ background: isDark ? '#181c2b' : '#f8fafc', borderRadius: 10, padding: 16, color: isDark ? '#fff' : '#232526', fontSize: 15, boxShadow: isDark ? '0 1px 6px #00dfd822' : '0 1px 6px #007cf022' }}>
-                    <div dangerouslySetInnerHTML={{ __html: procedure }} />
+                    
+                    {area !== null && (
+                      <div className="mt-3 p-3 rounded" style={{ background: isDark ? 'rgba(0, 223, 216, 0.1)' : 'rgba(183, 28, 28, 0.1)' }}>
+                        <h6 className="fw-bold" style={{ color: isDark ? '#00dfd8' : '#b71c1c' }}>
+                          <i className="bi bi-calculator me-2"></i>
+                          Área: {area.toFixed(6)} unidades²
+                        </h6>
+                      </div>
+                    )}
+                    
+                    <div className="mt-3">
+                      <h6 className="fw-bold mb-2" style={{ color: isDark ? '#00dfd8' : '#b71c1c' }}>
+                        <i className="bi bi-list-ul me-2"></i>
+                        Procedimiento
+                      </h6>
+                      <div 
+                        className="procedure-scroll"
+                        dangerouslySetInnerHTML={{ __html: procedure }} 
+                        style={{ 
+                          fontSize: '0.9rem',
+                          padding: '15px',
+                          background: isDark ? 'rgba(26, 32, 44, 0.3)' : 'rgba(248, 250, 252, 0.5)',
+                          borderRadius: '10px',
+                          border: `1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : 'rgba(183, 28, 28, 0.2)'}`
+                        }} 
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <div className="d-flex align-items-center justify-content-center h-100">
+                    <div className="text-center">
+                      <i className="bi bi-graph-up display-1 mb-3" style={{ opacity: 0.3, color: isDark ? '#00dfd8' : '#b71c1c' }}></i>
+                      <h4 className="mb-3" style={{ color: isDark ? '#a0aec0' : '#4a5568' }}>
+                        ¡Comienza tu Análisis!
+                      </h4>
+                      <p className="text-muted">
+                        Selecciona un método y presiona "Visualizar"
+                      </p>
+                    </div>
                   </div>
-                </>
-              ) : <p className="text-muted animate__animated animate__fadeIn animate__faster fs-5 text-center">Selecciona método e ingresa parámetros.</p>}
+                )}
+              </div>
             </div>
           </div>
         </div>
-        <footer className="text-center mt-5 animate__animated animate__fadeInUp animate__delay-1s" style={{ color: isDark ? '#00dfd8' : '#007cf0', fontWeight: 500, letterSpacing: 1, fontSize: 16 }}>
-          © {new Date().getFullYear()} Métodos Numéricos | Desarrollado por tu nombre
+        </div>
+
+        <footer className="footer-modern text-center app-footer" style={{ background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #b71c1c 0%, #2d3748 100%)', color: '#fff', borderRadius: '15px', padding: '20px 0', marginTop: '20px' }}>
+          <div className="d-flex align-items-center justify-content-center gap-3 mb-2">
+            <img src="/logo192.png" alt="UTA" style={{ width: 32, height: 32, borderRadius: '50%', border: '2px solid #ffd600' }} />
+            <span className="fw-bold">Universidad Técnica de Ambato</span>
+          </div>
+          <div style={{ opacity: 0.8, fontSize: '14px' }}>
+            © {new Date().getFullYear()} Métodos Numéricos • Ingeniería en Sistemas
+          </div>
         </footer>
       </div>
     </div>
