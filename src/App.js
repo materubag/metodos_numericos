@@ -380,7 +380,7 @@ export default function App() {
   }, [method]);
   return (    <div className={`app ${theme} app-container`} style={{ background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)' }}>
       <div className="container-fluid app-main">
-        <header className="header-modern app-header d-flex justify-content-between align-items-center" style={{ background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)', color: '#fff', borderRadius: '15px', padding: '15px 25px', boxShadow: isDark ? '0 8px 32px rgba(26, 26, 46, 0.3)' : '0 8px 32px rgba(183, 28, 28, 0.3)' }}>
+        <header className="header-modern app-header d-flex justify-content-between align-items-center" style={{ background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #b71c1c 0%, #2d3748 100%)', color: '#fff', borderRadius: '15px', padding: '15px 25px', boxShadow: isDark ? '0 8px 32px rgba(26, 26, 46, 0.3)' : '0 8px 32px rgba(183, 28, 28, 0.3)' }}>
           <div className="d-flex align-items-center gap-3">
             <img src="/logo192.png" alt="Logo UTA" className="logo-modern" style={{ width: 45, height: 45, borderRadius: '50%', border: '2px solid #ffd600', filter: 'drop-shadow(0 4px 8px rgba(255, 213, 0, 0.3))' }} />
             <div>
