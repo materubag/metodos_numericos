@@ -3,7 +3,7 @@
 
 :root {
   --uta-rojo: #b71c1c;
-  --uta-dorado: #ffd600;
+  --uta-dorado: #ffffff;
   --uta-blanco: #ffffff;
   --uta-negro: #1a1a1a;
   --uta-gris: #6c757d;
@@ -12,18 +12,18 @@
   --wine-secondary: #2d3748;    /* Gris oscuro del footer */
   --wine-dark: #1a1a2e;         /* Azul oscuro del footer (modo oscuro) */
   --wine-light: #16213e;        /* Azul footer modo oscuro */
-  --wine-accent: #ffd600;       /* Dorado del logo */
+  --wine-accent: #ffffff;       /* Dorado del logo */
   --wine-deep: #8b0000;         /* Rojo más oscuro */
   --wine-soft: #e2e8f0;         /* Gris claro para texto */
-  --wine-gold: #ffd600;         /* Oro del logo */
+  --wine-gold: #ffffff;         /* Oro del logo */
   --wine-cream: #ffffff;        /* Blanco para contraste */
     /* Gradientes footer theme */
   --gradient-wine-primary: linear-gradient(135deg, #b71c1c 0%, #2d3748 100%);
   --gradient-wine-secondary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   --gradient-wine-accent: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
   --gradient-wine-deep: linear-gradient(135deg, #2d3748 0%, #b71c1c 100%);
-  --gradient-wine-gold: linear-gradient(135deg, #b71c1c 0%, #ffd600 50%, #2d3748 100%);
-  --gradient-wine-soft: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #ffd600 100%);
+  --gradient-wine-gold: linear-gradient(135deg, #b71c1c 0%, #ffffff 50%, #2d3748 100%);
+  --gradient-wine-soft: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #ffffff 100%);
     /* Sombras con tonos footer */
   --shadow-wine-sm: 0 2px 8px rgba(183, 28, 28, 0.15);
   --shadow-wine-md: 0 4px 16px rgba(183, 28, 28, 0.2);
@@ -286,10 +286,10 @@ body, html {
 
 @keyframes glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(255, 213, 0, 0.3);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
   }
   50% {
-    box-shadow: 0 0 40px rgba(255, 213, 0, 0.6), 0 0 60px rgba(255, 213, 0, 0.4);
+    box-shadow: 0 0 40px rgba(243, 243, 241, 0.6), 0 0 60px rgba(255, 213, 0, 0.4);
   }
 }
 
@@ -392,10 +392,10 @@ body, html {
 
 @keyframes textGlowPulse {
   0%, 100% {
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.2), 0 0 30px rgba(255, 215, 0, 0.1);
+    text-shadow: 0 0 10px rgba(238, 237, 234, 0.3), 0 0 20px rgba(255, 215, 0, 0.2), 0 0 30px rgba(255, 215, 0, 0.1);
   }
   50% {
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2);
+    text-shadow: 0 0 20px rgba(238, 237, 230, 0.6), 0 0 30px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2);
   }
 }
 
@@ -505,7 +505,7 @@ body, html {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.5), transparent);
+  background: linear-gradient(90deg, transparent, rgba(245, 244, 241, 0.5), transparent);
   animation: liquidWave 2s ease-in-out infinite;
 }
 
@@ -624,7 +624,7 @@ body, html {
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.8), transparent);
+  background: linear-gradient(90deg, transparent, rgba(230, 229, 224, 0.8), transparent);
   animation: liquidWave 3s ease-in-out infinite;
 }
 
@@ -641,7 +641,7 @@ body, html {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(202, 202, 200, 0.3) 0%, transparent 70%);
   border-radius: 50%;
   opacity: 0;
   transition: opacity 0.6s ease;
@@ -663,7 +663,7 @@ body, html {
 .text-gradient {
   position: relative;
   background: 
-    linear-gradient(45deg, #b71c1c, #ffd600, #2d3748, #b71c1c),
+    linear-gradient(45deg, #b71c1c, #e7e6e0, #2d3748, #b71c1c),
     linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
   background-size: 300% 100%, 200% 100%;
   animation: holographicShimmer 4s linear infinite, textGlowPulse 2s ease-in-out infinite;
@@ -674,7 +674,7 @@ body, html {
 
 .app.dark .text-gradient {
   background: 
-    linear-gradient(45deg, #ffd600, #ffffff, #ffd600, #ffffff),
+    linear-gradient(45deg, #ecebe7, #ffffff, #e7e7e3, #ffffff),
     linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent);
   background-size: 300% 100%, 200% 100%;
 }
@@ -744,7 +744,7 @@ h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
   left: 50%;
   width: 0;
   height: 0;
-  background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(235, 235, 234, 0.3) 0%, transparent 70%);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -815,7 +815,7 @@ h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
   left: 50%;
   width: 0;
   height: 0;
-  background: radial-gradient(circle, rgba(255,215,0,0.4) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(236, 235, 230, 0.4) 0%, transparent 70%);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1202,7 +1202,7 @@ html, body, #root {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, #b71c1c 0%, #ffd600 100%);
+  background: linear-gradient(135deg, #b71c1c 0%, #ebeae9 100%);
   opacity: 0.9;
   z-index: -1;
 }
