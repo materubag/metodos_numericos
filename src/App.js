@@ -380,40 +380,88 @@ export default function App() {
   }, [method]);
   return (    <div className={`app ${theme} app-container`} style={{ background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)' }}>
       <div className="container-fluid app-main">
-        <header className="header-modern app-header d-flex justify-content-between align-items-center" style={{ background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #b71c1c 0%, #2d3748 100%)', color: '#fff', borderRadius: '15px', padding: '15px 25px', boxShadow: isDark ? '0 8px 32px rgba(26, 26, 46, 0.3)' : '0 8px 32px rgba(183, 28, 28, 0.3)' }}>
-          <div className="d-flex align-items-center gap-3">
-            <img src="/logo192.png" alt="Logo UTA" className="logo-modern" style={{ width: 45, height: 45, borderRadius: '50%', border: '2px solid #ffd600', filter: 'drop-shadow(0 4px 8px rgba(255, 213, 0, 0.3))' }} />
+        <header className="header-modern app-header d-flex justify-content-between align-items-center" style={{ background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #b71c1c 0%, #2d3748 100%)', color: '#fff', borderRadius: '15px', padding: '15px 25px', boxShadow: isDark ? '0 8px 32px rgba(26, 26, 46, 0.3)' : '0 8px 32px rgba(183, 28, 28, 0.3)' }}>          <div className="d-flex align-items-center gap-3">
+            <img src="/logo192.png" alt="Logo UTA" className="logo-modern animate__animated animate__rotateIn" style={{ 
+              width: 50, 
+              height: 50, 
+              borderRadius: '50%', 
+              border: '3px solid #ffd600', 
+              filter: 'drop-shadow(0 6px 12px rgba(255, 213, 0, 0.4))',
+              position: 'relative',
+              zIndex: 1
+            }} />
             <div>
-              <h1 className="fw-bold mb-0" style={{ fontSize: '1.8rem', textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>Métodos Numéricos</h1>
-              <small style={{ color: '#ffd600', fontWeight: '500' }}>Universidad Técnica de Ambato</small>
+              <h1 className="fw-bold mb-0" style={{ 
+                fontSize: '1.9rem', 
+                textShadow: '0 3px 6px rgba(0,0,0,0.4)',
+                background: 'linear-gradient(45deg, #ffffff, #ffd700, #ffffff)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                backgroundSize: '200% 100%',
+                animation: 'textGlowPulse 3s ease-in-out infinite'
+              }}>
+                Métodos Numéricos
+              </h1>
+              <small style={{ 
+                color: '#ffd600', 
+                fontWeight: '600',
+                filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))',
+                animation: 'textGlowPulse 4s ease-in-out infinite'
+              }}>
+                Universidad Técnica de Ambato
+              </small>
             </div>
-          </div>
-          <button className="btn btn-outline-light" onClick={() => setTheme(t => t === 'light' ? 'dark' : 'light')} style={{ 
-            border: '2px solid #d4af37', 
-            borderRadius: '12px',
-            padding: '8px 16px',
-            transition: 'all 0.3s ease',
-            background: 'rgba(212, 175, 55, 0.1)',
-            backdropFilter: 'blur(10px)'
-          }}>
-            <i className={`bi bi-${theme === 'light' ? 'moon-stars-fill' : 'sun-fill'} me-2`}></i>
-            {theme === 'light' ? 'Oscuro' : 'Claro'}
+          </div>          <button className="btn btn-outline-light interactive-element" onClick={() => setTheme(t => t === 'light' ? 'dark' : 'light')} style={{ 
+            border: '3px solid #ffd600', 
+            borderRadius: '15px',
+            padding: '10px 20px',
+            transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+            background: 'rgba(255, 215, 0, 0.15)',
+            backdropFilter: 'blur(15px)',
+            position: 'relative',
+            overflow: 'hidden',
+            fontWeight: '600',
+            textShadow: '0 2px 4px rgba(0,0,0,0.3)'
+          }}
+          onMouseOver={(e) => {
+            e.target.style.transform = 'translateY(-3px) scale(1.05)';
+            e.target.style.boxShadow = '0 8px 25px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.3)';
+            e.target.style.background = 'rgba(255, 215, 0, 0.25)';
+            e.target.style.borderColor = '#ffffff';
+          }}
+          onMouseOut={(e) => {
+            e.target.style.transform = 'translateY(0) scale(1)';
+            e.target.style.boxShadow = 'none';
+            e.target.style.background = 'rgba(255, 215, 0, 0.15)';
+            e.target.style.borderColor = '#ffd600';
+          }}
+          >
+            <i className={`bi bi-${theme === 'light' ? 'moon-stars-fill' : 'sun-fill'} me-2`} style={{
+              fontSize: '1.2rem',
+              animation: theme === 'light' ? 'sparkleRotate 3s ease-in-out infinite' : 'neonGlow 2s ease-in-out infinite'
+            }}></i>
+            {theme === 'light' ? 'Modo Oscuro' : 'Modo Claro'}
           </button>
         </header>
 
         <div className="app-content">
-          <div className="row g-4 h-100">            <div className="col-lg-4 col-md-5">              <div className="card card-modern card-scrollable glass-card" style={{ 
+          <div className="row g-4 h-100">            <div className="col-lg-4 col-md-5 animate__animated animate__slideInLeft">
+              <div className="card card-modern card-scrollable glass-card" style={{ 
                 background: isDark ? 'linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.98) 100%)' : 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.98) 100%)', 
-                borderRadius: '24px', 
-                border: `2px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(183, 28, 28, 0.3)'}`,
+                borderRadius: '28px', 
+                border: `3px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(183, 28, 28, 0.3)'}`,
                 height: '80vh',
                 maxHeight: '800px',
-                boxShadow: isDark ? '0 20px 60px rgba(26, 26, 46, 0.25), 0 8px 25px rgba(22, 33, 62, 0.3)' : '0 20px 60px rgba(183, 28, 28, 0.15), 0 8px 25px rgba(0, 0, 0, 0.1)',
-                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                boxShadow: isDark ? 
+                  '0 25px 70px rgba(26, 26, 46, 0.3), 0 10px 30px rgba(22, 33, 62, 0.4), inset 0 1px 0 rgba(255,255,255,0.1)' : 
+                  '0 25px 70px rgba(183, 28, 28, 0.2), 0 10px 30px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255,255,255,0.3)',
+                transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
                 overflow: 'hidden',
                 display: 'flex',
-                flexDirection: 'column'
-              }}>                <div style={{ 
+                flexDirection: 'column',
+                position: 'relative'
+              }}><div style={{ 
                   padding: '24px 24px 16px 24px',                  borderBottom: `1px solid ${isDark ? 'rgba(26, 26, 46, 0.4)' : 'rgba(183, 28, 28, 0.2)'}`,
                   flexShrink: 0,
                   background: isDark ? 'rgba(26, 26, 46, 0.15)' : 'rgba(183, 28, 28, 0.05)'
@@ -442,11 +490,10 @@ export default function App() {
                   textTransform: 'uppercase',
                   fontSize: '0.85rem',
                   marginBottom: '8px'
-                }}>Método Numérico</label>
-                <select 
+                }}>Método Numérico</label>                <select 
                   className="form-select form-select-modern interactive-element" 
                   value={method} 
-                  onChange={(e) => setMethod(e.target.value)}                  style={{ 
+                  onChange={(e) => setMethod(e.target.value)}style={{ 
                     background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)', 
                     color: isDark ? '#fff' : '#2d3748',
                     border: `2px solid ${isDark ? 'rgba(26, 26, 46, 0.6)' : 'rgba(183, 28, 28, 0.6)'}`,
@@ -702,47 +749,92 @@ export default function App() {
                   </div>
                 </div>
               )}              <button 
-                className="btn btn-modern btn-gradient w-100 mt-3 animate__animated animate__pulse animate__infinite" 
-                onClick={handleRun}                style={{ 
+                className="btn btn-modern btn-gradient w-100 mt-3" 
+                onClick={handleRun}
+                style={{ 
                   background: isDark ? '#1a1a2e' : '#b71c1c', 
                   border: 'none',
-                  padding: '16px 24px',
-                  borderRadius: '16px',
-                  fontSize: '1.1rem',
-                  fontWeight: '700',
-                  letterSpacing: '1px',
+                  padding: '20px 32px',
+                  borderRadius: '25px',
+                  fontSize: '1.2rem',
+                  fontWeight: '800',
+                  letterSpacing: '1.5px',
                   textTransform: 'uppercase',
-                  boxShadow: isDark ? '0 8px 32px rgba(26, 26, 46, 0.4), 0 4px 16px rgba(26, 26, 46, 0.3)' : '0 8px 32px rgba(183, 28, 28, 0.4), 0 4px 16px rgba(183, 28, 28, 0.3)',
-                  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                  boxShadow: isDark ? '0 15px 45px rgba(26, 26, 46, 0.6), 0 8px 25px rgba(26, 26, 46, 0.4), inset 0 2px 0 rgba(255,255,255,0.1)' : '0 15px 45px rgba(183, 28, 28, 0.6), 0 8px 25px rgba(183, 28, 28, 0.4), inset 0 2px 0 rgba(255,255,255,0.2)',
+                  transition: 'all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
                   position: 'relative',
                   overflow: 'hidden',
                   color: '#fff',
-                  textShadow: '0 2px 4px rgba(0,0,0,0.3)'
-                }}                onMouseOver={(e) => {
-                  e.target.style.transform = 'translateY(-4px) scale(1.02)';
-                  e.target.style.boxShadow = isDark ? '0 12px 48px rgba(26, 26, 46, 0.6), 0 6px 24px rgba(26, 26, 46, 0.4)' : '0 12px 48px rgba(183, 28, 28, 0.6), 0 6px 24px rgba(183, 28, 28, 0.4)';
-                  e.target.style.background = isDark ? '#16213e' : '#8b0000';
+                  textShadow: '0 3px 10px rgba(0,0,0,0.5)',
+                  backdropFilter: 'blur(15px)',
+                  transform: 'perspective(1000px) rotateX(0deg)',
+                  cursor: 'pointer',
+                  background: isDark ? 
+                    'linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%)' : 
+                    'linear-gradient(145deg, #b71c1c 0%, #8b0000 50%, #b71c1c 100%)',
+                  backgroundSize: '200% 200%'
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.transform = 'perspective(1000px) rotateX(-8deg) translateY(-10px) scale(1.05)';
+                  e.target.style.boxShadow = isDark ? '0 25px 70px rgba(26, 26, 46, 0.8), 0 15px 35px rgba(26, 26, 46, 0.6), inset 0 2px 0 rgba(255,255,255,0.2)' : '0 25px 70px rgba(183, 28, 28, 0.8), 0 15px 35px rgba(183, 28, 28, 0.6), inset 0 2px 0 rgba(255,255,255,0.3)';
+                  e.target.style.backgroundPosition = '100% 100%';
+                  e.target.style.textShadow = '0 5px 15px rgba(0,0,0,0.7)';
                 }}
                 onMouseOut={(e) => {
-                  e.target.style.transform = 'translateY(0) scale(1)';
-                  e.target.style.boxShadow = isDark ? '0 8px 32px rgba(26, 26, 46, 0.4), 0 4px 16px rgba(26, 26, 46, 0.3)' : '0 8px 32px rgba(183, 28, 28, 0.4), 0 4px 16px rgba(183, 28, 28, 0.3)';
-                  e.target.style.background = isDark ? '#1a1a2e' : '#b71c1c';
+                  e.target.style.transform = 'perspective(1000px) rotateX(0deg) translateY(0) scale(1)';
+                  e.target.style.boxShadow = isDark ? '0 15px 45px rgba(26, 26, 46, 0.6), 0 8px 25px rgba(26, 26, 46, 0.4), inset 0 2px 0 rgba(255,255,255,0.1)' : '0 15px 45px rgba(183, 28, 28, 0.6), 0 8px 25px rgba(183, 28, 28, 0.4), inset 0 2px 0 rgba(255,255,255,0.2)';
+                  e.target.style.backgroundPosition = '0% 0%';
+                  e.target.style.textShadow = '0 3px 10px rgba(0,0,0,0.5)';
+                }}
+                onMouseDown={(e) => {
+                  e.target.style.transform = 'perspective(1000px) rotateX(-3deg) translateY(-3px) scale(0.98)';
+                }}
+                onMouseUp={(e) => {
+                  e.target.style.transform = 'perspective(1000px) rotateX(-8deg) translateY(-10px) scale(1.05)';
+                }}
+              >
+                <span style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center',
+                  position: 'relative',
+                  zIndex: 2
                 }}>
-                <i className="bi bi-play-fill me-2" style={{ fontSize: '1.2rem' }}></i>
-                🍷 Visualizar 🍷
+                  <i className="bi bi-rocket-takeoff-fill rocket-icon me-3" style={{ 
+                    fontSize: '1.5rem',
+                    filter: 'drop-shadow(0 3px 6px rgba(0,0,0,0.4))',
+                  }}></i>
+                  <span className="btn-text" style={{
+                    background: 'linear-gradient(45deg, #ffffff, #ffd700, #ffffff)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    backgroundSize: '200% 100%'
+                  }}>
+                    Calcular & Visualizar
+                  </span>
+                  <i className="bi bi-stars sparkle-icon ms-3" style={{ 
+                    fontSize: '1.3rem',
+                    filter: 'drop-shadow(0 3px 6px rgba(0,0,0,0.4))',
+                  }}></i>
+                </span>
               </button>
                 </div>
               </div>
-            </div><div className="col-lg-8 col-md-7">            <div className="card card-modern card-scrollable p-4 d-flex flex-column glass-card" style={{ 
-              background: isDark ? 'linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.98) 100%)' : 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.98) 100%)', 
-              borderRadius: '24px', 
-              border: `2px solid ${isDark ? 'rgba(26, 26, 46, 0.4)' : 'rgba(183, 28, 28, 0.3)'}`,
-              height: '80vh',
-              maxHeight: '800px',
-              boxShadow: isDark ? '0 20px 60px rgba(26, 26, 46, 0.2), 0 8px 25px rgba(22, 33, 62, 0.3)' : '0 20px 60px rgba(183, 28, 28, 0.15), 0 8px 25px rgba(0, 0, 0, 0.1)',
-              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-              overflow: 'hidden'
-            }}><h5 className="card-title fw-bold mb-3 text-gradient" style={{ 
+            </div>            <div className="col-lg-8 col-md-7 animate__animated animate__slideInRight">
+              <div className="card card-modern card-scrollable p-4 d-flex flex-column glass-card" style={{ 
+                background: isDark ? 'linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.98) 100%)' : 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.98) 100%)', 
+                borderRadius: '28px', 
+                border: `3px solid ${isDark ? 'rgba(26, 26, 46, 0.4)' : 'rgba(183, 28, 28, 0.3)'}`,
+                height: '80vh',
+                maxHeight: '800px',
+                boxShadow: isDark ? 
+                  '0 25px 70px rgba(26, 26, 46, 0.25), 0 10px 30px rgba(22, 33, 62, 0.35), inset 0 1px 0 rgba(255,255,255,0.1)' : 
+                  '0 25px 70px rgba(183, 28, 28, 0.2), 0 10px 30px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255,255,255,0.3)',
+                transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+                overflow: 'hidden',
+                position: 'relative'
+              }}><h5 className="card-title fw-bold mb-3 text-gradient" style={{ 
                 background: isDark ? 'linear-gradient(135deg, #16213e, #ffd600)' : 'linear-gradient(135deg, #b71c1c, #2d3748)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
@@ -762,7 +854,7 @@ export default function App() {
                 scrollbarColor: isDark ? '#16213e rgba(26, 26, 46, 0.3)' : '#b71c1c rgba(248, 250, 252, 0.3)'
               }}>
                 {plotData ? (
-                  <>                    <div className="mb-3" style={{ height: '300px', minHeight: '280px', maxHeight: '350px' }}>
+                  <>                    <div className="mb-3 plot-container" style={{ height: '300px', minHeight: '280px', maxHeight: '350px' }}>
                       <Plot 
                         data={[{
                           x: plotData.x,

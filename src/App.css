@@ -236,11 +236,711 @@ body, html {
   animation-duration: 0.7s;
 }
 
-/* --- Etiquetas y títulos llamativos --- */
-label.form-label {
-  letter-spacing: 0.5px;
-  font-weight: 600;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.07);
+/* ==================== ANIMACIONES PROFESIONALES ==================== */
+
+/* Animaciones para iconos */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 213, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 213, 0, 0.6), 0 0 60px rgba(255, 213, 0, 0.4);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ==================== NUEVAS ANIMACIONES PROFESIONALES ==================== */
+
+@keyframes buttonFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes rocketLaunch {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-3px) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-3px) rotate(5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes sparkleRotate {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: rotate(180deg) scale(1.3);
+    opacity: 1;
+  }
+}
+
+@keyframes holographicShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes cardEntrance {
+  0% {
+    transform: translateY(30px) rotateX(15deg);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-5px) rotateX(-2deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0) rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes textGlowPulse {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.2), 0 0 30px rgba(255, 215, 0, 0.1);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2);
+  }
+}
+
+@keyframes morphingBackground {
+  0%, 100% {
+    background-size: 100% 100%;
+  }
+  50% {
+    background-size: 120% 120%;
+  }
+}
+
+@keyframes liquidWave {
+  0%, 100% {
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 90%, 70% 95%, 55% 90%, 40% 95%, 25% 90%, 10% 95%, 0 90%);
+  }
+  50% {
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 85% 95%, 70% 90%, 55% 95%, 40% 90%, 25% 95%, 10% 90%, 0 95%);
+  }
+}
+
+@keyframes floatingElements {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-8px) rotate(0.5deg);
+  }
+}
+
+@keyframes neonGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor;
+  }
+  50% {
+    box-shadow: 
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 30px currentColor,
+      0 0 40px currentColor;
+  }
+}
+
+/* ==================== EFECTOS PARA TARJETAS ==================== */
+
+.card-modern {
+  animation: cardEntrance 1s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-modern:hover {
+  transform: translateY(-8px) scale(1.02) rotateX(2deg);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: floatingElements 3s ease-in-out infinite;
+}
+
+/* Efecto de cristal mejorado con holografía */
+.glass-card {
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  position: relative;
+  overflow: hidden;
+  background: 
+    linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%),
+    linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%);
+  background-size: 100% 100%, 200% 200%;
+  animation: morphingBackground 4s ease-in-out infinite;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent),
+    linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+  background-size: 100% 100%, 300% 100%;
+  animation: holographicShimmer 3s linear infinite;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.glass-card:hover::before {
+  opacity: 1;
+}
+
+.glass-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.5), transparent);
+  animation: liquidWave 2s ease-in-out infinite;
+}
+
+.app.dark .glass-card {
+  background: 
+    linear-gradient(135deg, rgba(26,26,46,0.15) 0%, rgba(22,33,62,0.1) 100%),
+    linear-gradient(45deg, transparent 30%, rgba(26,26,46,0.1) 50%, transparent 70%);
+}
+
+/* ==================== EFECTOS PARA INPUTS ==================== */
+
+.form-control-modern {
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
+.form-control-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.6s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.form-control-modern:focus::before {
+  left: 100%;
+}
+
+.form-control-modern:focus {
+  animation: neonGlow 1.5s ease-in-out;
+  transform: translateY(-2px) scale(1.02);
+}
+
+.form-control-modern::placeholder {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.7;
+}
+
+.form-control-modern:focus::placeholder {
+  transform: translateY(-25px) scale(0.8);
+  opacity: 0;
+}
+
+.form-select-modern {
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.form-select-modern:hover {
+  animation: buttonFloat 0.6s ease-in-out;
+}
+
+.form-select-modern:focus {
+  animation: neonGlow 1s ease-in-out;
+}
+
+/* ==================== EFECTOS PARA HEADER Y FOOTER ==================== */
+
+.header-modern {
+  animation: slideInFromLeft 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  background-attachment: fixed;
+}
+
+.header-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    linear-gradient(135deg, rgba(183, 28, 28, 0.9) 0%, rgba(45, 55, 72, 0.9) 100%),
+    radial-gradient(circle at 30% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
+  background-size: 100% 100%, 200% 200%, 150% 150%;
+  animation: morphingBackground 5s ease-in-out infinite;
+  z-index: -1;
+}
+
+.header-modern:hover::before {
+  animation: morphingBackground 2s ease-in-out infinite;
+}
+
+.footer-modern {
+  animation: slideInFromRight 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+  position: relative;
+  overflow: hidden;
+  background-attachment: fixed;
+}
+
+.footer-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent);
+  animation: shine 4s infinite;
+}
+
+.footer-modern::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.8), transparent);
+  animation: liquidWave 3s ease-in-out infinite;
+}
+
+.logo-modern {
+  animation: floatingElements 4s ease-in-out infinite;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.logo-modern::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  animation: neonGlow 2s ease-in-out infinite;
+}
+
+.logo-modern:hover::before {
+  opacity: 1;
+}
+
+.logo-modern:hover {
+  transform: rotate(360deg) scale(1.3);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: floatingElements 1s ease-in-out infinite;
+}
+
+/* ==================== EFECTOS PARA TEXTOS ==================== */
+
+.text-gradient {
+  position: relative;
+  background: 
+    linear-gradient(45deg, #b71c1c, #ffd600, #2d3748, #b71c1c),
+    linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background-size: 300% 100%, 200% 100%;
+  animation: holographicShimmer 4s linear infinite, textGlowPulse 2s ease-in-out infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient:hover {
+  animation: holographicShimmer 1s linear infinite, textGlowPulse 0.8s ease-in-out infinite;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  animation: cardEntrance 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
+  transform: translateY(-2px) scale(1.02);
+  animation: textGlowPulse 1s ease-in-out infinite;
+}
+
+/* ==================== EFECTOS PARA GRÁFICAS ==================== */
+
+.plot-container {
+  animation: cardEntrance 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.plot-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(circle, rgba(183,28,28,0.05) 0%, transparent 70%),
+    conic-gradient(from 0deg, transparent, rgba(255,215,0,0.1), transparent);
+  animation: holographicShimmer 6s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.plot-container:hover {
+  transform: scale(1.03) translateY(-5px);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 10px 25px rgba(183, 28, 28, 0.2),
+    0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.plot-container:hover::before {
+  animation: holographicShimmer 2s linear infinite;
+}
+
+/* ==================== EFECTOS INTERACTIVOS MEJORADOS ==================== */
+
+.interactive-element {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.interactive-element::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.interactive-element:hover::before {
+  width: 200px;
+  height: 200px;
+  opacity: 0.5;
+}
+
+.interactive-element:active::before {
+  width: 300px;
+  height: 300px;
+  opacity: 0;
+}
+
+/* ==================== EFECTOS DE SCROLL ==================== */
+
+.app-container {
+  animation: fadeInScale 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.app-content {
+  animation: slideInFromLeft 1s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
+}
+
+/* ==================== EFECTOS PARA BOTONES MEJORADOS ==================== */
+
+.btn-modern {
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  background-attachment: fixed;
+}
+
+/* Efecto holográfico en el botón */
+.btn-modern::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    conic-gradient(from 0deg, transparent, rgba(255,255,255,0.3), transparent),
+    linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background-size: 100% 100%, 200% 100%;
+  animation: holographicShimmer 2s linear infinite;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.btn-modern:hover::before {
+  opacity: 1;
+}
+
+/* Efecto de partículas para el botón */
+.btn-modern::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255,215,0,0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.btn-modern:active::after {
+  width: 300px;
+  height: 300px;
+  opacity: 0;
+}
+
+/* Animación del icono del cohete */
+.btn-modern .rocket-icon {
+  display: inline-block;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: rocketLaunch 2s ease-in-out infinite;
+}
+
+.btn-modern:hover .rocket-icon {
+  transform: translateX(5px) translateY(-3px) rotate(15deg) scale(1.2);
+  animation: rocketLaunch 0.8s ease-in-out infinite;
+}
+
+/* Animación de las chispas */
+.btn-modern .sparkle-icon {
+  display: inline-block;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: sparkleRotate 3s ease-in-out infinite;
+}
+
+.btn-modern:hover .sparkle-icon {
+  animation: sparkleRotate 1s ease-in-out infinite;
+  transform: scale(1.3);
+}
+
+/* Texto del botón con efectos */
+.btn-modern .btn-text {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: textGlowPulse 3s ease-in-out infinite;
+}
+
+.btn-modern:hover .btn-text {
+  animation: textGlowPulse 1.5s ease-in-out infinite;
+  transform: scale(1.05);
+}
+
+/* Estado activo del botón */
+.btn-modern:active {
+  transform: perspective(1000px) rotateX(5deg) translateY(2px) scale(0.95);
+}
+
+/* Efecto de ondas concéntricas */
+.btn-modern.calculating {
+  animation: neonGlow 1s ease-in-out infinite;
+}
+
+.btn-modern.calculating::before {
+  animation: holographicShimmer 0.5s linear infinite;
+}
+
+.btn-modern.calculating .rocket-icon {
+  animation: rocketLaunch 0.3s ease-in-out infinite;
+}
+
+/* Efecto de éxito */
+.btn-modern.success {
+  background: linear-gradient(145deg, #10b981, #34d399) !important;
+  animation: pulse 0.6s ease-in-out;
+}
+
+.btn-modern.success .rocket-icon {
+  transform: translateX(10px) translateY(-5px) rotate(25deg) scale(1.3);
+}
+.btn-modern::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.btn-modern:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* ==================== OPTIMIZACIÓN DE RENDIMIENTO ==================== */
+
+.app * {
+  will-change: auto;
+}
+
+.app *:hover,
+.app *:focus,
+.app *:active {
+  will-change: transform, opacity, box-shadow;
+}
+
+/* ==================== EFECTOS PARA PROCEDIMIENTOS ==================== */
+
+.procedure-scroll {
+  animation: fadeInScale 1s cubic-bezier(0.4, 0, 0.2, 1) 0.8s both;
+}
+
+/* ==================== RESPONSIVE ANIMATIONS ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-modern:hover {
+    transform: none;
+  }
+  
+  .logo-modern:hover {
+    transform: scale(1.1);
+  }
 }
 
 /* --- Responsive mejorado --- */
