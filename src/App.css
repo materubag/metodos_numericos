@@ -1,41 +1,108 @@
+/* Importar Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --bg-light: #f9f9f9;
-  --text-light: #1a1a1a;
-  --bg-dark: #000000;
-  --text-dark: #39ff14;
-  --neon-glow: 0 0 6px #39ff14;
-  --input-border: #ccc;
-  --input-dark-border: #0ff;
-  --primary-color: #2563eb;
-  --primary-hover: #1e40af;
+  --uta-rojo: #b71c1c;
+  --uta-dorado: #ffd600;
+  --uta-blanco: #ffffff;
+  --uta-negro: #1a1a1a;
+  --uta-gris: #6c757d;
+    /* Paleta Footer Theme */
+  --wine-primary: #b71c1c;      /* Rojo principal del footer */
+  --wine-secondary: #2d3748;    /* Gris oscuro del footer */
+  --wine-dark: #1a1a2e;         /* Azul oscuro del footer (modo oscuro) */
+  --wine-light: #16213e;        /* Azul footer modo oscuro */
+  --wine-accent: #ffd600;       /* Dorado del logo */
+  --wine-deep: #8b0000;         /* Rojo más oscuro */
+  --wine-soft: #e2e8f0;         /* Gris claro para texto */
+  --wine-gold: #ffd600;         /* Oro del logo */
+  --wine-cream: #ffffff;        /* Blanco para contraste */
+    /* Gradientes footer theme */
+  --gradient-wine-primary: linear-gradient(135deg, #b71c1c 0%, #2d3748 100%);
+  --gradient-wine-secondary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  --gradient-wine-accent: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+  --gradient-wine-deep: linear-gradient(135deg, #2d3748 0%, #b71c1c 100%);
+  --gradient-wine-gold: linear-gradient(135deg, #b71c1c 0%, #ffd600 50%, #2d3748 100%);
+  --gradient-wine-soft: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #ffd600 100%);
+    /* Sombras con tonos footer */
+  --shadow-wine-sm: 0 2px 8px rgba(183, 28, 28, 0.15);
+  --shadow-wine-md: 0 4px 16px rgba(183, 28, 28, 0.2);
+  --shadow-wine-lg: 0 8px 32px rgba(183, 28, 28, 0.25);
+  --shadow-wine-xl: 0 16px 64px rgba(183, 28, 28, 0.3);
+    /* Tema claro con footer */
+  --bg-light: linear-gradient(135deg, #b71c1c 0%, #2d3748 100%);
+  --card-bg-light: rgba(183, 28, 28, 0.95);
+  --text-light: #ffffff;
+  --text-muted-light: #f8f9fa;
+  
+  /* Tema oscuro con footer */
+  --bg-dark: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  --card-bg-dark: rgba(26, 26, 46, 0.95);
+  --text-dark: #ffffff;
+  --text-muted-dark: #e2e8f0;
 }
 
+* {
+  box-sizing: border-box;
+}
 
-body, html, .app {
+body, html {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.app {
   min-height: 100vh;
+  height: auto;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .app.light {
-  background-color: var(--bg-light);
+  background: var(--bg-light);
   color: var(--text-light);
 }
 
 .app.dark {
-  background-color: var(--bg-dark);
+  background: var(--bg-dark);
   color: var(--text-dark);
+}
+
+/* Efectos de glassmorphism */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.app.dark .glass-card {
+  background: rgba(45, 55, 72, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 
 .container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 2rem;
-  margin-left: 0;
-  margin-right: auto;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  padding-left: 2vw;
+  padding-right: 2vw;
 }
 
 
@@ -43,7 +110,7 @@ body, html, .app {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2rem; 
 }
 
 .header h1 {
@@ -65,21 +132,31 @@ body, html, .app {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+.app.dark .theme-toggle {
+  color: var(--text-dark);
+  border: 1px solid var(--input-border-dark); 
+}
+
+.app.dark .theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.08); 
+}
+
 
 .panel {
-  width: 120%;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 2rem;
-  background: white;
+  gap: 6rem;
+  background: var(--panel-bg-light);    
   border-radius: 16px;
   padding: 2rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--panel-shadow-light);
+  box-sizing: border-box;
 }
 
 .app.dark .panel {
-  background: #111;
-  box-shadow: 0 0 15px #0ff3;
+  background: var(--panel-bg-dark);     
+  box-shadow: var(--panel-shadow-dark); 
 }
 
 
@@ -103,10 +180,10 @@ body, html, .app {
 
 .app.dark .inputs input,
 .app.dark .inputs select {
-  background: #000;
-  color: #0ff;
-  border: 1px solid var(--input-dark-border);
-  box-shadow: var(--neon-glow);
+  background: var(--input-bg-dark);    
+  color: var(--input-text-dark);     
+  border: 1px solid var(--input-border-dark); 
+  box-shadow: none;                      
 }
 
 
@@ -130,11 +207,13 @@ body, html, .app {
 
 
 .plot {
-  height: 700px;
-  width: 900px;
+  height: 100%; 
+  width: 100%; 
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden; 
+  box-sizing: border-box; 
 }
 
 .placeholder {
@@ -143,8 +222,1254 @@ body, html, .app {
 }
 
 
+/* --- Animaciones personalizadas --- */
+@keyframes neon-glow {
+  0%, 100% { box-shadow: 0 0 8px 2px var(--neon-pink, #ff0080, 0.5); }
+  50% { box-shadow: 0 0 24px 6px var(--neon-blue, #007cf0, 0.7); }
+}
+
+.btn-gradient.animate__pulse {
+  animation: neon-glow 2s infinite alternate;
+}
+
+.card.animate__zoomIn {
+  animation-duration: 0.7s;
+}
+
+/* ==================== ANIMACIONES PROFESIONALES ==================== */
+
+/* Animaciones para iconos */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 213, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 213, 0, 0.6), 0 0 60px rgba(255, 213, 0, 0.4);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ==================== NUEVAS ANIMACIONES PROFESIONALES ==================== */
+
+@keyframes buttonFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes rocketLaunch {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-3px) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-3px) rotate(5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes sparkleRotate {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: rotate(180deg) scale(1.3);
+    opacity: 1;
+  }
+}
+
+@keyframes holographicShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes cardEntrance {
+  0% {
+    transform: translateY(30px) rotateX(15deg);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-5px) rotateX(-2deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0) rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes textGlowPulse {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.2), 0 0 30px rgba(255, 215, 0, 0.1);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2);
+  }
+}
+
+@keyframes morphingBackground {
+  0%, 100% {
+    background-size: 100% 100%;
+  }
+  50% {
+    background-size: 120% 120%;
+  }
+}
+
+@keyframes liquidWave {
+  0%, 100% {
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 90%, 70% 95%, 55% 90%, 40% 95%, 25% 90%, 10% 95%, 0 90%);
+  }
+  50% {
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 85% 95%, 70% 90%, 55% 95%, 40% 90%, 25% 95%, 10% 90%, 0 95%);
+  }
+}
+
+@keyframes floatingElements {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-8px) rotate(0.5deg);
+  }
+}
+
+@keyframes neonGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor;
+  }
+  50% {
+    box-shadow: 
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 30px currentColor,
+      0 0 40px currentColor;
+  }
+}
+
+/* ==================== EFECTOS PARA TARJETAS ==================== */
+
+.card-modern {
+  animation: cardEntrance 1s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-modern:hover {
+  transform: translateY(-8px) scale(1.02) rotateX(2deg);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: floatingElements 3s ease-in-out infinite;
+}
+
+/* Efecto de cristal mejorado con holografía */
+.glass-card {
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  position: relative;
+  overflow: hidden;
+  background: 
+    linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%),
+    linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%);
+  background-size: 100% 100%, 200% 200%;
+  animation: morphingBackground 4s ease-in-out infinite;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent),
+    linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+  background-size: 100% 100%, 300% 100%;
+  animation: holographicShimmer 3s linear infinite;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.glass-card:hover::before {
+  opacity: 1;
+}
+
+.glass-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.5), transparent);
+  animation: liquidWave 2s ease-in-out infinite;
+}
+
+.app.dark .glass-card {
+  background: 
+    linear-gradient(135deg, rgba(26,26,46,0.15) 0%, rgba(22,33,62,0.1) 100%),
+    linear-gradient(45deg, transparent 30%, rgba(26,26,46,0.1) 50%, transparent 70%);
+}
+
+/* ==================== EFECTOS PARA INPUTS ==================== */
+
+.form-control-modern {
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
+.form-control-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.6s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.form-control-modern:focus::before {
+  left: 100%;
+}
+
+.form-control-modern:focus {
+  animation: neonGlow 1.5s ease-in-out;
+  transform: translateY(-2px) scale(1.02);
+}
+
+.form-control-modern::placeholder {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.7;
+}
+
+.form-control-modern:focus::placeholder {
+  transform: translateY(-25px) scale(0.8);
+  opacity: 0;
+}
+
+.form-select-modern {
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.form-select-modern:hover {
+  animation: buttonFloat 0.6s ease-in-out;
+}
+
+.form-select-modern:focus {
+  animation: neonGlow 1s ease-in-out;
+}
+
+/* ==================== EFECTOS PARA HEADER Y FOOTER ==================== */
+
+.header-modern {
+  animation: slideInFromLeft 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  background-attachment: fixed;
+}
+
+.header-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    linear-gradient(135deg, rgba(183, 28, 28, 0.9) 0%, rgba(45, 55, 72, 0.9) 100%),
+    radial-gradient(circle at 30% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
+  background-size: 100% 100%, 200% 200%, 150% 150%;
+  animation: morphingBackground 5s ease-in-out infinite;
+  z-index: -1;
+}
+
+.header-modern:hover::before {
+  animation: morphingBackground 2s ease-in-out infinite;
+}
+
+.footer-modern {
+  animation: slideInFromRight 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+  position: relative;
+  overflow: hidden;
+  background-attachment: fixed;
+}
+
+.footer-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent);
+  animation: shine 4s infinite;
+}
+
+.footer-modern::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,215,0,0.8), transparent);
+  animation: liquidWave 3s ease-in-out infinite;
+}
+
+.logo-modern {
+  animation: floatingElements 4s ease-in-out infinite;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.logo-modern::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  animation: neonGlow 2s ease-in-out infinite;
+}
+
+.logo-modern:hover::before {
+  opacity: 1;
+}
+
+.logo-modern:hover {
+  transform: rotate(360deg) scale(1.3);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: floatingElements 1s ease-in-out infinite;
+}
+
+/* ==================== EFECTOS PARA TEXTOS ==================== */
+
+.text-gradient {
+  position: relative;
+  background: 
+    linear-gradient(45deg, #b71c1c, #ffd600, #2d3748, #b71c1c),
+    linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background-size: 300% 100%, 200% 100%;
+  animation: holographicShimmer 4s linear infinite, textGlowPulse 2s ease-in-out infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.app.dark .text-gradient {
+  background: 
+    linear-gradient(45deg, #ffd600, #ffffff, #ffd600, #ffffff),
+    linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent);
+  background-size: 300% 100%, 200% 100%;
+}
+
+.text-gradient:hover {
+  animation: holographicShimmer 1s linear infinite, textGlowPulse 0.8s ease-in-out infinite;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  animation: cardEntrance 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
+  transform: translateY(-2px) scale(1.02);
+  animation: textGlowPulse 1s ease-in-out infinite;
+}
+
+/* ==================== EFECTOS PARA GRÁFICAS ==================== */
+
+.plot-container {
+  animation: cardEntrance 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.plot-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(circle, rgba(183,28,28,0.05) 0%, transparent 70%),
+    conic-gradient(from 0deg, transparent, rgba(255,215,0,0.1), transparent);
+  animation: holographicShimmer 6s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.plot-container:hover {
+  transform: scale(1.03) translateY(-5px);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 10px 25px rgba(183, 28, 28, 0.2),
+    0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.plot-container:hover::before {
+  animation: holographicShimmer 2s linear infinite;
+}
+
+/* ==================== EFECTOS INTERACTIVOS MEJORADOS ==================== */
+
+.interactive-element {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.interactive-element::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.interactive-element:hover::before {
+  width: 200px;
+  height: 200px;
+  opacity: 0.5;
+}
+
+.interactive-element:active::before {
+  width: 300px;
+  height: 300px;
+  opacity: 0;
+}
+
+/* ==================== EFECTOS DE SCROLL ==================== */
+
+.app-container {
+  animation: fadeInScale 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.app-content {
+  animation: slideInFromLeft 1s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
+}
+
+/* ==================== EFECTOS PARA BOTONES MEJORADOS ==================== */
+
+.btn-modern {
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  background-attachment: fixed;
+}
+
+/* Efecto holográfico en el botón */
+.btn-modern::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: 
+    conic-gradient(from 0deg, transparent, rgba(255,255,255,0.3), transparent),
+    linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background-size: 100% 100%, 200% 100%;
+  animation: holographicShimmer 2s linear infinite;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.btn-modern:hover::before {
+  opacity: 1;
+}
+
+/* Efecto de partículas para el botón */
+.btn-modern::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255,215,0,0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.btn-modern:active::after {
+  width: 300px;
+  height: 300px;
+  opacity: 0;
+}
+
+/* Animación del icono del cohete */
+.btn-modern .rocket-icon {
+  display: inline-block;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: rocketLaunch 2s ease-in-out infinite;
+}
+
+.btn-modern:hover .rocket-icon {
+  transform: translateX(5px) translateY(-3px) rotate(15deg) scale(1.2);
+  animation: rocketLaunch 0.8s ease-in-out infinite;
+}
+
+/* Animación de las chispas */
+.btn-modern .sparkle-icon {
+  display: inline-block;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: sparkleRotate 3s ease-in-out infinite;
+}
+
+.btn-modern:hover .sparkle-icon {
+  animation: sparkleRotate 1s ease-in-out infinite;
+  transform: scale(1.3);
+}
+
+/* Texto del botón con efectos */
+.btn-modern .btn-text {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: textGlowPulse 3s ease-in-out infinite;
+}
+
+.btn-modern:hover .btn-text {
+  animation: textGlowPulse 1.5s ease-in-out infinite;
+  transform: scale(1.05);
+}
+
+/* Estado activo del botón */
+.btn-modern:active {
+  transform: perspective(1000px) rotateX(5deg) translateY(2px) scale(0.95);
+}
+
+/* Efecto de ondas concéntricas */
+.btn-modern.calculating {
+  animation: neonGlow 1s ease-in-out infinite;
+}
+
+.btn-modern.calculating::before {
+  animation: holographicShimmer 0.5s linear infinite;
+}
+
+.btn-modern.calculating .rocket-icon {
+  animation: rocketLaunch 0.3s ease-in-out infinite;
+}
+
+/* Efecto de éxito */
+.btn-modern.success {
+  background: linear-gradient(145deg, #10b981, #34d399) !important;
+  animation: pulse 0.6s ease-in-out;
+}
+
+.btn-modern.success .rocket-icon {
+  transform: translateX(10px) translateY(-5px) rotate(25deg) scale(1.3);
+}
+.btn-modern::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.btn-modern:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* ==================== OPTIMIZACIÓN DE RENDIMIENTO ==================== */
+
+.app * {
+  will-change: auto;
+}
+
+.app *:hover,
+.app *:focus,
+.app *:active {
+  will-change: transform, opacity, box-shadow;
+}
+
+/* ==================== EFECTOS PARA PROCEDIMIENTOS ==================== */
+
+.procedure-scroll {
+  animation: fadeInScale 1s cubic-bezier(0.4, 0, 0.2, 1) 0.8s both;
+}
+
+/* ==================== RESPONSIVE ANIMATIONS ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 @media (max-width: 768px) {
-  .panel {
-    grid-template-columns: 1fr;
+  .card-modern:hover {
+    transform: none;
+  }
+  
+  .logo-modern:hover {
+    transform: scale(1.1);
+  }
+}
+
+/* --- Responsive mejorado --- */
+@media (max-width: 768px) {
+  .card { border-radius: 14px !important; }
+  .container { padding: 0.5rem; }
+}
+
+@media (max-width: 900px) {
+  .row.g-4 {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .col-md-4, .col-md-8 {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+  }
+  .card {
+    min-height: 220px;
+    padding: 1rem !important;
+  }
+  header, footer {
+    font-size: 15px !important;
+    padding: 10px 0 !important;
+  }
+}
+
+/* --- Estilos para tablas de procedimientos --- */
+.procedure-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0 0 0;
+  font-size: 15px;
+  background: var(--panel-bg-light, #fff);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.app.dark .procedure-table {
+  background: #232526;
+  color: #fff;
+  box-shadow: 0 2px 8px #00dfd822;
+}
+.procedure-table th, .procedure-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: center;
+}
+.app.dark .procedure-table th, .app.dark .procedure-table td {
+  border-bottom: 1px solid #333;
+}
+.procedure-table th {
+  background: #f3f6fa;
+  color: #007cf0;
+  font-weight: 600;
+}
+.app.dark .procedure-table th {
+  background: #232526;
+  color: #00dfd8;
+}
+.procedure-table tr:last-child td {
+  border-bottom: none;
+}
+.procedure-table tr:hover {
+  background: #eaf6ff;
+}
+.app.dark .procedure-table tr:hover {
+  background: #1a1e2b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--uta-rojo);
+}
+.app.dark ::-webkit-scrollbar-thumb {
+  background: var(--uta-dorado);
+}
+
+html, body, #root {
+  height: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.app {
+  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.container {
+  max-width: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+}
+
+.row.g-4 {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  margin: 0;
+  flex: 1;
+  height: 100%;
+  align-items: stretch;
+}
+
+.col-md-4, .col-md-8 {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.col-md-4 {
+  flex: 0 0 350px;
+  min-width: 320px;
+  max-width: 400px;
+}
+
+.col-md-8 {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Estilos profesionales adicionales */
+
+/* Botones mejorados */
+.btn-modern {
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.btn-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-modern:hover::before {
+  left: 100%;
+}
+
+.btn-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Cards con efectos modernos */
+.card-modern {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none !important;
+}
+
+.card-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.card-modern:hover::before {
+  transform: scaleX(1);
+}
+
+.card-modern:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* Inputs mejorados */
+.form-control-modern {
+  position: relative;
+  border: 2px solid transparent;
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(135deg, #667eea, #764ba2) border-box;
+  transition: all 0.3s ease;
+}
+
+.app.dark .form-control-modern {
+  background: linear-gradient(#2d3748, #2d3748) padding-box,
+              linear-gradient(135deg, #00dfd8, #764ba2) border-box;
+  color: #e2e8f0;
+}
+
+.form-control-modern:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Select mejorado */
+.form-select-modern {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23667eea' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px 12px;
+}
+
+/* Header mejorado */
+.header-modern {
+  position: relative;
+  overflow: hidden;
+}
+
+.header-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #b71c1c 0%, #ffd600 100%);
+  opacity: 0.9;
+  z-index: -1;
+}
+
+/* Logo con efectos */
+.logo-modern {
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+
+.logo-modern:hover {
+  transform: scale(1.05) rotate(5deg);
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+}
+
+/* Animaciones de carga */
+.loading-dots {
+  display: inline-block;
+}
+
+.loading-dots::after {
+  content: '';
+  animation: loading-dots 1.5s infinite;
+}
+
+@keyframes loading-dots {
+  0%, 20% { content: ''; }
+  40% { content: '.'; }
+  60% { content: '..'; }
+  80%, 100% { content: '...'; }
+}
+
+/* Efectos de hover para elementos interactivos */
+.interactive-element {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.interactive-element:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Gradientes para fondos */
+.bg-gradient-primary {
+  background: var(--gradient-primary);
+}
+
+.bg-gradient-secondary {
+  background: var(--gradient-secondary);
+}
+
+.bg-gradient-success {
+  background: var(--gradient-success);
+}
+
+.bg-gradient-warning {
+  background: var(--gradient-warning);
+}
+
+.bg-gradient-danger {
+  background: var(--gradient-danger);
+}
+
+/* Texto con gradiente */
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* Footer mejorado */
+.footer-modern {
+  position: relative;
+  background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+  overflow: hidden;
+}
+
+.app.dark .footer-modern {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.footer-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Mejoras responsive para pantalla completa */
+@media (max-width: 1200px) {
+  .container {
+    padding: 0.5rem;
+  }
+  
+  .col-md-4 {
+    flex: 0 0 300px;
+    min-width: 280px;
+  }
+}
+
+@media (max-width: 900px) {
+  .row.g-4 {
+    flex-direction: column;
+    gap: 1rem;
+    height: auto;
+  }
+  
+  .col-md-4, .col-md-8 {
+    min-width: 0;
+    max-width: 100%;
+    flex: none;
+    height: auto;
+  }
+  
+  .col-md-4 {
+    order: 1;
+  }
+  
+  .col-md-8 {
+    order: 2;
+    min-height: 60vh;
+  }
+  
+  .app {
+    height: auto;
+    min-height: 100vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0.25rem;
+  }
+  
+  .card {
+    padding: 1rem !important;
+  }
+  
+  .header-modern {
+    padding: 15px !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .footer-modern {
+    font-size: 14px !important;
+    padding: 15px 0 !important;
+    margin-top: 1rem !important;
+  }
+}
+
+/* Estilos para scrollbar personalizado con tema footer */
+.card-scrollable .flex-fill::-webkit-scrollbar {
+  width: 8px;
+}
+
+.card-scrollable .flex-fill::-webkit-scrollbar-track {
+  background: rgba(183, 28, 28, 0.05);
+  border-radius: 10px;
+}
+
+.card-scrollable .flex-fill::-webkit-scrollbar-thumb {
+  background: var(--gradient-wine-primary);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(183, 28, 28, 0.2);
+}
+
+.app.dark .card-scrollable .flex-fill::-webkit-scrollbar-thumb {
+  background: var(--gradient-wine-secondary);
+}
+
+.card-scrollable .flex-fill::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-wine-gold);
+  transform: scaleX(1.2);
+}
+
+.app.dark .card-scrollable .flex-fill::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-wine-soft);
+}
+
+/* Estilos específicos para el panel de configuración con scroll - tema footer */
+.card-scrollable > div:last-child::-webkit-scrollbar {
+  width: 6px;
+}
+
+.card-scrollable > div:last-child::-webkit-scrollbar-track {
+  background: rgba(183, 28, 28, 0.03);
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+.card-scrollable > div:last-child::-webkit-scrollbar-thumb {
+  background: var(--gradient-wine-primary);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 4px rgba(183, 28, 28, 0.15);
+}
+
+.app.dark .card-scrollable > div:last-child::-webkit-scrollbar-thumb {
+  background: var(--gradient-wine-secondary);
+}
+
+.card-scrollable > div:last-child::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-wine-gold);
+  width: 8px;
+  box-shadow: 0 2px 8px rgba(255, 213, 0, 0.3);
+}
+
+.app.dark .card-scrollable > div:last-child::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-wine-soft);
+  width: 8px;
+}
+
+/* Indicador visual de scroll disponible */
+.card-scrollable > div:last-child {
+  position: relative;
+}
+
+.card-scrollable > div:last-child::after {
+  content: '';
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: linear-gradient(to top, rgba(255,255,255,0.9), transparent);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.app.dark .card-scrollable > div:last-child::after {
+  background: linear-gradient(to top, rgba(45, 55, 72, 0.9), transparent);
+}
+
+/* Responsive mejorado con scroll */
+@media (max-width: 768px) {
+  .app-main {
+    padding: 15px;
+  }
+  
+  .card-scrollable {
+    max-height: calc(100vh - 150px);
+  }
+  
+  .procedure-scroll {
+    max-height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-main {
+    padding: 10px;
+  }
+  
+  .card-scrollable {
+    max-height: calc(100vh - 120px);
   }
 }
