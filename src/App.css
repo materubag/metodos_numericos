@@ -672,6 +672,13 @@ body, html {
   background-clip: text;
 }
 
+.app.dark .text-gradient {
+  background: 
+    linear-gradient(45deg, #ffd600, #ffffff, #ffd600, #ffffff),
+    linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent);
+  background-size: 300% 100%, 200% 100%;
+}
+
 .text-gradient:hover {
   animation: holographicShimmer 1s linear infinite, textGlowPulse 0.8s ease-in-out infinite;
 }

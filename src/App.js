@@ -465,15 +465,15 @@ export default function App() {
                   padding: '24px 24px 16px 24px',                  borderBottom: `1px solid ${isDark ? 'rgba(26, 26, 46, 0.4)' : 'rgba(183, 28, 28, 0.2)'}`,
                   flexShrink: 0,
                   background: isDark ? 'rgba(26, 26, 46, 0.15)' : 'rgba(183, 28, 28, 0.05)'
-                }}><h5 className="card-title fw-bold mb-0 text-gradient" style={{ 
-                    background: isDark ? 'linear-gradient(135deg, #16213e, #ffd600)' : 'linear-gradient(135deg, #b71c1c, #2d3748)',
+                }}>                    <h5 className="card-title fw-bold mb-0 text-gradient" style={{ 
+                    background: isDark ? 'linear-gradient(135deg, #ffd600, #ffffff)' : 'linear-gradient(135deg, #b71c1c, #2d3748)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
                     fontSize: '1.3rem',
                     letterSpacing: '0.5px'
                   }}>
-                    <i className="bi bi-gear-fill me-2" style={{ color: isDark ? '#16213e' : '#b71c1c' }}></i>
+                    <i className="bi bi-gear-fill me-2" style={{ color: isDark ? '#ffd600' : '#b71c1c' }}></i>
                     Configuración
                   </h5>
                 </div>
@@ -833,16 +833,14 @@ export default function App() {
                   '0 25px 70px rgba(183, 28, 28, 0.2), 0 10px 30px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255,255,255,0.3)',
                 transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
                 overflow: 'hidden',
-                position: 'relative'
-              }}><h5 className="card-title fw-bold mb-3 text-gradient" style={{ 
-                background: isDark ? 'linear-gradient(135deg, #16213e, #ffd600)' : 'linear-gradient(135deg, #b71c1c, #2d3748)',
+                position: 'relative'              }}><h5 className="card-title fw-bold mb-3 text-gradient" style={{ 
+                background: isDark ? 'linear-gradient(135deg, #ffd600, #ffffff)' : 'linear-gradient(135deg, #b71c1c, #2d3748)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
                 fontSize: '1.3rem',
-                letterSpacing: '0.5px'
-              }}>
-                <i className="bi bi-graph-up-arrow me-2" style={{ color: isDark ? '#16213e' : '#b71c1c' }}></i>
+                letterSpacing: '0.5px'}}>
+                <i className="bi bi-graph-up-arrow me-2" style={{ color: isDark ? '#ffd600' : '#b71c1c' }}></i>
                 Visualización
               </h5>
                 <div className="flex-fill d-flex flex-column" style={{ 
@@ -860,27 +858,25 @@ export default function App() {
                           x: plotData.x,
                           y: plotData.y,
                           type: 'scatter',
-                          mode: 'lines+markers',
-                          line: { 
-                            color: isDark ? '#1a1a2e' : '#b71c1c', 
+                          mode: 'lines+markers',                          line: { 
+                            color: isDark ? '#ffd600' : '#b71c1c', 
                             width: 3,
                             shape: 'spline'
                           },
                           marker: { 
-                            color: isDark ? '#1a1a2e' : '#b71c1c', 
+                            color: isDark ? '#ffd600' : '#b71c1c', 
                             size: 6,
                             line: { width: 1, color: isDark ? '#fff' : '#000' }
                           },
                           name: method === 'simpson' ? 'f(x) - Función a Integrar' : method === 'euler' ? 'y(x) - Solución por Euler' : 'y(x) - Solución por RK2',
                           fill: method === 'simpson' ? 'tozeroy' : undefined,
-                          fillcolor: method === 'simpson' ? (isDark ? 'rgba(0,223,216,0.15)' : 'rgba(183,28,28,0.15)') : undefined
+                          fillcolor: method === 'simpson' ? (isDark ? 'rgba(255, 215, 0, 0.15)' : 'rgba(183,28,28,0.15)') : undefined
                         }]}
                         layout={{
                           autosize: true,
                           title: { 
-                            text: `<b>${method === 'simpson' ? 'Simpson 1/3 - Integración Numérica' : method === 'euler' ? 'Euler - Solución EDO' : 'Runge-Kutta 2° - Solución EDO'}</b>`, 
-                            font: { 
-                              color: isDark ? '#1a1a2e' : '#b71c1c', 
+                            text: `<b>${method === 'simpson' ? 'Simpson 1/3 - Integración Numérica' : method === 'euler' ? 'Euler - Solución EDO' : 'Runge-Kutta 2° - Solución EDO'}</b>`,                            font: { 
+                              color: isDark ? '#ffd600' : '#b71c1c', 
                               size: 16,
                               family: 'Inter, sans-serif'
                             },
@@ -895,34 +891,31 @@ export default function App() {
                             size: 12
                           },
                           margin: { t: 60, l: 60, r: 40, b: 50 },
-                          xaxis: { 
-                            title: {
+                          xaxis: {                            title: {
                               text: '<b>x</b>',
-                              font: { color: isDark ? '#1a1a2e' : '#b71c1c', size: 14 }
+                              font: { color: isDark ? '#ffd600' : '#b71c1c', size: 14 }
                             },
-                            gridcolor: isDark ? 'rgba(0, 223, 216, 0.2)' : 'rgba(183, 28, 28, 0.2)',
-                            linecolor: isDark ? '#1a1a2e' : '#b71c1c',
-                            tickcolor: isDark ? '#1a1a2e' : '#b71c1c',
-                            tickfont: { color: isDark ? '#a0aec0' : '#4a5568' },
-                            zerolinecolor: isDark ? 'rgba(0, 223, 216, 0.5)' : 'rgba(183, 28, 28, 0.5)'
+                            gridcolor: isDark ? 'rgba(255, 215, 0, 0.2)' : 'rgba(183, 28, 28, 0.2)',
+                            linecolor: isDark ? '#ffd600' : '#b71c1c',
+                            tickcolor: isDark ? '#ffd600' : '#b71c1c',                            tickfont: { color: isDark ? '#a0aec0' : '#4a5568' },
+                            zerolinecolor: isDark ? 'rgba(255, 215, 0, 0.5)' : 'rgba(183, 28, 28, 0.5)'
                           },
                           yaxis: { 
                             title: {
                               text: method === 'simpson' ? '<b>f(x)</b>' : '<b>y</b>',
-                              font: { color: isDark ? '#1a1a2e' : '#b71c1c', size: 14 }
+                              font: { color: isDark ? '#ffd600' : '#b71c1c', size: 14 }
                             },
-                            gridcolor: isDark ? 'rgba(0, 223, 216, 0.2)' : 'rgba(183, 28, 28, 0.2)',
-                            linecolor: isDark ? '#1a1a2e' : '#b71c1c',
-                            tickcolor: isDark ? '#1a1a2e' : '#b71c1c',
+                            gridcolor: isDark ? 'rgba(255, 215, 0, 0.2)' : 'rgba(183, 28, 28, 0.2)',
+                            linecolor: isDark ? '#ffd600' : '#b71c1c',
+                            tickcolor: isDark ? '#ffd600' : '#b71c1c',
                             tickfont: { color: isDark ? '#a0aec0' : '#4a5568' },
-                            zerolinecolor: isDark ? 'rgba(0, 223, 216, 0.5)' : 'rgba(183, 28, 28, 0.5)'
+                            zerolinecolor: isDark ? 'rgba(255, 215, 0, 0.5)' : 'rgba(183, 28, 28, 0.5)'
                           },
                           showlegend: true,
                           legend: {
                             x: 0.02,
-                            y: 0.98,
-                            bgcolor: isDark ? 'rgba(45, 55, 72, 0.8)' : 'rgba(255, 255, 255, 0.9)',
-                            bordercolor: isDark ? '#1a1a2e' : '#b71c1c',
+                            y: 0.98,                            bgcolor: isDark ? 'rgba(45, 55, 72, 0.8)' : 'rgba(255, 255, 255, 0.9)',
+                            bordercolor: isDark ? '#ffd600' : '#b71c1c',
                             borderwidth: 1,
                             font: { 
                               color: isDark ? '#fff' : '#2d3748',
@@ -938,7 +931,7 @@ export default function App() {
                         style={{ 
                           width: '100%', 
                           height: '100%',
-                          border: `1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : 'rgba(183, 28, 28, 0.2)'}`,
+                          border: `1px solid ${isDark ? 'rgba(255, 215, 0, 0.2)' : 'rgba(183, 28, 28, 0.2)'}`,
                           borderRadius: '10px',
                           overflow: 'hidden'
                         }}
@@ -946,9 +939,8 @@ export default function App() {
                       />
                     </div>
                     
-                    {area !== null && (
-                      <div className="mt-3 p-3 rounded" style={{ background: isDark ? 'rgba(26, 26, 46, 0.2)' : 'rgba(183, 28, 28, 0.1)' }}>
-                        <h6 className="fw-bold" style={{ color: isDark ? '#1a1a2e' : '#b71c1c' }}>
+                    {area !== null && (                      <div className="mt-3 p-3 rounded" style={{ background: isDark ? 'rgba(255, 215, 0, 0.1)' : 'rgba(183, 28, 28, 0.1)' }}>
+                        <h6 className="fw-bold" style={{ color: isDark ? '#ffd600' : '#b71c1c' }}>
                           <i className="bi bi-calculator me-2"></i>
                           Área: {area.toFixed(6)} unidades²
                         </h6>
@@ -956,7 +948,7 @@ export default function App() {
                     )}
                     
                     <div className="mt-3">
-                      <h6 className="fw-bold mb-2" style={{ color: isDark ? '#1a1a2e' : '#b71c1c' }}>
+                      <h6 className="fw-bold mb-2" style={{ color: isDark ? '#ffd600' : '#b71c1c' }}>
                         <i className="bi bi-list-ul me-2"></i>
                         Procedimiento
                       </h6>
@@ -968,15 +960,14 @@ export default function App() {
                           padding: '15px',
                           background: isDark ? 'rgba(26, 32, 44, 0.3)' : 'rgba(248, 250, 252, 0.5)',
                           borderRadius: '10px',
-                          border: `1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : 'rgba(183, 28, 28, 0.2)'}`
+                          border: `1px solid ${isDark ? 'rgba(255, 215, 0, 0.2)' : 'rgba(183, 28, 28, 0.2)'}`
                         }} 
                       />
                     </div>
                   </>
                 ) : (                  <div className="d-flex align-items-center justify-content-center h-100">
-                    <div className="text-center animate__animated animate__fadeIn">
-                      <div className="mb-4" style={{ 
-                        background: isDark ? 'linear-gradient(135deg, #1a1a2e, #667eea)' : 'linear-gradient(135deg, #b71c1c, #667eea)',
+                    <div className="text-center animate__animated animate__fadeIn">                      <div className="mb-4" style={{ 
+                        background: isDark ? 'linear-gradient(135deg, #ffd600, #ffffff)' : 'linear-gradient(135deg, #b71c1c, #667eea)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                         backgroundClip: 'text'
@@ -985,9 +976,8 @@ export default function App() {
                           fontSize: '6rem',
                           filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.1))'
                         }}></i>
-                      </div>
-                      <h4 className="mb-3 fw-bold" style={{ 
-                        background: isDark ? 'linear-gradient(135deg, #1a1a2e, #667eea)' : 'linear-gradient(135deg, #b71c1c, #667eea)',
+                      </div>                      <h4 className="mb-3 fw-bold" style={{ 
+                        background: isDark ? 'linear-gradient(135deg, #ffd600, #ffffff)' : 'linear-gradient(135deg, #b71c1c, #667eea)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                         backgroundClip: 'text',
