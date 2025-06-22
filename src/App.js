@@ -371,6 +371,14 @@ export default function App() {
       setProcedure(procHtml);
     }
   };
+
+  // Limpiar gráfica y procedimiento al cambiar de método
+  React.useEffect(() => {
+    setPlotData(null);
+    setProcedure("");
+    setArea(null);
+  }, [method]);
+
   return (
     <div className={`app ${theme} app-container`} style={{ background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)' }}>
       <div className="container-fluid app-main">
@@ -412,40 +420,44 @@ export default function App() {
                 </select>
               </div>
 
-              <div className="mb-3">
-                <label className="form-label fw-semibold">Función f(x) o f(x,y)</label>
-                <input 
-                  type="text" 
-                  className="form-control" 
-                  value={expr} 
-                  onChange={(e) => setExpr(e.target.value)}
-                  placeholder="Ej: x^2, sin(x), x+y"
-                  style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
-                />
-              </div>
+              {method !== '' && (
+                <>
+                  <div className="mb-3">
+                    <label className="form-label fw-semibold">Función f(x) o f(x,y)</label>
+                    <input 
+                      type="text" 
+                      className="form-control" 
+                      value={expr} 
+                      onChange={(e) => setExpr(e.target.value)}
+                      placeholder="Ej: x^2, sin(x), x+y"
+                      style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
+                    />
+                  </div>
 
-              <div className="row">
-                <div className="col-6 mb-3">
-                  <label className="form-label fw-semibold">Límite inferior (a)</label>
-                  <input 
-                    type="number" 
-                    className="form-control" 
-                    value={a} 
-                    onChange={(e) => setA(e.target.value)}
-                    style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
-                  />
-                </div>
-                <div className="col-6 mb-3">
-                  <label className="form-label fw-semibold">Límite superior (b)</label>
-                  <input 
-                    type="number" 
-                    className="form-control" 
-                    value={b} 
-                    onChange={(e) => setB(e.target.value)}
-                    style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
-                  />
-                </div>
-              </div>
+                  <div className="row">
+                    <div className="col-6 mb-3">
+                      <label className="form-label fw-semibold">Límite inferior (a)</label>
+                      <input 
+                        type="number" 
+                        className="form-control" 
+                        value={a} 
+                        onChange={(e) => setA(e.target.value)}
+                        style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
+                      />
+                    </div>
+                    <div className="col-6 mb-3">
+                      <label className="form-label fw-semibold">Límite superior (b)</label>
+                      <input 
+                        type="number" 
+                        className="form-control" 
+                        value={b} 
+                        onChange={(e) => setB(e.target.value)}
+                        style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
 
               {method === 'simpson' && (
                 <div className="mb-3">
