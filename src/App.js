@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Plot from 'react-plotly.js';
 import { parse } from 'mathjs';
 import './App.css';
+import 'animate.css';
 
 export default function App() {
   // Estados
@@ -9,8 +10,7 @@ export default function App() {
   const [a, setA] = useState('');
   const [b, setB] = useState('');
   const [h, setH] = useState('');
-  const [delta, setDelta] = useState('');
-  const [y0, setY0] = useState('');
+  const [delta, setDelta] = useState('');  const [y0, setY0] = useState('');
   const [method, setMethod] = useState('');
   const [plotData, setPlotData] = useState(null);
   const [area, setArea] = useState(null);
@@ -76,27 +76,27 @@ export default function App() {
       const calculatedArea = (h / 3) * sum;
       
       setPlotData({ x, y });
-      setArea(calculatedArea);      let procHtml = `<div style='background: ${isDark ? 'linear-gradient(135deg, #2d3748, #1a202c)' : 'linear-gradient(135deg, #f8f9fa, #e9ecef)'}; padding: 25px; border-radius: 15px; border-left: 5px solid ${isDark ? '#00dfd8' : '#007bff'}; color: ${isDark ? '#e2e8f0' : '#2d3748'}; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>`;
+      setArea(calculatedArea);      let procHtml = `<div style='background: ${isDark ? 'linear-gradient(135deg, #2d3748, #1a202c)' : 'linear-gradient(135deg, #f8f9fa, #e9ecef)'}; padding: 25px; border-radius: 15px; border-left: 5px solid ${isDark ? '#1a1a2e' : '#007bff'}; color: ${isDark ? '#e2e8f0' : '#2d3748'}; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>`;
       
-      procHtml += `<div style='text-align: center; margin-bottom: 25px; padding: 15px; background: ${isDark ? 'rgba(0, 223, 216, 0.1)' : 'rgba(0, 123, 255, 0.1)'}; border-radius: 10px;'>`;
-      procHtml += `<h3 style='color: ${isDark ? '#00dfd8' : '#007bff'}; margin: 0; font-weight: 700;'><i class="bi bi-calculator-fill"></i> Regla de Simpson 1/3</h3>`;
+      procHtml += `<div style='text-align: center; margin-bottom: 25px; padding: 15px; background: ${isDark ? 'rgba(26, 26, 46, 0.2)' : 'rgba(0, 123, 255, 0.1)'}; border-radius: 10px;'>`;
+      procHtml += `<h3 style='color: ${isDark ? '#1a1a2e' : '#007bff'}; margin: 0; font-weight: 700;'><i class="bi bi-calculator-fill"></i> Regla de Simpson 1/3</h3>`;
       procHtml += `<p style='margin: 5px 0 0 0; font-style: italic; opacity: 0.8;'>Integración Numérica</p>`;
       procHtml += `</div>`;
       
       procHtml += `<div style='display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;'>`;
-      procHtml += `<div style='background: ${isDark ? 'rgba(26, 32, 44, 0.6)' : 'rgba(255, 255, 255, 0.8)'}; padding: 15px; border-radius: 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(0, 123, 255, 0.3)'};'>`;
-      procHtml += `<h5 style='color: ${isDark ? '#00dfd8' : '#007bff'}; margin-bottom: 10px;'><i class="bi bi-info-circle"></i> Datos del Problema</h5>`;
-      procHtml += `<p><strong>Función:</strong> <code style='background: ${isDark ? '#1a202c' : '#f8f9fa'}; padding: 2px 6px; border-radius: 4px; color: ${isDark ? '#00dfd8' : '#007bff'};'>f(x) = ${expr}</code></p>`;
+      procHtml += `<div style='background: ${isDark ? 'rgba(26, 32, 44, 0.6)' : 'rgba(255, 255, 255, 0.8)'}; padding: 15px; border-radius: 10px; border: 1px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(0, 123, 255, 0.3)'};'>`;
+      procHtml += `<h5 style='color: ${isDark ? '#1a1a2e' : '#007bff'}; margin-bottom: 10px;'><i class="bi bi-info-circle"></i> Datos del Problema</h5>`;
+      procHtml += `<p><strong>Función:</strong> <code style='background: ${isDark ? '#1a202c' : '#f8f9fa'}; padding: 2px 6px; border-radius: 4px; color: ${isDark ? '#1a1a2e' : '#007bff'};'>f(x) = ${expr}</code></p>`;
       procHtml += `<p><strong>Intervalo:</strong> <code>[${aNum}, ${bNum}]</code></p>`;
       procHtml += `<p><strong>Δx inicial:</strong> <code>${deltaNum}</code></p>`;
       procHtml += `<p><strong>Subintervalos (n):</strong> <code>${n}</code> ${n % 2 === 0 ? '✓' : '(ajustado)'}</p>`;
       procHtml += `<p><strong>Paso real (h):</strong> <code>${h.toFixed(6)}</code></p>`;
       procHtml += `</div>`;
       
-      procHtml += `<div style='background: ${isDark ? 'rgba(26, 32, 44, 0.6)' : 'rgba(255, 255, 255, 0.8)'}; padding: 15px; border-radius: 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(0, 123, 255, 0.3)'};'>`;
-      procHtml += `<h5 style='color: ${isDark ? '#00dfd8' : '#007bff'}; margin-bottom: 10px;'><i class="bi bi-calculator"></i> Fórmula de Simpson</h5>`;
+      procHtml += `<div style='background: ${isDark ? 'rgba(26, 32, 44, 0.6)' : 'rgba(255, 255, 255, 0.8)'}; padding: 15px; border-radius: 10px; border: 1px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(0, 123, 255, 0.3)'};'>`;
+      procHtml += `<h5 style='color: ${isDark ? '#1a1a2e' : '#007bff'}; margin-bottom: 10px;'><i class="bi bi-calculator"></i> Fórmula de Simpson</h5>`;
       procHtml += `<div style='text-align: center; font-size: 16px; line-height: 1.6; background: ${isDark ? '#1a202c' : '#f8f9fa'}; padding: 12px; border-radius: 8px; margin: 10px 0;'>`;
-      procHtml += `<strong style='color: ${isDark ? '#00dfd8' : '#007bff'};'>∫<sub>${aNum}</sub><sup>${bNum}</sup> f(x) dx ≈ <span style='color: ${isDark ? '#ffd600' : '#dc3545'};'>h/3</span> [f(x₀) + 4∑f(x<sub>impar</sub>) + 2∑f(x<sub>par</sub>) + f(xₙ)]</strong>`;
+      procHtml += `<strong style='color: ${isDark ? '#1a1a2e' : '#007bff'};'>∫<sub>${aNum}</sub><sup>${bNum}</sup> f(x) dx ≈ <span style='color: ${isDark ? '#ffd600' : '#dc3545'};'>h/3</span> [f(x₀) + 4∑f(x<sub>impar</sub>) + 2∑f(x<sub>par</sub>) + f(xₙ)]</strong>`;
       procHtml += `</div>`;
       procHtml += `<p><strong>Donde:</strong></p>`;
       procHtml += `<ul style='margin: 5px 0; padding-left: 20px;'>`;
@@ -108,8 +108,8 @@ export default function App() {
       procHtml += `</div>`;
       
       // Cálculo paso a paso
-      procHtml += `<div style='margin: 20px 0; padding: 15px; background: ${isDark ? 'rgba(26, 32, 44, 0.6)' : 'rgba(255, 255, 255, 0.8)'}; border-radius: 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(0, 123, 255, 0.3)'};'>`;
-      procHtml += `<h5 style='color: ${isDark ? '#00dfd8' : '#007bff'}; margin-bottom: 15px;'><i class="bi bi-gear"></i> Cálculo Paso a Paso</h5>`;
+      procHtml += `<div style='margin: 20px 0; padding: 15px; background: ${isDark ? 'rgba(26, 32, 44, 0.6)' : 'rgba(255, 255, 255, 0.8)'}; border-radius: 10px; border: 1px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(0, 123, 255, 0.3)'};'>`;
+      procHtml += `<h5 style='color: ${isDark ? '#1a1a2e' : '#007bff'}; margin-bottom: 15px;'><i class="bi bi-gear"></i> Cálculo Paso a Paso</h5>`;
       
       let sumCalculation = `S = f(${aNum}) + f(${bNum})`;
       for (let i = 1; i < n; i++) {
@@ -139,26 +139,26 @@ export default function App() {
       procHtml += `</div>`;
       
       procHtml += `<p><strong>4. Resultado final:</strong></p>`;
-      procHtml += `<div style='background: ${isDark ? 'rgba(0, 223, 216, 0.2)' : 'rgba(0, 123, 255, 0.2)'}; padding: 12px; border-radius: 8px; font-size: 18px; text-align: center; margin: 10px 0; border: 2px solid ${isDark ? '#00dfd8' : '#007bff'};'>`;
-      procHtml += `<strong style='color: ${isDark ? '#00dfd8' : '#007bff'};'>∫ f(x) dx = (${h.toFixed(6)}/3) × ${sum.toFixed(6)} = <span style='font-size: 20px; color: ${isDark ? '#ffd600' : '#dc3545'};'>${calculatedArea.toFixed(6)} unidades²</span></strong>`;
+      procHtml += `<div style='background: ${isDark ? 'rgba(0, 223, 216, 0.2)' : 'rgba(0, 123, 255, 0.2)'}; padding: 12px; border-radius: 8px; font-size: 18px; text-align: center; margin: 10px 0; border: 2px solid ${isDark ? '#1a1a2e' : '#007bff'};'>`;
+      procHtml += `<strong style='color: ${isDark ? '#1a1a2e' : '#007bff'};'>∫ f(x) dx = (${h.toFixed(6)}/3) × ${sum.toFixed(6)} = <span style='font-size: 20px; color: ${isDark ? '#ffd600' : '#dc3545'};'>${calculatedArea.toFixed(6)} unidades²</span></strong>`;
       procHtml += `</div>`;
       procHtml += `</div>`;
         // Tabla de valores
       procHtml += `<div style='margin-top: 20px;'>`;
-      procHtml += `<h5 style='color: ${isDark ? '#00dfd8' : '#007bff'}; margin-bottom: 15px; font-weight: 600;'><i class="bi bi-table"></i> Tabla de Puntos - Regla de Simpson 1/3</h5>`;
-      procHtml += `<div style='overflow-x: auto; border-radius: 12px; border: 2px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(0, 123, 255, 0.3)'}; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>`;
+      procHtml += `<h5 style='color: ${isDark ? '#1a1a2e' : '#007bff'}; margin-bottom: 15px; font-weight: 600;'><i class="bi bi-table"></i> Tabla de Puntos - Regla de Simpson 1/3</h5>`;
+      procHtml += `<div style='overflow-x: auto; border-radius: 12px; border: 2px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(0, 123, 255, 0.3)'}; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>`;
       procHtml += `<table style='width: 100%; border-collapse: collapse; font-size: 0.9em; background: ${isDark ? '#1a202c' : '#fff'};'>`;
-      procHtml += `<thead><tr style='background: ${isDark ? 'linear-gradient(135deg, #00dfd8, #0db7b7)' : 'linear-gradient(135deg, #007bff, #0056b3)'}; color: white;'>`;
-      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(0, 123, 255, 0.3)'}; font-weight: 700; text-align: center;'>i</th>`;
-      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(0, 123, 255, 0.3)'}; font-weight: 700; text-align: center;'>x<sub>i</sub></th>`;
-      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(0, 123, 255, 0.3)'}; font-weight: 700; text-align: center;'>f(x<sub>i</sub>)</th>`;
-      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(0, 123, 255, 0.3)'}; font-weight: 700; text-align: center; background: rgba(255,255,255,0.2);'>Coeficiente</th>`;
+      procHtml += `<thead><tr style='background: ${isDark ? 'linear-gradient(135deg, #1a1a2e, #0db7b7)' : 'linear-gradient(135deg, #007bff, #0056b3)'}; color: white;'>`;
+      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(0, 123, 255, 0.3)'}; font-weight: 700; text-align: center;'>i</th>`;
+      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(0, 123, 255, 0.3)'}; font-weight: 700; text-align: center;'>x<sub>i</sub></th>`;
+      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(0, 123, 255, 0.3)'}; font-weight: 700; text-align: center;'>f(x<sub>i</sub>)</th>`;
+      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(0, 123, 255, 0.3)'}; font-weight: 700; text-align: center; background: rgba(255,255,255,0.2);'>Coeficiente</th>`;
       procHtml += `</tr></thead><tbody>`;
       
       for (let i = 0; i <= n; i++) {
         let coef = i === 0 || i === n ? 1 : (i % 2 === 0 ? 2 : 4);
         const isEven = i % 2 === 0;
-        let coefColor = coef === 1 ? (isDark ? '#ffd600' : '#ff6b00') : coef === 2 ? (isDark ? '#ff6b00' : '#dc3545') : (isDark ? '#00dfd8' : '#007bff');
+        let coefColor = coef === 1 ? (isDark ? '#ffd600' : '#ff6b00') : coef === 2 ? (isDark ? '#ff6b00' : '#dc3545') : (isDark ? '#1a1a2e' : '#007bff');
         
         procHtml += `<tr style='${isEven ? (isDark ? "background: rgba(0, 223, 216, 0.08);" : "background: #f8f9fa;") : (isDark ? "background: rgba(26, 32, 44, 0.8);" : "background: #fff;")} color: ${isDark ? '#e2e8f0' : '#2d3748'}; transition: all 0.3s ease;' onmouseover='this.style.background="${isDark ? 'rgba(0, 223, 216, 0.15)' : 'rgba(0, 123, 255, 0.08)'}";' onmouseout='this.style.background="${isEven ? (isDark ? 'rgba(0, 223, 216, 0.08)' : '#f8f9fa') : (isDark ? 'rgba(26, 32, 44, 0.8)' : '#fff')}";'>`;
         procHtml += `<td style='padding: 12px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; font-weight: 600;'>${i}</td>`;
@@ -196,18 +196,18 @@ export default function App() {
       }
       
       setPlotData({ x, y });
-      setArea(null);        let procHtml = `<div style='background: ${isDark ? 'linear-gradient(135deg, #2d3748, #1a202c)' : 'linear-gradient(135deg, #f8f9fa, #e9ecef)'}; padding: 25px; border-radius: 15px; border-left: 5px solid ${isDark ? '#00dfd8' : '#28a745'}; color: ${isDark ? '#e2e8f0' : '#2d3748'}; box-shadow: 0 8px 32px rgba(0,0,0,0.1);'>`;
+      setArea(null);        let procHtml = `<div style='background: ${isDark ? 'linear-gradient(135deg, #2d3748, #1a202c)' : 'linear-gradient(135deg, #f8f9fa, #e9ecef)'}; padding: 25px; border-radius: 15px; border-left: 5px solid ${isDark ? '#1a1a2e' : '#28a745'}; color: ${isDark ? '#e2e8f0' : '#2d3748'}; box-shadow: 0 8px 32px rgba(0,0,0,0.1);'>`;
       
-      procHtml += `<div style='text-align: center; margin-bottom: 25px; padding: 15px; background: ${isDark ? 'rgba(0, 223, 216, 0.1)' : 'rgba(40, 167, 69, 0.1)'}; border-radius: 10px;'>`;
-      procHtml += `<h3 style='color: ${isDark ? '#00dfd8' : '#28a745'}; margin: 0; font-weight: 700;'><i class="bi bi-graph-up-arrow"></i> Método de Euler</h3>`;
+      procHtml += `<div style='text-align: center; margin-bottom: 25px; padding: 15px; background: ${isDark ? 'rgba(26, 26, 46, 0.2)' : 'rgba(40, 167, 69, 0.1)'}; border-radius: 10px;'>`;
+      procHtml += `<h3 style='color: ${isDark ? '#1a1a2e' : '#28a745'}; margin: 0; font-weight: 700;'><i class="bi bi-graph-up-arrow"></i> Método de Euler</h3>`;
       procHtml += `<p style='margin: 5px 0 0 0; font-style: italic; opacity: 0.8;'>Solución Numérica de Ecuaciones Diferenciales Ordinarias</p>`;
       procHtml += `</div>`;
       
       // Información del problema
       procHtml += `<div style='background: ${isDark ? 'rgba(0, 223, 216, 0.08)' : 'rgba(40, 167, 69, 0.08)'}; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : 'rgba(40, 167, 69, 0.2)'};'>`;
-      procHtml += `<h5 style='color: ${isDark ? '#00dfd8' : '#28a745'}; margin-bottom: 12px; font-weight: 600;'><i class="bi bi-info-circle"></i> Datos del Problema</h5>`;
+      procHtml += `<h5 style='color: ${isDark ? '#1a1a2e' : '#28a745'}; margin-bottom: 12px; font-weight: 600;'><i class="bi bi-info-circle"></i> Datos del Problema</h5>`;
       procHtml += `<div style='display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;'>`;
-      procHtml += `<div><strong>EDO:</strong> <code style='background: ${isDark ? '#1a202c' : '#f8f9fa'}; padding: 4px 8px; border-radius: 4px; color: ${isDark ? '#00dfd8' : '#28a745'};'>dy/dx = ${expr}</code></div>`;
+      procHtml += `<div><strong>EDO:</strong> <code style='background: ${isDark ? '#1a202c' : '#f8f9fa'}; padding: 4px 8px; border-radius: 4px; color: ${isDark ? '#1a1a2e' : '#28a745'};'>dy/dx = ${expr}</code></div>`;
       procHtml += `<div><strong>Condición inicial:</strong> <code style='background: ${isDark ? '#1a202c' : '#f8f9fa'}; padding: 4px 8px; border-radius: 4px;'>y(${aNum}) = ${y0Num}</code></div>`;
       procHtml += `<div><strong>Intervalo:</strong> <code style='background: ${isDark ? '#1a202c' : '#f8f9fa'}; padding: 4px 8px; border-radius: 4px;'>[${aNum}, ${bNum}]</code></div>`;
       procHtml += `<div><strong>Paso h:</strong> <code style='background: ${isDark ? '#1a202c' : '#f8f9fa'}; padding: 4px 8px; border-radius: 4px;'>${hNum}</code></div>`;
@@ -215,8 +215,8 @@ export default function App() {
       
       // Fórmula matemática
       procHtml += `<div style='background: ${isDark ? 'rgba(0, 223, 216, 0.05)' : 'rgba(40, 167, 69, 0.05)'}; padding: 20px; border-radius: 10px; margin-bottom: 20px; text-align: center; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : 'rgba(40, 167, 69, 0.2)'};'>`;
-      procHtml += `<h5 style='color: ${isDark ? '#00dfd8' : '#28a745'}; margin-bottom: 15px; font-weight: 600;'><i class="bi bi-calculator-fill"></i> Fórmula del Método de Euler</h5>`;
-      procHtml += `<div style='font-size: 1.2em; font-family: "Courier New", monospace; background: ${isDark ? '#1a202c' : '#fff'}; padding: 15px; border-radius: 8px; border: 2px solid ${isDark ? '#00dfd8' : '#28a745'}; color: ${isDark ? '#00dfd8' : '#28a745'}; margin-bottom: 15px;'>`;
+      procHtml += `<h5 style='color: ${isDark ? '#1a1a2e' : '#28a745'}; margin-bottom: 15px; font-weight: 600;'><i class="bi bi-calculator-fill"></i> Fórmula del Método de Euler</h5>`;
+      procHtml += `<div style='font-size: 1.2em; font-family: "Courier New", monospace; background: ${isDark ? '#1a202c' : '#fff'}; padding: 15px; border-radius: 8px; border: 2px solid ${isDark ? '#1a1a2e' : '#28a745'}; color: ${isDark ? '#1a1a2e' : '#28a745'}; margin-bottom: 15px;'>`;
       procHtml += `<strong>y<sub>i+1</sub> = y<sub>i</sub> + h · f(x<sub>i</sub>, y<sub>i</sub>)</strong>`;
       procHtml += `</div>`;
       procHtml += `<div style='text-align: left; color: ${isDark ? '#cbd5e0' : '#4a5568'}; font-size: 0.9em;'>`;
@@ -236,15 +236,15 @@ export default function App() {
       procHtml += `</div>`;
         // Tabla de iteraciones
       procHtml += `<div style='margin-top: 20px;'>`;
-      procHtml += `<h5 style='color: ${isDark ? '#00dfd8' : '#28a745'}; margin-bottom: 15px; font-weight: 600;'><i class="bi bi-table"></i> Tabla de Iteraciones - Método de Euler</h5>`;
-      procHtml += `<div style='overflow-x: auto; border-radius: 12px; border: 2px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(40, 167, 69, 0.3)'}; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>`;
+      procHtml += `<h5 style='color: ${isDark ? '#1a1a2e' : '#28a745'}; margin-bottom: 15px; font-weight: 600;'><i class="bi bi-table"></i> Tabla de Iteraciones - Método de Euler</h5>`;
+      procHtml += `<div style='overflow-x: auto; border-radius: 12px; border: 2px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(40, 167, 69, 0.3)'}; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>`;
       procHtml += `<table style='width: 100%; border-collapse: collapse; font-size: 0.9em; background: ${isDark ? '#1a202c' : '#fff'};'>`;
-      procHtml += `<thead><tr style='background: ${isDark ? 'linear-gradient(135deg, #00dfd8, #0db7b7)' : 'linear-gradient(135deg, #28a745, #20c997)'}; color: white;'>`;
-      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(40, 167, 69, 0.3)'}; font-weight: 700; text-align: center;'>i</th>`;
-      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(40, 167, 69, 0.3)'}; font-weight: 700; text-align: center;'>x<sub>i</sub></th>`;
-      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(40, 167, 69, 0.3)'}; font-weight: 700; text-align: center;'>y<sub>i</sub></th>`;
-      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(40, 167, 69, 0.3)'}; font-weight: 700; text-align: center; background: rgba(255,255,255,0.1);'>f(x<sub>i</sub>,y<sub>i</sub>)</th>`;
-      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(40, 167, 69, 0.3)'}; font-weight: 700; text-align: center; background: rgba(255,255,255,0.2);'>y<sub>i+1</sub></th>`;
+      procHtml += `<thead><tr style='background: ${isDark ? 'linear-gradient(135deg, #1a1a2e, #0db7b7)' : 'linear-gradient(135deg, #28a745, #20c997)'}; color: white;'>`;
+      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(40, 167, 69, 0.3)'}; font-weight: 700; text-align: center;'>i</th>`;
+      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(40, 167, 69, 0.3)'}; font-weight: 700; text-align: center;'>x<sub>i</sub></th>`;
+      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(40, 167, 69, 0.3)'}; font-weight: 700; text-align: center;'>y<sub>i</sub></th>`;
+      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(40, 167, 69, 0.3)'}; font-weight: 700; text-align: center; background: rgba(255,255,255,0.1);'>f(x<sub>i</sub>,y<sub>i</sub>)</th>`;
+      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(40, 167, 69, 0.3)'}; font-weight: 700; text-align: center; background: rgba(255,255,255,0.2);'>y<sub>i+1</sub></th>`;
       procHtml += `</tr></thead><tbody>`;
       
       for (let i = 0; i < x.length - 1; i++) {
@@ -253,8 +253,8 @@ export default function App() {
         procHtml += `<td style='padding: 12px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; font-weight: 600;'>${i}</td>`;
         procHtml += `<td style='padding: 12px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; font-family: monospace;'>${x[i].toFixed(4)}</td>`;
         procHtml += `<td style='padding: 12px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; font-family: monospace;'>${y[i].toFixed(6)}</td>`;
-        procHtml += `<td style='padding: 12px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; color: ${isDark ? '#00dfd8' : '#28a745'}; font-weight: 600; font-family: monospace; background: ${isDark ? 'rgba(0, 223, 216, 0.05)' : 'rgba(40, 167, 69, 0.05)'};'>${slopes[i].toFixed(6)}</td>`;
-        procHtml += `<td style='padding: 12px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; font-weight: bold; color: ${isDark ? '#00dfd8' : '#28a745'}; font-family: monospace; background: ${isDark ? 'rgba(0, 223, 216, 0.1)' : 'rgba(40, 167, 69, 0.1)'}; border-left: 3px solid ${isDark ? '#00dfd8' : '#28a745'};'>${y[i+1].toFixed(6)}</td>`;
+        procHtml += `<td style='padding: 12px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; color: ${isDark ? '#1a1a2e' : '#28a745'}; font-weight: 600; font-family: monospace; background: ${isDark ? 'rgba(0, 223, 216, 0.05)' : 'rgba(40, 167, 69, 0.05)'};'>${slopes[i].toFixed(6)}</td>`;
+        procHtml += `<td style='padding: 12px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; font-weight: bold; color: ${isDark ? '#1a1a2e' : '#28a745'}; font-family: monospace; background: ${isDark ? 'rgba(26, 26, 46, 0.2)' : 'rgba(40, 167, 69, 0.1)'}; border-left: 3px solid ${isDark ? '#1a1a2e' : '#28a745'};'>${y[i+1].toFixed(6)}</td>`;
         procHtml += `</tr>`;
       }
       
@@ -288,18 +288,18 @@ export default function App() {
       }
       
       setPlotData({ x, y });
-      setArea(null);        let procHtml = `<div style='background: ${isDark ? 'linear-gradient(135deg, #2d3748, #1a202c)' : 'linear-gradient(135deg, #f8f9fa, #e9ecef)'}; padding: 25px; border-radius: 15px; border-left: 5px solid ${isDark ? '#00dfd8' : '#dc3545'}; color: ${isDark ? '#e2e8f0' : '#2d3748'}; box-shadow: 0 8px 32px rgba(0,0,0,0.1);'>`;
+      setArea(null);        let procHtml = `<div style='background: ${isDark ? 'linear-gradient(135deg, #2d3748, #1a202c)' : 'linear-gradient(135deg, #f8f9fa, #e9ecef)'}; padding: 25px; border-radius: 15px; border-left: 5px solid ${isDark ? '#1a1a2e' : '#dc3545'}; color: ${isDark ? '#e2e8f0' : '#2d3748'}; box-shadow: 0 8px 32px rgba(0,0,0,0.1);'>`;
       
-      procHtml += `<div style='text-align: center; margin-bottom: 25px; padding: 15px; background: ${isDark ? 'rgba(0, 223, 216, 0.1)' : 'rgba(220, 53, 69, 0.1)'}; border-radius: 10px;'>`;
-      procHtml += `<h3 style='color: ${isDark ? '#00dfd8' : '#dc3545'}; margin: 0; font-weight: 700;'><i class="bi bi-graph-up"></i> Método de Runge-Kutta 2° Orden</h3>`;
+      procHtml += `<div style='text-align: center; margin-bottom: 25px; padding: 15px; background: ${isDark ? 'rgba(26, 26, 46, 0.2)' : 'rgba(220, 53, 69, 0.1)'}; border-radius: 10px;'>`;
+      procHtml += `<h3 style='color: ${isDark ? '#1a1a2e' : '#dc3545'}; margin: 0; font-weight: 700;'><i class="bi bi-graph-up"></i> Método de Runge-Kutta 2° Orden</h3>`;
       procHtml += `<p style='margin: 5px 0 0 0; font-style: italic; opacity: 0.8;'>Método de Heun - Solución Numérica Mejorada de EDOs</p>`;
       procHtml += `</div>`;
       
       // Información del problema
       procHtml += `<div style='background: ${isDark ? 'rgba(0, 223, 216, 0.08)' : 'rgba(220, 53, 69, 0.08)'}; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : 'rgba(220, 53, 69, 0.2)'};'>`;
-      procHtml += `<h5 style='color: ${isDark ? '#00dfd8' : '#dc3545'}; margin-bottom: 12px; font-weight: 600;'><i class="bi bi-info-circle"></i> Datos del Problema</h5>`;
+      procHtml += `<h5 style='color: ${isDark ? '#1a1a2e' : '#dc3545'}; margin-bottom: 12px; font-weight: 600;'><i class="bi bi-info-circle"></i> Datos del Problema</h5>`;
       procHtml += `<div style='display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;'>`;
-      procHtml += `<div><strong>EDO:</strong> <code style='background: ${isDark ? '#1a202c' : '#f8f9fa'}; padding: 4px 8px; border-radius: 4px; color: ${isDark ? '#00dfd8' : '#dc3545'};'>dy/dx = ${expr}</code></div>`;
+      procHtml += `<div><strong>EDO:</strong> <code style='background: ${isDark ? '#1a202c' : '#f8f9fa'}; padding: 4px 8px; border-radius: 4px; color: ${isDark ? '#1a1a2e' : '#dc3545'};'>dy/dx = ${expr}</code></div>`;
       procHtml += `<div><strong>Condición inicial:</strong> <code style='background: ${isDark ? '#1a202c' : '#f8f9fa'}; padding: 4px 8px; border-radius: 4px;'>y(${aNum}) = ${y0Num}</code></div>`;
       procHtml += `<div><strong>Intervalo:</strong> <code style='background: ${isDark ? '#1a202c' : '#f8f9fa'}; padding: 4px 8px; border-radius: 4px;'>[${aNum}, ${bNum}]</code></div>`;
       procHtml += `<div><strong>Paso h:</strong> <code style='background: ${isDark ? '#1a202c' : '#f8f9fa'}; padding: 4px 8px; border-radius: 4px;'>${hNum}</code></div>`;
@@ -307,21 +307,21 @@ export default function App() {
       
       // Fórmulas matemáticas
       procHtml += `<div style='background: ${isDark ? 'rgba(0, 223, 216, 0.05)' : 'rgba(220, 53, 69, 0.05)'}; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : 'rgba(220, 53, 69, 0.2)'};'>`;
-      procHtml += `<h5 style='color: ${isDark ? '#00dfd8' : '#dc3545'}; margin-bottom: 15px; font-weight: 600; text-align: center;'><i class="bi bi-calculator-fill"></i> Fórmulas del Método RK2</h5>`;
+      procHtml += `<h5 style='color: ${isDark ? '#1a1a2e' : '#dc3545'}; margin-bottom: 15px; font-weight: 600; text-align: center;'><i class="bi bi-calculator-fill"></i> Fórmulas del Método RK2</h5>`;
       
       procHtml += `<div style='display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 15px;'>`;
-      procHtml += `<div style='background: ${isDark ? '#1a202c' : '#fff'}; padding: 12px; border-radius: 8px; border: 2px solid ${isDark ? '#00dfd8' : '#dc3545'}; text-align: center;'>`;
-      procHtml += `<div style='font-size: 1.1em; font-family: "Courier New", monospace; color: ${isDark ? '#00dfd8' : '#dc3545'}; font-weight: bold;'>k₁ = f(xᵢ, yᵢ)</div>`;
+      procHtml += `<div style='background: ${isDark ? '#1a202c' : '#fff'}; padding: 12px; border-radius: 8px; border: 2px solid ${isDark ? '#1a1a2e' : '#dc3545'}; text-align: center;'>`;
+      procHtml += `<div style='font-size: 1.1em; font-family: "Courier New", monospace; color: ${isDark ? '#1a1a2e' : '#dc3545'}; font-weight: bold;'>k₁ = f(xᵢ, yᵢ)</div>`;
       procHtml += `<div style='font-size: 0.8em; color: ${isDark ? '#cbd5e0' : '#6c757d'}; margin-top: 5px;'>Pendiente inicial</div>`;
       procHtml += `</div>`;
       
-      procHtml += `<div style='background: ${isDark ? '#1a202c' : '#fff'}; padding: 12px; border-radius: 8px; border: 2px solid ${isDark ? '#00dfd8' : '#dc3545'}; text-align: center;'>`;
-      procHtml += `<div style='font-size: 1.1em; font-family: "Courier New", monospace; color: ${isDark ? '#00dfd8' : '#dc3545'}; font-weight: bold;'>k₂ = f(xᵢ+h, yᵢ+h·k₁)</div>`;
+      procHtml += `<div style='background: ${isDark ? '#1a202c' : '#fff'}; padding: 12px; border-radius: 8px; border: 2px solid ${isDark ? '#1a1a2e' : '#dc3545'}; text-align: center;'>`;
+      procHtml += `<div style='font-size: 1.1em; font-family: "Courier New", monospace; color: ${isDark ? '#1a1a2e' : '#dc3545'}; font-weight: bold;'>k₂ = f(xᵢ+h, yᵢ+h·k₁)</div>`;
       procHtml += `<div style='font-size: 0.8em; color: ${isDark ? '#cbd5e0' : '#6c757d'}; margin-top: 5px;'>Pendiente final</div>`;
       procHtml += `</div>`;
       
-      procHtml += `<div style='background: ${isDark ? '#1a202c' : '#fff'}; padding: 12px; border-radius: 8px; border: 2px solid ${isDark ? '#00dfd8' : '#dc3545'}; text-align: center;'>`;
-      procHtml += `<div style='font-size: 1.1em; font-family: "Courier New", monospace; color: ${isDark ? '#00dfd8' : '#dc3545'}; font-weight: bold;'>yᵢ₊₁ = yᵢ + (h/2)(k₁+k₂)</div>`;
+      procHtml += `<div style='background: ${isDark ? '#1a202c' : '#fff'}; padding: 12px; border-radius: 8px; border: 2px solid ${isDark ? '#1a1a2e' : '#dc3545'}; text-align: center;'>`;
+      procHtml += `<div style='font-size: 1.1em; font-family: "Courier New", monospace; color: ${isDark ? '#1a1a2e' : '#dc3545'}; font-weight: bold;'>yᵢ₊₁ = yᵢ + (h/2)(k₁+k₂)</div>`;
       procHtml += `<div style='font-size: 0.8em; color: ${isDark ? '#cbd5e0' : '#6c757d'}; margin-top: 5px;'>Valor siguiente</div>`;
       procHtml += `</div>`;
       procHtml += `</div>`;
@@ -339,16 +339,16 @@ export default function App() {
       procHtml += `</div>`;
         // Tabla de iteraciones
       procHtml += `<div style='margin-top: 20px;'>`;
-      procHtml += `<h5 style='color: ${isDark ? '#00dfd8' : '#dc3545'}; margin-bottom: 15px; font-weight: 600;'><i class="bi bi-table"></i> Tabla de Iteraciones - Método RK2</h5>`;
-      procHtml += `<div style='overflow-x: auto; border-radius: 12px; border: 2px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(220, 53, 69, 0.3)'}; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>`;
+      procHtml += `<h5 style='color: ${isDark ? '#1a1a2e' : '#dc3545'}; margin-bottom: 15px; font-weight: 600;'><i class="bi bi-table"></i> Tabla de Iteraciones - Método RK2</h5>`;
+      procHtml += `<div style='overflow-x: auto; border-radius: 12px; border: 2px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(220, 53, 69, 0.3)'}; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>`;
       procHtml += `<table style='width: 100%; border-collapse: collapse; font-size: 0.9em; background: ${isDark ? '#1a202c' : '#fff'};'>`;
-      procHtml += `<thead><tr style='background: ${isDark ? 'linear-gradient(135deg, #00dfd8, #0db7b7)' : 'linear-gradient(135deg, #dc3545, #c82333)'}; color: white;'>`;
-      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(220, 53, 69, 0.3)'}; font-weight: 700; text-align: center;'>i</th>`;
-      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(220, 53, 69, 0.3)'}; font-weight: 700; text-align: center;'>x<sub>i</sub></th>`;
-      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(220, 53, 69, 0.3)'}; font-weight: 700; text-align: center;'>y<sub>i</sub></th>`;
-      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(220, 53, 69, 0.3)'}; font-weight: 700; text-align: center; background: rgba(255,255,255,0.1);'>k₁</th>`;
-      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(220, 53, 69, 0.3)'}; font-weight: 700; text-align: center; background: rgba(255,255,255,0.1);'>k₂</th>`;
-      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.3)' : 'rgba(220, 53, 69, 0.3)'}; font-weight: 700; text-align: center; background: rgba(255,255,255,0.2);'>y<sub>i+1</sub></th>`;
+      procHtml += `<thead><tr style='background: ${isDark ? 'linear-gradient(135deg, #1a1a2e, #0db7b7)' : 'linear-gradient(135deg, #dc3545, #c82333)'}; color: white;'>`;
+      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(220, 53, 69, 0.3)'}; font-weight: 700; text-align: center;'>i</th>`;
+      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(220, 53, 69, 0.3)'}; font-weight: 700; text-align: center;'>x<sub>i</sub></th>`;
+      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(220, 53, 69, 0.3)'}; font-weight: 700; text-align: center;'>y<sub>i</sub></th>`;
+      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(220, 53, 69, 0.3)'}; font-weight: 700; text-align: center; background: rgba(255,255,255,0.1);'>k₁</th>`;
+      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(220, 53, 69, 0.3)'}; font-weight: 700; text-align: center; background: rgba(255,255,255,0.1);'>k₂</th>`;
+      procHtml += `<th style='padding: 15px 10px; border: 1px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(220, 53, 69, 0.3)'}; font-weight: 700; text-align: center; background: rgba(255,255,255,0.2);'>y<sub>i+1</sub></th>`;
       procHtml += `</tr></thead><tbody>`;
       
       for (let i = 0; i < x.length - 1; i++) {
@@ -357,9 +357,9 @@ export default function App() {
         procHtml += `<td style='padding: 12px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; font-weight: 600;'>${i}</td>`;
         procHtml += `<td style='padding: 12px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; font-family: monospace;'>${x[i].toFixed(4)}</td>`;
         procHtml += `<td style='padding: 12px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; font-family: monospace;'>${y[i].toFixed(6)}</td>`;
-        procHtml += `<td style='padding: 12px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; color: ${isDark ? '#00dfd8' : '#dc3545'}; font-weight: 600; font-family: monospace; background: ${isDark ? 'rgba(0, 223, 216, 0.05)' : 'rgba(220, 53, 69, 0.05)'};'>${k1Values[i].toFixed(6)}</td>`;
-        procHtml += `<td style='padding: 12px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; color: ${isDark ? '#00dfd8' : '#dc3545'}; font-weight: 600; font-family: monospace; background: ${isDark ? 'rgba(0, 223, 216, 0.05)' : 'rgba(220, 53, 69, 0.05)'};'>${k2Values[i].toFixed(6)}</td>`;
-        procHtml += `<td style='padding: 12px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; font-weight: bold; color: ${isDark ? '#00dfd8' : '#dc3545'}; font-family: monospace; background: ${isDark ? 'rgba(0, 223, 216, 0.1)' : 'rgba(220, 53, 69, 0.1)'}; border-left: 3px solid ${isDark ? '#00dfd8' : '#dc3545'};'>${y[i+1].toFixed(6)}</td>`;
+        procHtml += `<td style='padding: 12px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; color: ${isDark ? '#1a1a2e' : '#dc3545'}; font-weight: 600; font-family: monospace; background: ${isDark ? 'rgba(0, 223, 216, 0.05)' : 'rgba(220, 53, 69, 0.05)'};'>${k1Values[i].toFixed(6)}</td>`;
+        procHtml += `<td style='padding: 12px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; color: ${isDark ? '#1a1a2e' : '#dc3545'}; font-weight: 600; font-family: monospace; background: ${isDark ? 'rgba(0, 223, 216, 0.05)' : 'rgba(220, 53, 69, 0.05)'};'>${k2Values[i].toFixed(6)}</td>`;
+        procHtml += `<td style='padding: 12px 10px; border: 1px solid ${isDark ? 'rgba(0, 223, 216, 0.2)' : '#dee2e6'}; text-align: center; font-weight: bold; color: ${isDark ? '#1a1a2e' : '#dc3545'}; font-family: monospace; background: ${isDark ? 'rgba(26, 26, 46, 0.2)' : 'rgba(220, 53, 69, 0.1)'}; border-left: 3px solid ${isDark ? '#1a1a2e' : '#dc3545'};'>${y[i+1].toFixed(6)}</td>`;
         procHtml += `</tr>`;
       }
       
@@ -378,146 +378,389 @@ export default function App() {
     setProcedure("");
     setArea(null);
   }, [method]);
-
-  return (
-    <div className={`app ${theme} app-container`} style={{ background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)' }}>
+  return (    <div className={`app ${theme} app-container`} style={{ background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)' }}>
       <div className="container-fluid app-main">
-        <header className="header-modern app-header d-flex justify-content-between align-items-center" style={{ background: 'linear-gradient(135deg, #b71c1c 0%, #ffd600 100%)', color: '#fff', borderRadius: '15px', padding: '15px 25px' }}>
+        <header className="header-modern app-header d-flex justify-content-between align-items-center" style={{ background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)', color: '#fff', borderRadius: '15px', padding: '15px 25px', boxShadow: isDark ? '0 8px 32px rgba(26, 26, 46, 0.3)' : '0 8px 32px rgba(183, 28, 28, 0.3)' }}>
           <div className="d-flex align-items-center gap-3">
-            <img src="/logo192.png" alt="Logo UTA" className="logo-modern" style={{ width: 45, height: 45, borderRadius: '50%', border: '2px solid #ffd600' }} />
+            <img src="/logo192.png" alt="Logo UTA" className="logo-modern" style={{ width: 45, height: 45, borderRadius: '50%', border: '2px solid #ffd600', filter: 'drop-shadow(0 4px 8px rgba(255, 213, 0, 0.3))' }} />
             <div>
-              <h1 className="fw-bold mb-0" style={{ fontSize: '1.8rem' }}>Métodos Numéricos</h1>
-              <small className="text-warning">Universidad Técnica de Ambato</small>
+              <h1 className="fw-bold mb-0" style={{ fontSize: '1.8rem', textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>Métodos Numéricos</h1>
+              <small style={{ color: '#ffd600', fontWeight: '500' }}>Universidad Técnica de Ambato</small>
             </div>
           </div>
-          <button className="btn btn-outline-light" onClick={() => setTheme(t => t === 'light' ? 'dark' : 'light')}>
+          <button className="btn btn-outline-light" onClick={() => setTheme(t => t === 'light' ? 'dark' : 'light')} style={{ 
+            border: '2px solid #d4af37', 
+            borderRadius: '12px',
+            padding: '8px 16px',
+            transition: 'all 0.3s ease',
+            background: 'rgba(212, 175, 55, 0.1)',
+            backdropFilter: 'blur(10px)'
+          }}>
             <i className={`bi bi-${theme === 'light' ? 'moon-stars-fill' : 'sun-fill'} me-2`}></i>
             {theme === 'light' ? 'Oscuro' : 'Claro'}
           </button>
         </header>
 
         <div className="app-content">
-          <div className="row g-4 h-100">
-            <div className="col-lg-4 col-md-5">
-              <div className="card card-scrollable p-4" style={{ background: isDark ? 'rgba(45, 55, 72, 0.95)' : 'rgba(255, 255, 255, 0.95)', borderRadius: '20px', border: 'none', height: 'fit-content', minHeight: '500px' }}>
-                <h5 className="card-title fw-bold mb-4" style={{ color: isDark ? '#00dfd8' : '#b71c1c' }}>
-                  <i className="bi bi-gear-fill me-2"></i>
-                  Configuración
-                </h5>
-              
-              <div className="mb-3">
-                <label className="form-label fw-semibold">Método Numérico</label>
+          <div className="row g-4 h-100">            <div className="col-lg-4 col-md-5">              <div className="card card-modern card-scrollable glass-card" style={{ 
+                background: isDark ? 'linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.98) 100%)' : 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.98) 100%)', 
+                borderRadius: '24px', 
+                border: `2px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(183, 28, 28, 0.3)'}`,
+                height: '80vh',
+                maxHeight: '800px',
+                boxShadow: isDark ? '0 20px 60px rgba(26, 26, 46, 0.25), 0 8px 25px rgba(22, 33, 62, 0.3)' : '0 20px 60px rgba(183, 28, 28, 0.15), 0 8px 25px rgba(0, 0, 0, 0.1)',
+                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column'
+              }}>                <div style={{ 
+                  padding: '24px 24px 16px 24px',                  borderBottom: `1px solid ${isDark ? 'rgba(26, 26, 46, 0.4)' : 'rgba(183, 28, 28, 0.2)'}`,
+                  flexShrink: 0,
+                  background: isDark ? 'rgba(26, 26, 46, 0.15)' : 'rgba(183, 28, 28, 0.05)'
+                }}><h5 className="card-title fw-bold mb-0 text-gradient" style={{ 
+                    background: isDark ? 'linear-gradient(135deg, #16213e, #ffd600)' : 'linear-gradient(135deg, #b71c1c, #2d3748)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    fontSize: '1.3rem',
+                    letterSpacing: '0.5px'
+                  }}>
+                    <i className="bi bi-gear-fill me-2" style={{ color: isDark ? '#16213e' : '#b71c1c' }}></i>
+                    Configuración
+                  </h5>
+                </div>
+                  <div style={{
+                  flex: 1,
+                  overflowY: 'auto',
+                  overflowX: 'hidden',
+                  padding: '24px',
+                  scrollbarWidth: 'thin',
+                  scrollbarColor: isDark ? '#16213e rgba(26, 26, 46, 0.3)' : '#b71c1c rgba(248, 250, 252, 0.3)'
+                }}><div className="mb-3 animate__animated animate__fadeInUp" style={{ animationDelay: '0.1s' }}>                <label className="form-label fw-semibold" style={{ 
+                  color: isDark ? '#e2e8f0' : '#2d3748',
+                  letterSpacing: '0.5px',
+                  textTransform: 'uppercase',
+                  fontSize: '0.85rem',
+                  marginBottom: '8px'
+                }}>Método Numérico</label>
                 <select 
-                  className="form-select" 
+                  className="form-select form-select-modern interactive-element" 
                   value={method} 
-                  onChange={(e) => setMethod(e.target.value)}
-                  style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
+                  onChange={(e) => setMethod(e.target.value)}                  style={{ 
+                    background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)', 
+                    color: isDark ? '#fff' : '#2d3748',
+                    border: `2px solid ${isDark ? 'rgba(26, 26, 46, 0.6)' : 'rgba(183, 28, 28, 0.6)'}`,
+                    borderRadius: '12px',
+                    padding: '12px 16px',
+                    fontSize: '1rem',
+                    fontWeight: '500',
+                    boxShadow: isDark ? '0 4px 20px rgba(26, 26, 46, 0.3)' : '0 4px 20px rgba(183, 28, 28, 0.3)',
+                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    cursor: 'pointer'
+                  }}                  onMouseOver={(e) => {
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = isDark ? '0 8px 30px rgba(26, 26, 46, 0.5)' : '0 8px 30px rgba(183, 28, 28, 0.5)';
+                    e.target.style.borderColor = isDark ? '#1a1a2e' : '#b71c1c';
+                  }}
+                  onMouseOut={(e) => {
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = isDark ? '0 4px 20px rgba(26, 26, 46, 0.3)' : '0 4px 20px rgba(183, 28, 28, 0.3)';
+                    e.target.style.borderColor = isDark ? 'rgba(26, 26, 46, 0.6)' : 'rgba(183, 28, 28, 0.6)';
+                  }}
                 >
-                  <option value="">Seleccionar método</option>
-                  <option value="simpson">Simpson 1/3 (Integración)</option>
-                  <option value="euler">Euler (EDO)</option>
-                  <option value="rk2">Runge-Kutta 2° Orden (EDO)</option>
+                  <option value="">🍷 Seleccionar método</option>
+                  <option value="simpson">📊 Simpson 1/3 (Integración)</option>
+                  <option value="euler">📈 Euler (EDO)</option>
+                  <option value="rk2">🚀 Runge-Kutta 2° Orden (EDO)</option>
                 </select>
-              </div>
-
-              {method !== '' && (
-                <>
+              </div>{method !== '' && (
+                <div className="animate__animated animate__fadeInUp" style={{ animationDelay: '0.2s' }}>
                   <div className="mb-3">
-                    <label className="form-label fw-semibold">Función f(x) o f(x,y)</label>
-                    <input 
+                    <label className="form-label fw-semibold" style={{ 
+                      color: isDark ? '#e2e8f0' : '#2d3748',
+                      letterSpacing: '0.5px',
+                      textTransform: 'uppercase',
+                      fontSize: '0.85rem',
+                      marginBottom: '8px'
+                    }}>🔧 Función f(x) o f(x,y)</label>                    <input 
                       type="text" 
-                      className="form-control" 
+                      className="form-control form-control-modern interactive-element" 
                       value={expr} 
                       onChange={(e) => setExpr(e.target.value)}
                       placeholder="Ej: x^2, sin(x), x+y"
-                      style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
+                      style={{ 
+                        background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)', 
+                        color: isDark ? '#fff' : '#2d3748',
+                        border: `2px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(183, 28, 28, 0.5)'}`,
+                        borderRadius: '12px',
+                        padding: '12px 16px',
+                        fontSize: '1rem',
+                        fontWeight: '500',
+                        boxShadow: isDark ? '0 4px 20px rgba(26, 26, 46, 0.2)' : '0 4px 20px rgba(183, 28, 28, 0.2)',
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.transform = 'translateY(-2px)';
+                        e.target.style.boxShadow = isDark ? '0 8px 30px rgba(26, 26, 46, 0.4), 0 0 0 3px rgba(26, 26, 46, 0.2)' : '0 8px 30px rgba(183, 28, 28, 0.2), 0 0 0 3px rgba(183, 28, 28, 0.1)';
+                        e.target.style.borderColor = isDark ? '#1a1a2e' : '#b71c1c';
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.transform = 'translateY(0)';
+                        e.target.style.boxShadow = isDark ? '0 4px 20px rgba(26, 26, 46, 0.2)' : '0 4px 20px rgba(183, 28, 28, 0.1)';
+                        e.target.style.borderColor = isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(183, 28, 28, 0.3)';
+                      }}
                     />
                   </div>
 
                   <div className="row">
                     <div className="col-6 mb-3">
-                      <label className="form-label fw-semibold">Límite inferior (a)</label>
+                      <label className="form-label fw-semibold" style={{ 
+                        color: isDark ? '#e2e8f0' : '#2d3748',
+                        letterSpacing: '0.5px',
+                        textTransform: 'uppercase',
+                        fontSize: '0.85rem',
+                        marginBottom: '8px'
+                      }}>📍 Límite inferior (a)</label>
                       <input 
                         type="number" 
-                        className="form-control" 
+                        className="form-control form-control-modern interactive-element" 
                         value={a} 
                         onChange={(e) => setA(e.target.value)}
-                        style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
+                        style={{ 
+                          background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)', 
+                          color: isDark ? '#fff' : '#2d3748',
+                          border: `2px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(183, 28, 28, 0.3)'}`,
+                          borderRadius: '12px',
+                          padding: '12px 16px',
+                          fontSize: '1rem',
+                          fontWeight: '500',
+                          boxShadow: isDark ? '0 4px 20px rgba(26, 26, 46, 0.2)' : '0 4px 20px rgba(183, 28, 28, 0.1)',
+                          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                        }}
+                        onFocus={(e) => {
+                          e.target.style.transform = 'translateY(-2px)';
+                          e.target.style.boxShadow = isDark ? '0 8px 30px rgba(26, 26, 46, 0.4), 0 0 0 3px rgba(26, 26, 46, 0.2)' : '0 8px 30px rgba(183, 28, 28, 0.2), 0 0 0 3px rgba(183, 28, 28, 0.1)';
+                          e.target.style.borderColor = isDark ? '#1a1a2e' : '#b71c1c';
+                        }}
+                        onBlur={(e) => {
+                          e.target.style.transform = 'translateY(0)';
+                          e.target.style.boxShadow = isDark ? '0 4px 20px rgba(26, 26, 46, 0.2)' : '0 4px 20px rgba(183, 28, 28, 0.1)';
+                          e.target.style.borderColor = isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(183, 28, 28, 0.3)';
+                        }}
                       />
                     </div>
                     <div className="col-6 mb-3">
-                      <label className="form-label fw-semibold">Límite superior (b)</label>
+                      <label className="form-label fw-semibold" style={{ 
+                        color: isDark ? '#e2e8f0' : '#2d3748',
+                        letterSpacing: '0.5px',
+                        textTransform: 'uppercase',
+                        fontSize: '0.85rem',
+                        marginBottom: '8px'
+                      }}>🎯 Límite superior (b)</label>
                       <input 
                         type="number" 
-                        className="form-control" 
+                        className="form-control form-control-modern interactive-element" 
                         value={b} 
                         onChange={(e) => setB(e.target.value)}
-                        style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
+                        style={{ 
+                          background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)', 
+                          color: isDark ? '#fff' : '#2d3748',
+                          border: `2px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(183, 28, 28, 0.3)'}`,
+                          borderRadius: '12px',
+                          padding: '12px 16px',
+                          fontSize: '1rem',
+                          fontWeight: '500',
+                          boxShadow: isDark ? '0 4px 20px rgba(26, 26, 46, 0.2)' : '0 4px 20px rgba(183, 28, 28, 0.1)',
+                          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                        }}
+                        onFocus={(e) => {
+                          e.target.style.transform = 'translateY(-2px)';
+                          e.target.style.boxShadow = isDark ? '0 8px 30px rgba(26, 26, 46, 0.4), 0 0 0 3px rgba(26, 26, 46, 0.2)' : '0 8px 30px rgba(183, 28, 28, 0.2), 0 0 0 3px rgba(183, 28, 28, 0.1)';
+                          e.target.style.borderColor = isDark ? '#1a1a2e' : '#b71c1c';
+                        }}
+                        onBlur={(e) => {
+                          e.target.style.transform = 'translateY(0)';
+                          e.target.style.boxShadow = isDark ? '0 4px 20px rgba(26, 26, 46, 0.2)' : '0 4px 20px rgba(183, 28, 28, 0.1)';
+                          e.target.style.borderColor = isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(183, 28, 28, 0.3)';
+                        }}
                       />
                     </div>
                   </div>
-                </>
-              )}
-
-              {method === 'simpson' && (
-                <div className="mb-3">
-                  <label className="form-label fw-semibold">Δx (paso)</label>
+                </div>
+              )}              {method === 'simpson' && (
+                <div className="mb-3 animate__animated animate__fadeInUp" style={{ animationDelay: '0.3s' }}>
+                  <label className="form-label fw-semibold" style={{ 
+                    color: isDark ? '#e2e8f0' : '#2d3748',
+                    letterSpacing: '0.5px',
+                    textTransform: 'uppercase',
+                    fontSize: '0.85rem',
+                    marginBottom: '8px'
+                  }}>⚡ Δx (paso)</label>
                   <input 
                     type="number" 
-                    className="form-control" 
+                    className="form-control form-control-modern interactive-element" 
                     value={delta} 
                     onChange={(e) => setDelta(e.target.value)}
                     step="0.01"
-                    style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
+                    style={{ 
+                      background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)', 
+                      color: isDark ? '#fff' : '#2d3748',
+                      border: `2px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(183, 28, 28, 0.3)'}`,
+                      borderRadius: '12px',
+                      padding: '12px 16px',
+                      fontSize: '1rem',
+                      fontWeight: '500',
+                      boxShadow: isDark ? '0 4px 20px rgba(26, 26, 46, 0.2)' : '0 4px 20px rgba(183, 28, 28, 0.1)',
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.transform = 'translateY(-2px)';
+                      e.target.style.boxShadow = isDark ? '0 8px 30px rgba(26, 26, 46, 0.4), 0 0 0 3px rgba(26, 26, 46, 0.2)' : '0 8px 30px rgba(183, 28, 28, 0.2), 0 0 0 3px rgba(183, 28, 28, 0.1)';
+                      e.target.style.borderColor = isDark ? '#1a1a2e' : '#b71c1c';
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.transform = 'translateY(0)';
+                      e.target.style.boxShadow = isDark ? '0 4px 20px rgba(26, 26, 46, 0.2)' : '0 4px 20px rgba(183, 28, 28, 0.1)';
+                      e.target.style.borderColor = isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(183, 28, 28, 0.3)';
+                    }}
                   />
                 </div>
-              )}
-
-              {(method === 'euler' || method === 'rk2') && (
-                <>
+              )}              {(method === 'euler' || method === 'rk2') && (
+                <div className="animate__animated animate__fadeInUp" style={{ animationDelay: '0.3s' }}>
                   <div className="mb-3">
-                    <label className="form-label fw-semibold">Paso h</label>
+                    <label className="form-label fw-semibold" style={{ 
+                      color: isDark ? '#e2e8f0' : '#2d3748',
+                      letterSpacing: '0.5px',
+                      textTransform: 'uppercase',
+                      fontSize: '0.85rem',
+                      marginBottom: '8px'
+                    }}>⚡ Paso h</label>
                     <input 
                       type="number" 
-                      className="form-control" 
+                      className="form-control form-control-modern interactive-element" 
                       value={h} 
                       onChange={(e) => setH(e.target.value)}
                       step="0.01"
-                      style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
+                      style={{ 
+                        background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)', 
+                        color: isDark ? '#fff' : '#2d3748',
+                        border: `2px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(183, 28, 28, 0.3)'}`,
+                        borderRadius: '12px',
+                        padding: '12px 16px',
+                        fontSize: '1rem',
+                        fontWeight: '500',
+                        boxShadow: isDark ? '0 4px 20px rgba(26, 26, 46, 0.2)' : '0 4px 20px rgba(183, 28, 28, 0.1)',
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.transform = 'translateY(-2px)';
+                        e.target.style.boxShadow = isDark ? '0 8px 30px rgba(26, 26, 46, 0.4), 0 0 0 3px rgba(26, 26, 46, 0.2)' : '0 8px 30px rgba(183, 28, 28, 0.2), 0 0 0 3px rgba(183, 28, 28, 0.1)';
+                        e.target.style.borderColor = isDark ? '#1a1a2e' : '#b71c1c';
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.transform = 'translateY(0)';
+                        e.target.style.boxShadow = isDark ? '0 4px 20px rgba(26, 26, 46, 0.2)' : '0 4px 20px rgba(183, 28, 28, 0.1)';
+                        e.target.style.borderColor = isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(183, 28, 28, 0.3)';
+                      }}
                     />
                   </div>
                   <div className="mb-3">
-                    <label className="form-label fw-semibold">Valor inicial y₀</label>
+                    <label className="form-label fw-semibold" style={{ 
+                      color: isDark ? '#e2e8f0' : '#2d3748',
+                      letterSpacing: '0.5px',
+                      textTransform: 'uppercase',
+                      fontSize: '0.85rem',
+                      marginBottom: '8px'
+                    }}>🎯 Valor inicial y₀</label>
                     <input 
                       type="number" 
-                      className="form-control" 
+                      className="form-control form-control-modern interactive-element" 
                       value={y0} 
                       onChange={(e) => setY0(e.target.value)}
-                      style={{ background: isDark ? '#2d3748' : '#fff', color: isDark ? '#e2e8f0' : '#2d3748' }}
+                      style={{ 
+                        background: isDark ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' : 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)', 
+                        color: isDark ? '#fff' : '#2d3748',
+                        border: `2px solid ${isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(183, 28, 28, 0.3)'}`,
+                        borderRadius: '12px',
+                        padding: '12px 16px',
+                        fontSize: '1rem',
+                        fontWeight: '500',
+                        boxShadow: isDark ? '0 4px 20px rgba(26, 26, 46, 0.2)' : '0 4px 20px rgba(183, 28, 28, 0.1)',
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.transform = 'translateY(-2px)';
+                        e.target.style.boxShadow = isDark ? '0 8px 30px rgba(26, 26, 46, 0.4), 0 0 0 3px rgba(26, 26, 46, 0.2)' : '0 8px 30px rgba(183, 28, 28, 0.2), 0 0 0 3px rgba(183, 28, 28, 0.1)';
+                        e.target.style.borderColor = isDark ? '#1a1a2e' : '#b71c1c';
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.transform = 'translateY(0)';
+                        e.target.style.boxShadow = isDark ? '0 4px 20px rgba(26, 26, 46, 0.2)' : '0 4px 20px rgba(183, 28, 28, 0.1)';
+                        e.target.style.borderColor = isDark ? 'rgba(26, 26, 46, 0.5)' : 'rgba(183, 28, 28, 0.3)';
+                      }}
                     />
                   </div>
-                </>
-              )}
-
-              <button 
-                className="btn btn-primary w-100 mt-3" 
-                onClick={handleRun}
-                style={{ background: isDark ? 'linear-gradient(135deg, #00dfd8, #667eea)' : 'linear-gradient(135deg, #b71c1c, #667eea)', border: 'none', padding: '12px' }}
-              >
-                <i className="bi bi-play-fill me-2"></i>
-                Visualizar
+                </div>
+              )}              <button 
+                className="btn btn-modern btn-gradient w-100 mt-3 animate__animated animate__pulse animate__infinite" 
+                onClick={handleRun}                style={{ 
+                  background: isDark ? 'linear-gradient(135deg, #1a1a2e, #16213e, #ffd600)' : 'linear-gradient(135deg, #b71c1c, #2d3748, #ffd600)', 
+                  border: 'none',
+                  padding: '16px 24px',
+                  borderRadius: '16px',
+                  fontSize: '1.1rem',
+                  fontWeight: '700',
+                  letterSpacing: '1px',
+                  textTransform: 'uppercase',
+                  boxShadow: isDark ? '0 8px 32px rgba(26, 26, 46, 0.4), 0 4px 16px rgba(255, 213, 0, 0.3)' : '0 8px 32px rgba(183, 28, 28, 0.4), 0 4px 16px rgba(45, 55, 72, 0.3)',
+                  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  color: '#fff',
+                  textShadow: '0 2px 4px rgba(0,0,0,0.3)'
+                }}                onMouseOver={(e) => {
+                  e.target.style.transform = 'translateY(-4px) scale(1.02)';
+                  e.target.style.boxShadow = isDark ? '0 12px 48px rgba(26, 26, 46, 0.6), 0 6px 24px rgba(255, 213, 0, 0.4)' : '0 12px 48px rgba(183, 28, 28, 0.6), 0 6px 24px rgba(45, 55, 72, 0.4)';
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.transform = 'translateY(0) scale(1)';
+                  e.target.style.boxShadow = isDark ? '0 8px 32px rgba(26, 26, 46, 0.4), 0 4px 16px rgba(255, 213, 0, 0.3)' : '0 8px 32px rgba(183, 28, 28, 0.4), 0 4px 16px rgba(45, 55, 72, 0.3)';
+                }}>
+                <i className="bi bi-play-fill me-2" style={{ fontSize: '1.2rem' }}></i>
+                🍷 Visualizar 🍷
               </button>
-            </div>
-          </div>          <div className="col-lg-8 col-md-7">
-            <div className="card card-scrollable p-4 d-flex flex-column" style={{ background: isDark ? 'rgba(45, 55, 72, 0.95)' : 'rgba(255, 255, 255, 0.95)', borderRadius: '20px', border: 'none', minHeight: '500px' }}>
-              <h5 className="card-title fw-bold mb-3" style={{ color: isDark ? '#00dfd8' : '#b71c1c' }}>
-                <i className="bi bi-graph-up-arrow me-2"></i>
+                </div>
+              </div>
+            </div><div className="col-lg-8 col-md-7">            <div className="card card-modern card-scrollable p-4 d-flex flex-column glass-card" style={{ 
+              background: isDark ? 'linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.98) 100%)' : 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.98) 100%)', 
+              borderRadius: '24px', 
+              border: `2px solid ${isDark ? 'rgba(26, 26, 46, 0.4)' : 'rgba(183, 28, 28, 0.3)'}`,
+              height: '80vh',
+              maxHeight: '800px',
+              boxShadow: isDark ? '0 20px 60px rgba(26, 26, 46, 0.2), 0 8px 25px rgba(22, 33, 62, 0.3)' : '0 20px 60px rgba(183, 28, 28, 0.15), 0 8px 25px rgba(0, 0, 0, 0.1)',
+              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+              overflow: 'hidden'
+            }}><h5 className="card-title fw-bold mb-3 text-gradient" style={{ 
+                background: isDark ? 'linear-gradient(135deg, #16213e, #ffd600)' : 'linear-gradient(135deg, #b71c1c, #2d3748)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                fontSize: '1.3rem',
+                letterSpacing: '0.5px'
+              }}>
+                <i className="bi bi-graph-up-arrow me-2" style={{ color: isDark ? '#16213e' : '#b71c1c' }}></i>
                 Visualización
               </h5>
-              
-              <div className="flex-fill d-flex flex-column" style={{ minHeight: 0 }}>
+                <div className="flex-fill d-flex flex-column" style={{ 
+                minHeight: 0,
+                overflowY: 'auto',
+                overflowX: 'hidden',
+                paddingRight: '8px',
+                scrollbarWidth: 'thin',
+                scrollbarColor: isDark ? '#16213e rgba(26, 26, 46, 0.3)' : '#b71c1c rgba(248, 250, 252, 0.3)'
+              }}>
                 {plotData ? (
-                  <>                    <div className="flex-fill" style={{ minHeight: '350px', height: '400px' }}>
+                  <>                    <div className="mb-3" style={{ height: '300px', minHeight: '280px', maxHeight: '350px' }}>
                       <Plot 
                         data={[{
                           x: plotData.x,
@@ -525,12 +768,12 @@ export default function App() {
                           type: 'scatter',
                           mode: 'lines+markers',
                           line: { 
-                            color: isDark ? '#00dfd8' : '#b71c1c', 
+                            color: isDark ? '#1a1a2e' : '#b71c1c', 
                             width: 3,
                             shape: 'spline'
                           },
                           marker: { 
-                            color: isDark ? '#00dfd8' : '#b71c1c', 
+                            color: isDark ? '#1a1a2e' : '#b71c1c', 
                             size: 6,
                             line: { width: 1, color: isDark ? '#fff' : '#000' }
                           },
@@ -543,7 +786,7 @@ export default function App() {
                           title: { 
                             text: `<b>${method === 'simpson' ? 'Simpson 1/3 - Integración Numérica' : method === 'euler' ? 'Euler - Solución EDO' : 'Runge-Kutta 2° - Solución EDO'}</b>`, 
                             font: { 
-                              color: isDark ? '#00dfd8' : '#b71c1c', 
+                              color: isDark ? '#1a1a2e' : '#b71c1c', 
                               size: 16,
                               family: 'Inter, sans-serif'
                             },
@@ -553,7 +796,7 @@ export default function App() {
                           paper_bgcolor: 'rgba(0,0,0,0)',
                           plot_bgcolor: isDark ? 'rgba(26, 32, 44, 0.3)' : 'rgba(248, 250, 252, 0.8)',
                           font: { 
-                            color: isDark ? '#e2e8f0' : '#2d3748',
+                            color: isDark ? '#fff' : '#2d3748',
                             family: 'Inter, sans-serif',
                             size: 12
                           },
@@ -561,22 +804,22 @@ export default function App() {
                           xaxis: { 
                             title: {
                               text: '<b>x</b>',
-                              font: { color: isDark ? '#00dfd8' : '#b71c1c', size: 14 }
+                              font: { color: isDark ? '#1a1a2e' : '#b71c1c', size: 14 }
                             },
                             gridcolor: isDark ? 'rgba(0, 223, 216, 0.2)' : 'rgba(183, 28, 28, 0.2)',
-                            linecolor: isDark ? '#00dfd8' : '#b71c1c',
-                            tickcolor: isDark ? '#00dfd8' : '#b71c1c',
+                            linecolor: isDark ? '#1a1a2e' : '#b71c1c',
+                            tickcolor: isDark ? '#1a1a2e' : '#b71c1c',
                             tickfont: { color: isDark ? '#a0aec0' : '#4a5568' },
                             zerolinecolor: isDark ? 'rgba(0, 223, 216, 0.5)' : 'rgba(183, 28, 28, 0.5)'
                           },
                           yaxis: { 
                             title: {
                               text: method === 'simpson' ? '<b>f(x)</b>' : '<b>y</b>',
-                              font: { color: isDark ? '#00dfd8' : '#b71c1c', size: 14 }
+                              font: { color: isDark ? '#1a1a2e' : '#b71c1c', size: 14 }
                             },
                             gridcolor: isDark ? 'rgba(0, 223, 216, 0.2)' : 'rgba(183, 28, 28, 0.2)',
-                            linecolor: isDark ? '#00dfd8' : '#b71c1c',
-                            tickcolor: isDark ? '#00dfd8' : '#b71c1c',
+                            linecolor: isDark ? '#1a1a2e' : '#b71c1c',
+                            tickcolor: isDark ? '#1a1a2e' : '#b71c1c',
                             tickfont: { color: isDark ? '#a0aec0' : '#4a5568' },
                             zerolinecolor: isDark ? 'rgba(0, 223, 216, 0.5)' : 'rgba(183, 28, 28, 0.5)'
                           },
@@ -585,10 +828,10 @@ export default function App() {
                             x: 0.02,
                             y: 0.98,
                             bgcolor: isDark ? 'rgba(45, 55, 72, 0.8)' : 'rgba(255, 255, 255, 0.9)',
-                            bordercolor: isDark ? '#00dfd8' : '#b71c1c',
+                            bordercolor: isDark ? '#1a1a2e' : '#b71c1c',
                             borderwidth: 1,
                             font: { 
-                              color: isDark ? '#e2e8f0' : '#2d3748',
+                              color: isDark ? '#fff' : '#2d3748',
                               size: 11
                             }
                           }
@@ -610,8 +853,8 @@ export default function App() {
                     </div>
                     
                     {area !== null && (
-                      <div className="mt-3 p-3 rounded" style={{ background: isDark ? 'rgba(0, 223, 216, 0.1)' : 'rgba(183, 28, 28, 0.1)' }}>
-                        <h6 className="fw-bold" style={{ color: isDark ? '#00dfd8' : '#b71c1c' }}>
+                      <div className="mt-3 p-3 rounded" style={{ background: isDark ? 'rgba(26, 26, 46, 0.2)' : 'rgba(183, 28, 28, 0.1)' }}>
+                        <h6 className="fw-bold" style={{ color: isDark ? '#1a1a2e' : '#b71c1c' }}>
                           <i className="bi bi-calculator me-2"></i>
                           Área: {area.toFixed(6)} unidades²
                         </h6>
@@ -619,7 +862,7 @@ export default function App() {
                     )}
                     
                     <div className="mt-3">
-                      <h6 className="fw-bold mb-2" style={{ color: isDark ? '#00dfd8' : '#b71c1c' }}>
+                      <h6 className="fw-bold mb-2" style={{ color: isDark ? '#1a1a2e' : '#b71c1c' }}>
                         <i className="bi bi-list-ul me-2"></i>
                         Procedimiento
                       </h6>
@@ -636,16 +879,50 @@ export default function App() {
                       />
                     </div>
                   </>
-                ) : (
-                  <div className="d-flex align-items-center justify-content-center h-100">
-                    <div className="text-center">
-                      <i className="bi bi-graph-up display-1 mb-3" style={{ opacity: 0.3, color: isDark ? '#00dfd8' : '#b71c1c' }}></i>
-                      <h4 className="mb-3" style={{ color: isDark ? '#a0aec0' : '#4a5568' }}>
-                        ¡Comienza tu Análisis!
+                ) : (                  <div className="d-flex align-items-center justify-content-center h-100">
+                    <div className="text-center animate__animated animate__fadeIn">
+                      <div className="mb-4" style={{ 
+                        background: isDark ? 'linear-gradient(135deg, #1a1a2e, #667eea)' : 'linear-gradient(135deg, #b71c1c, #667eea)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text'
+                      }}>
+                        <i className="bi bi-graph-up display-1 mb-3 animate__animated animate__pulse animate__infinite" style={{ 
+                          fontSize: '6rem',
+                          filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.1))'
+                        }}></i>
+                      </div>
+                      <h4 className="mb-3 fw-bold" style={{ 
+                        background: isDark ? 'linear-gradient(135deg, #1a1a2e, #667eea)' : 'linear-gradient(135deg, #b71c1c, #667eea)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                        fontSize: '1.8rem',
+                        letterSpacing: '1px'
+                      }}>
+                        ✨ ¡Comienza tu Análisis! ✨
                       </h4>
-                      <p className="text-muted">
-                        Selecciona un método y presiona "Visualizar"
-                      </p>
+                      <p style={{ 
+                        color: isDark ? '#a0aec0' : '#4a5568',
+                        fontSize: '1.1rem',
+                        fontWeight: '500',
+                        opacity: 0.8
+                      }}>
+                        🚀 Selecciona un método y presiona "Visualizar"
+                      </p>                      <div className="mt-4" style={{
+                        padding: '20px',
+                        background: isDark ? 'rgba(26, 26, 46, 0.15)' : 'rgba(183, 28, 28, 0.05)',
+                        borderRadius: '16px',
+                        border: `1px solid ${isDark ? 'rgba(26, 26, 46, 0.3)' : 'rgba(183, 28, 28, 0.2)'}`
+                      }}>
+                        <p style={{ 
+                          color: isDark ? '#e2e8f0' : '#2d3748',
+                          margin: 0,
+                          fontStyle: 'italic'
+                        }}>
+                          💡 Explora los métodos numéricos más poderosos
+                        </p>
+                      </div>
                     </div>
                   </div>
                 )}

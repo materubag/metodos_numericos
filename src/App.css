@@ -7,35 +7,39 @@
   --uta-blanco: #ffffff;
   --uta-negro: #1a1a1a;
   --uta-gris: #6c757d;
-  --uta-azul: #007bff;
-  --uta-verde: #28a745;
-  --uta-naranja: #fd7e14;
-  --uta-morado: #6f42c1;
+    /* Paleta Footer Theme */
+  --wine-primary: #b71c1c;      /* Rojo principal del footer */
+  --wine-secondary: #2d3748;    /* Gris oscuro del footer */
+  --wine-dark: #1a1a2e;         /* Azul oscuro del footer (modo oscuro) */
+  --wine-light: #16213e;        /* Azul footer modo oscuro */
+  --wine-accent: #ffd600;       /* Dorado del logo */
+  --wine-deep: #8b0000;         /* Rojo más oscuro */
+  --wine-soft: #e2e8f0;         /* Gris claro para texto */
+  --wine-gold: #ffd600;         /* Oro del logo */
+  --wine-cream: #ffffff;        /* Blanco para contraste */
+    /* Gradientes footer theme */
+  --gradient-wine-primary: linear-gradient(135deg, #b71c1c 0%, #2d3748 100%);
+  --gradient-wine-secondary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  --gradient-wine-accent: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+  --gradient-wine-deep: linear-gradient(135deg, #2d3748 0%, #b71c1c 100%);
+  --gradient-wine-gold: linear-gradient(135deg, #b71c1c 0%, #ffd600 50%, #2d3748 100%);
+  --gradient-wine-soft: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #ffd600 100%);
+    /* Sombras con tonos footer */
+  --shadow-wine-sm: 0 2px 8px rgba(183, 28, 28, 0.15);
+  --shadow-wine-md: 0 4px 16px rgba(183, 28, 28, 0.2);
+  --shadow-wine-lg: 0 8px 32px rgba(183, 28, 28, 0.25);
+  --shadow-wine-xl: 0 16px 64px rgba(183, 28, 28, 0.3);
+    /* Tema claro con footer */
+  --bg-light: linear-gradient(135deg, #b71c1c 0%, #2d3748 100%);
+  --card-bg-light: rgba(183, 28, 28, 0.95);
+  --text-light: #ffffff;
+  --text-muted-light: #f8f9fa;
   
-  /* Gradientes profesionales */
-  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  --gradient-warning: linear-gradient(135deg, #ffd600 0%, #ff8c00 100%);
-  --gradient-danger: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
-  
-  /* Sombras modernas */
-  --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
-  --shadow-lg: 0 8px 24px rgba(0,0,0,0.2);
-  --shadow-xl: 0 16px 48px rgba(0,0,0,0.25);
-  
-  /* Tema claro */
-  --bg-light: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  --card-bg-light: rgba(255, 255, 255, 0.95);
-  --text-light: #2d3748;
-  --text-muted-light: #718096;
-  
-  /* Tema oscuro */
+  /* Tema oscuro con footer */
   --bg-dark: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  --card-bg-dark: rgba(45, 55, 72, 0.95);
-  --text-dark: #e2e8f0;
-  --text-muted-dark: #a0aec0;
+  --card-bg-dark: rgba(26, 26, 46, 0.95);
+  --text-dark: #ffffff;
+  --text-muted-dark: #e2e8f0;
 }
 
 * {
@@ -654,200 +658,88 @@ html, body, #root {
   }
 }
 
-/* Estilos adicionales para optimizar el uso de pantalla completa */
-
-/* Reducir márgenes del header */
-.header-modern {
-  margin-bottom: 1rem !important;
-}
-
-/* Optimizar el footer */
-.footer-modern {
-  margin-top: 1rem !important;
-  flex-shrink: 0;
-}
-
-/* Contenedor principal sin márgenes innecesarios */
-.py-4 {
-  padding-top: 0.5rem !important;
-  padding-bottom: 0.5rem !important;
-}
-
-/* Optimizar espaciado entre elementos */
-.mb-5 {
-  margin-bottom: 1rem !important;
-}
-
-.mt-5 {
-  margin-top: 1rem !important;
-}
-
-/* Hacer que los elementos ocupen todo el ancho disponible */
-.w-100 {
-  width: 100% !important;
-}
-
-/* Mejorar el uso del espacio vertical */
-.h-100 {
-  height: 100% !important;
-}
-
-/* Asegurar que el gráfico use todo el espacio disponible */
-.plotly-div {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-/* Contenedor de la aplicación con mejor distribución */
-.app-container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
-}
-
-/* Header fijo */
-.app-header {
-  flex-shrink: 0;
-  z-index: 1030;
-}
-
-/* Contenido principal que ocupa el espacio restante */
-.app-main {
-  flex: 1;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Footer fijo */
-.app-footer {
-  flex-shrink: 0;
-  z-index: 1030;
-}
-
-/* Optimizaciones para pantallas muy grandes */
-@media (min-width: 1400px) {
-  .container {
-    padding: 1rem 2rem;
-  }
-  
-  .col-md-4 {
-    flex: 0 0 400px;
-    max-width: 450px;
-  }
-}
-
-/* Optimizaciones para pantallas ultrawide */
-@media (min-width: 1920px) {
-  .col-md-4 {
-    flex: 0 0 450px;
-    max-width: 500px;
-  }
-  
-  .container {
-    padding: 1rem 3rem;
-  }
-}
-
-/* Mejoras para tablets en orientación landscape */
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-  .app {
-    height: 100vh;
-    overflow: hidden;
-  }
-  
-  .container {
-    height: 100%;
-    padding: 0.5rem;
-  }
-  
-  .header-modern {
-    margin-bottom: 0.5rem !important;
-    padding: 15px 20px !important;
-  }
-  
-  .footer-modern {
-    margin-top: 0.5rem !important;
-    padding: 15px 0 !important;
-  }
-}
-
-/* Estilos para scroll y contenedores */
-.app-container {
-  min-height: 100vh;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.app-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-.app-header {
-  flex-shrink: 0;
-  margin-bottom: 20px;
-}
-
-.app-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-}
-
-.app-footer {
-  flex-shrink: 0;
-  margin-top: 20px;
-}
-
-/* Mejores estilos para las cards */
-.card-scrollable {
-  overflow-y: auto;
-  max-height: calc(100vh - 200px);
-}
-
-.procedure-scroll {
-  max-height: 300px;
-  overflow-y: auto;
-  padding-right: 10px;
-}
-
-/* Scrollbar personalizado */
-::-webkit-scrollbar {
+/* Estilos para scrollbar personalizado con tema footer */
+.card-scrollable .flex-fill::-webkit-scrollbar {
   width: 8px;
+}
+
+.card-scrollable .flex-fill::-webkit-scrollbar-track {
+  background: rgba(183, 28, 28, 0.05);
+  border-radius: 10px;
+}
+
+.card-scrollable .flex-fill::-webkit-scrollbar-thumb {
+  background: var(--gradient-wine-primary);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(183, 28, 28, 0.2);
+}
+
+.app.dark .card-scrollable .flex-fill::-webkit-scrollbar-thumb {
+  background: var(--gradient-wine-secondary);
+}
+
+.card-scrollable .flex-fill::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-wine-gold);
+  transform: scaleX(1.2);
+}
+
+.app.dark .card-scrollable .flex-fill::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-wine-soft);
+}
+
+/* Estilos específicos para el panel de configuración con scroll - tema footer */
+.card-scrollable > div:last-child::-webkit-scrollbar {
+  width: 6px;
+}
+
+.card-scrollable > div:last-child::-webkit-scrollbar-track {
+  background: rgba(183, 28, 28, 0.03);
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+.card-scrollable > div:last-child::-webkit-scrollbar-thumb {
+  background: var(--gradient-wine-primary);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 4px rgba(183, 28, 28, 0.15);
+}
+
+.app.dark .card-scrollable > div:last-child::-webkit-scrollbar-thumb {
+  background: var(--gradient-wine-secondary);
+}
+
+.card-scrollable > div:last-child::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-wine-gold);
+  width: 8px;
+  box-shadow: 0 2px 8px rgba(255, 213, 0, 0.3);
+}
+
+.app.dark .card-scrollable > div:last-child::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-wine-soft);
+  width: 8px;
+}
+
+/* Indicador visual de scroll disponible */
+.card-scrollable > div:last-child {
+  position: relative;
+}
+
+.card-scrollable > div:last-child::after {
+  content: '';
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
   height: 8px;
+  background: linear-gradient(to top, rgba(255,255,255,0.9), transparent);
+  pointer-events: none;
+  z-index: 5;
 }
 
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--uta-rojo);
-  border-radius: 10px;
-  transition: background 0.3s ease;
-}
-
-.app.dark ::-webkit-scrollbar-thumb {
-  background: var(--uta-dorado);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(183, 28, 28, 0.8);
-}
-
-.app.dark ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 214, 0, 0.8);
+.app.dark .card-scrollable > div:last-child::after {
+  background: linear-gradient(to top, rgba(45, 55, 72, 0.9), transparent);
 }
 
 /* Responsive mejorado con scroll */
