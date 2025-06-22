@@ -704,7 +704,7 @@ export default function App() {
               )}              <button 
                 className="btn btn-modern btn-gradient w-100 mt-3 animate__animated animate__pulse animate__infinite" 
                 onClick={handleRun}                style={{ 
-                  background: isDark ? 'linear-gradient(135deg, #1a1a2e, #16213e, #ffd600)' : 'linear-gradient(135deg, #b71c1c, #2d3748, #ffd600)', 
+                  background: isDark ? '#1a1a2e' : '#b71c1c', 
                   border: 'none',
                   padding: '16px 24px',
                   borderRadius: '16px',
@@ -712,7 +712,7 @@ export default function App() {
                   fontWeight: '700',
                   letterSpacing: '1px',
                   textTransform: 'uppercase',
-                  boxShadow: isDark ? '0 8px 32px rgba(26, 26, 46, 0.4), 0 4px 16px rgba(255, 213, 0, 0.3)' : '0 8px 32px rgba(183, 28, 28, 0.4), 0 4px 16px rgba(45, 55, 72, 0.3)',
+                  boxShadow: isDark ? '0 8px 32px rgba(26, 26, 46, 0.4), 0 4px 16px rgba(26, 26, 46, 0.3)' : '0 8px 32px rgba(183, 28, 28, 0.4), 0 4px 16px rgba(183, 28, 28, 0.3)',
                   transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                   position: 'relative',
                   overflow: 'hidden',
@@ -720,11 +720,13 @@ export default function App() {
                   textShadow: '0 2px 4px rgba(0,0,0,0.3)'
                 }}                onMouseOver={(e) => {
                   e.target.style.transform = 'translateY(-4px) scale(1.02)';
-                  e.target.style.boxShadow = isDark ? '0 12px 48px rgba(26, 26, 46, 0.6), 0 6px 24px rgba(255, 213, 0, 0.4)' : '0 12px 48px rgba(183, 28, 28, 0.6), 0 6px 24px rgba(45, 55, 72, 0.4)';
+                  e.target.style.boxShadow = isDark ? '0 12px 48px rgba(26, 26, 46, 0.6), 0 6px 24px rgba(26, 26, 46, 0.4)' : '0 12px 48px rgba(183, 28, 28, 0.6), 0 6px 24px rgba(183, 28, 28, 0.4)';
+                  e.target.style.background = isDark ? '#16213e' : '#8b0000';
                 }}
                 onMouseOut={(e) => {
                   e.target.style.transform = 'translateY(0) scale(1)';
-                  e.target.style.boxShadow = isDark ? '0 8px 32px rgba(26, 26, 46, 0.4), 0 4px 16px rgba(255, 213, 0, 0.3)' : '0 8px 32px rgba(183, 28, 28, 0.4), 0 4px 16px rgba(45, 55, 72, 0.3)';
+                  e.target.style.boxShadow = isDark ? '0 8px 32px rgba(26, 26, 46, 0.4), 0 4px 16px rgba(26, 26, 46, 0.3)' : '0 8px 32px rgba(183, 28, 28, 0.4), 0 4px 16px rgba(183, 28, 28, 0.3)';
+                  e.target.style.background = isDark ? '#1a1a2e' : '#b71c1c';
                 }}>
                 <i className="bi bi-play-fill me-2" style={{ fontSize: '1.2rem' }}></i>
                 🍷 Visualizar 🍷
