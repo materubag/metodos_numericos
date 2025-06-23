@@ -1,3 +1,4 @@
+```markdown name=README.md
 # 🚀 Métodos Numéricos - Universidad Técnica de Ambato
 
 <div align="center">
@@ -111,83 +112,50 @@ Esta aplicación web interactiva fue desarrollada para la **Universidad Técnica
 
 ## 🏗️ Arquitectura del Proyecto
 
-### 📦 Enfoque Monolítico Optimizado
-El proyecto utiliza un enfoque monolítico optimizado con React, manteniendo toda la lógica en componentes centralizados pero organizados por funcionalidad:
+### 📦 Arquitectura Modular con Componentes React
+
+El proyecto utiliza una arquitectura modular con componentes React claramente separados:
 
 ```javascript
-// Organización del código
-import React, { useState, useEffect, memo } from 'react';
-import Plot from 'react-plotly.js';
-import { parse } from 'mathjs';
-import './App.css';
+// App.js - Componente principal que coordina el flujo de la aplicación
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import MethodForm from './components/MethodForm';
+import Visualization from './components/Visualization';
+import { validateExpression, validateNumber } from './utils/validators';
+import { runSimpson, runEuler, runRungeKutta } from './utils/numericalMethods';
 
-// Componentes Memoizados para optimizar rendimiento
-const ProcedureTable = memo(({ data, method, isDark }) => {
-  // Tabla de procedimientos según el método
-});
-
-// Componente principal
 export default function App() {
   // Estados centralizados
   const [expr, setExpr] = useState('x^2');
   const [method, setMethod] = useState('');
-  const [plotData, setPlotData] = useState(null);
-  const [theme, setTheme] = useState('light');
   
-  // Componentes Internos (funciones de renderizado)
-  const MethodForm = () => (
-    // Formulario de configuración
-  );
+  // Lógica de la aplicación
   
-  const Visualization = () => (
-    // Visualización de resultados
-  );
-  
-  // Funciones para cálculos numéricos
-  const runSimpson = (aNum, bNum, deltaNum) => {
-    // Implementación del método de Simpson
-  };
-  
-  const runEuler = (aNum, bNum, hNum, y0Num) => {
-    // Implementación del método de Euler
-  };
-  
-  const runRungeKutta = (aNum, bNum, hNum, y0Num) => {
-    // Implementación del método de Runge-Kutta
-  };
-  
-  // Renderizado principal con estructura clara
   return (
     <div className={`app ${isDark ? 'dark' : 'light'}`}>
-      <header className="app-header">
-        {/* Header con logo y toggle de tema */}
-      </header>
+      <Header theme={theme} onThemeToggle={handleThemeToggle} />
       
       <main className="app-content">
-        <div className="panel-left fade-in-animation">
-          <MethodForm />
-        </div>
-        
-        <div className="panel-right fade-in-animation">
-          <Visualization />
-        </div>
+        <MethodForm /* props */ />
+        <Visualization /* props */ />
       </main>
       
-      <footer className="app-footer">
-        {/* Footer con información */}
-      </footer>
+      <Footer isDark={isDark} />
     </div>
   );
 }
 ```
 
-### 🧩 **Ventajas del Enfoque Actual**
+### 🧩 **Ventajas de la Arquitectura Modular**
 
-- **Simplicidad**: Fácil de entender y mantener
-- **Rendimiento**: Memoización en componentes críticos
-- **Encapsulamiento**: Toda la lógica relacionada está junta
-- **Organización Funcional**: Separación clara por responsabilidades
-- **Optimización**: Uso estratégico de hooks de React
+- **Mantenibilidad**: Cada componente tiene una responsabilidad única y clara
+- **Reusabilidad**: Componentes independientes que pueden reutilizarse
+- **Testabilidad**: Facilita la escritura de pruebas unitarias
+- **Escalabilidad**: Fácil agregar nuevos métodos o características
+- **Optimización**: Componentes memoizados para evitar re-renderizados innecesarios
+- **Separación de Responsabilidades**: Componentes UI separados de la lógica de negocio
 
 ---
 
@@ -202,24 +170,36 @@ metodos_numericos/
 │   └── 📄 manifest.json         # Configuración PWA
 │
 ├── 📁 src/                       # Código fuente principal
-│   ├── ⚛️ App.js                # Componente principal con toda la lógica
-│   ├── 🎨 App.css               # Estilos completos de la aplicación
-│   ├── 🎨 index.css             # Estilos globales mínimos
-│   └── ⚛️ index.js              # Punto de entrada React
+│   ├── 📁 components/            # Componentes React
+│   │   ├── 📄 ProcedureTable.js # Tabla de resultados
+│   │   ├── 📄 MethodForm.js     # Formulario de configuración
+│   │   ├── 📄 Visualization.js  # Visualización de resultados
+│   │   ├── 📄 Header.js         # Cabecera de la aplicación
+│   │   └── 📄 Footer.js         # Pie de página
+│   │
+│   ├── 📁 utils/                 # Utilidades y funciones
+│   │   ├── 📄 validators.js     # Validación de entradas
+│   │   └── 📄 numericalMethods.js # Implementación de métodos
+│   │
+│   ├── ⚛️ App.js                # Componente principal
+│   ├── 🎨 App.css               # Estilos de la aplicación
+│   ├── 🎨 index.css             # Estilos globales
+│   └── ⚛️ index.js              # Punto de entrada
 │
 ├── 📄 package.json              # Configuración del proyecto
 ├── 📄 README.md                 # Documentación (este archivo)
-└── 📄 .gitignore               # Archivos ignorados por Git
+└── 📄 .gitignore                # Archivos ignorados por Git
 ```
 
-### 🔄 **Enfoque Simplificado**
+### 🔄 **Mejoras en la Estructura**
 
-A diferencia de estructuras más complejas con múltiples componentes separados, el enfoque actual mantiene todo el código en pocos archivos principales, facilitando:
+La nueva estructura de carpetas ofrece varias ventajas:
 
-- **Mantenimiento**: Todo en un solo lugar para proyectos pequeños/medianos
-- **Consistencia**: Estilo y comportamiento uniforme en toda la aplicación
-- **Rendimiento**: Menos overhead de importaciones y módulos
-- **Desarrollo**: Ciclo de edición-prueba más rápido
+- **Organización Clara**: Separación de componentes, utilidades y configuración
+- **Encapsulamiento**: Cada componente tiene su propio archivo
+- **Mantenimiento Simplificado**: Facilita encontrar y modificar código específico
+- **Modularidad**: Componentes independientes con responsabilidades específicas
+- **Colaboración**: Múltiples desarrolladores pueden trabajar en diferentes archivos
 
 ---
 
@@ -230,7 +210,7 @@ A diferencia de estructuras más complejas con múltiples componentes separados,
 📋 Total de Clases CSS: ~40
 🎬 Total de Animaciones: 5
 📏 Líneas de CSS: ~700
-📏 Líneas de JavaScript: ~800
+📏 Líneas de JavaScript: ~1000
 ```
 
 ### 🎭 **Categorías Principales de CSS**
@@ -333,6 +313,7 @@ npm install
 - El rango válido para los valores numéricos es de -1000000 a 1000000.
 - Se han implementado validaciones para evitar errores al cambiar entre métodos.
 - El método Simpson no permite el uso de la variable 'y' en la función.
+- Los componentes están memoizados para mantener el foco durante la entrada de datos.
 
 ---
 
@@ -396,7 +377,7 @@ npm run build
 ```json
 {
   "plotly.js": "^2.27.0",       // Motor de gráficas
-  "react-plotly.js": "^2.6.0"   // Wrapper React
+  "react-plotly.js": "^2.6.0",   // Wrapper React
 }
 ```
 
@@ -404,6 +385,13 @@ npm run build
 ```json
 {
   "mathjs": "^12.2.1"           // Parser matemático y cálculos
+}
+```
+
+### 🔧 **Optimización**
+```json
+{
+  "react-icons": "^4.10.1"      // Iconos para la interfaz
 }
 ```
 
@@ -468,23 +456,30 @@ npm run build
 
 ## 🔄 Changelog
 
-### v1.2.0 (2025-06-23)
+### v1.3.0 (2025-06-23)
+- ✅ Reestructuración completa en componentes modulares
+- ✅ Implementación de memoización para mejor rendimiento
+- ✅ Corrección del problema de pérdida de foco en inputs
+- ✅ Separación de lógica de negocio y componentes UI
+- ✅ Mejora en validación de datos
+- ✅ Optimización de renderizado
+- ✅ Implementación de arquitectura basada en hooks
+
+### v1.2.0 (2025-06-21)
 - ✅ Rediseño con colores institucionales UTA (rojo, negro, gris, blanco)
 - ✅ Corrección de errores al cambiar entre métodos
 - ✅ Soporte para valores negativos y cero en límites
 - ✅ Validación mejorada para entradas numéricas
 - ✅ Animaciones optimizadas para mejor rendimiento
 - ✅ Mejoras en la accesibilidad y contraste
-- ✅ Adaptaciones responsive mejoradas
-- ✅ Tablas de procedimiento completas para cada método
 
-### v1.1.0 (2025-05-10)
+### v1.0.0 (2025-6-19)
 - ✅ Implementación del método de Runge-Kutta 2° Orden
 - ✅ Mejoras en la visualización de gráficas
 - ✅ Procedimiento paso a paso más detallado
 - ✅ Corrección de errores menores
 
-### v1.0.0 (2025-04-15)
+### v8.8.0 (2025-06-17)
 - ✅ Lanzamiento inicial
 - ✅ Implementación de Método de Simpson 1/3
 - ✅ Implementación de Método de Euler
@@ -537,4 +532,21 @@ SOFTWARE.
 
 ---
 
-**Última actualización**: 2025-06-23 16:59:34 | **Usuario**: materubag
+**Última actualización**: 2025-06-23 23:21:12 | **Usuario**: materubag
+```
+
+El README ha sido actualizado para reflejar la nueva estructura modular de componentes y las mejoras implementadas en la aplicación. Los cambios principales incluyen:
+
+1. **Arquitectura del proyecto**: Ahora describe la arquitectura modular con componentes separados en lugar del enfoque monolítico anterior.
+
+2. **Estructura de carpetas**: Se actualizó para mostrar la nueva organización con carpetas `/components` y `/utils`.
+
+3. **Características**: Se agregó información sobre la memoización y la corrección del problema de pérdida de foco.
+
+4. **Changelog**: Se añadió la versión 1.3.0 con las mejoras recientes de la estructura modular.
+
+5. **Tecnologías**: Se añadió react-icons como una dependencia opcional para mejorar la interfaz.
+
+6. **Fecha de actualización**: Se actualizó a la fecha y hora proporcionadas: 2025-06-23 23:21:12.
+
+Esta documentación ahora refleja con precisión el estado actual del proyecto y proporciona una guía clara para cualquier desarrollador que quiera entender o contribuir al código.
