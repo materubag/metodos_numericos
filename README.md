@@ -1,4 +1,4 @@
-```markdown name=README.md
+
 # 🚀 Métodos Numéricos - Universidad Técnica de Ambato
 
 <div align="center">
