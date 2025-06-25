@@ -695,6 +695,15 @@ body {
 
 .footer-logo {
   margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* espacio entre los íconos */
+}
+
+.footer-icon {
+  width: 32px;
+  height: 32px;
+  color: white;
 }
 
 .footer-img {
